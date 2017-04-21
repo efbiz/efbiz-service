@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 10000
 
 spring:
   application:
@@ -48,7 +48,7 @@ endpoints:
 mybatis:
     mapperLocations: classpath:mybatis/*/*/*.xml
     typeAliasesPackage: org.efbiz.product
-    #configLocation: classpath:configuration.xml
+    configLocation: classpath:configuration.xml
 ---
 spring:
   profiles: docker

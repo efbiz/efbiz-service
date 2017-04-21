@@ -1,5 +1,6 @@
-/org/
+/mybatis/
 /static/
 /application.yml
 /bootstrap.yml
-/mybatis/
+/org/
+/configuration.xml

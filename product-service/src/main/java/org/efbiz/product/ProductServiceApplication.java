@@ -36,7 +36,7 @@ public class ProductServiceApplication {
                 .build()
                 .pathMapping("/")
                 .useDefaultResponseMessages(false)
-                .apiInfo(new ApiInfo("Product Service API Doc", "Product Service API Doc", "1.0", "https://github.com/efbiz/efbiz-netflix",
+                .apiInfo(new ApiInfo("Product Service API Doc", "Product Service API Doc", "1.0", "https://github.com/efbiz/efbiz-service",
                         new Contact("Joni", "https://github.com/efbiz", "joni@efbiz.org"), null, null))
                 .forCodeGeneration(true);
     }

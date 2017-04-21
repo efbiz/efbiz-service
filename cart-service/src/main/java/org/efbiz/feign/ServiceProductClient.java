@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "products")
 public interface ServiceProductClient {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/prodcatalog/prodcatalogs", method = RequestMethod.GET)
     String printProductInfo();
 }

@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.store.dao.ProductStoreShipmentMethMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.store.model.ProductStoreShipmentMeth">
+    <id column="PRODUCT_STORE_SHIP_METH_ID" jdbcType="VARCHAR" property="productStoreShipMethId" />
+    <result column="PRODUCT_STORE_ID" jdbcType="VARCHAR" property="productStoreId" />
+    <result column="SHIPMENT_METHOD_TYPE_ID" jdbcType="VARCHAR" property="shipmentMethodTypeId" />
+    <result column="PARTY_ID" jdbcType="VARCHAR" property="partyId" />
+    <result column="ROLE_TYPE_ID" jdbcType="VARCHAR" property="roleTypeId" />
+    <result column="COMPANY_PARTY_ID" jdbcType="VARCHAR" property="companyPartyId" />
+    <result column="MIN_WEIGHT" jdbcType="DECIMAL" property="minWeight" />
+    <result column="MAX_WEIGHT" jdbcType="DECIMAL" property="maxWeight" />
+    <result column="MIN_SIZE" jdbcType="DECIMAL" property="minSize" />
+    <result column="MAX_SIZE" jdbcType="DECIMAL" property="maxSize" />
+    <result column="MIN_TOTAL" jdbcType="DECIMAL" property="minTotal" />
+    <result column="MAX_TOTAL" jdbcType="DECIMAL" property="maxTotal" />
+    <result column="ALLOW_USPS_ADDR" jdbcType="CHAR" property="allowUspsAddr" />
+    <result column="REQUIRE_USPS_ADDR" jdbcType="CHAR" property="requireUspsAddr" />
+    <result column="ALLOW_COMPANY_ADDR" jdbcType="CHAR" property="allowCompanyAddr" />
+    <result column="REQUIRE_COMPANY_ADDR" jdbcType="CHAR" property="requireCompanyAddr" />
+    <result column="INCLUDE_NO_CHARGE_ITEMS" jdbcType="CHAR" property="includeNoChargeItems" />
+    <result column="INCLUDE_FEATURE_GROUP" jdbcType="VARCHAR" property="includeFeatureGroup" />
+    <result column="EXCLUDE_FEATURE_GROUP" jdbcType="VARCHAR" property="excludeFeatureGroup" />
+    <result column="INCLUDE_GEO_ID" jdbcType="VARCHAR" property="includeGeoId" />
+    <result column="EXCLUDE_GEO_ID" jdbcType="VARCHAR" property="excludeGeoId" />
+    <result column="SERVICE_NAME" jdbcType="VARCHAR" property="serviceName" />
+    <result column="CONFIG_PROPS" jdbcType="VARCHAR" property="configProps" />
+    <result column="SHIPMENT_CUSTOM_METHOD_ID" jdbcType="VARCHAR" property="shipmentCustomMethodId" />
+    <result column="SHIPMENT_GATEWAY_CONFIG_ID" jdbcType="VARCHAR" property="shipmentGatewayConfigId" />
+    <result column="SEQUENCE_NUMBER" jdbcType="DECIMAL" property="sequenceNumber" />
+    <result column="ALLOWANCE_PERCENT" jdbcType="DECIMAL" property="allowancePercent" />
+    <result column="MINIMUM_PRICE" jdbcType="DECIMAL" property="minimumPrice" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_STORE_SHIP_METH_ID, PRODUCT_STORE_ID, SHIPMENT_METHOD_TYPE_ID, PARTY_ID, 
+    ROLE_TYPE_ID, COMPANY_PARTY_ID, MIN_WEIGHT, MAX_WEIGHT, MIN_SIZE, MAX_SIZE, MIN_TOTAL, 
+    MAX_TOTAL, ALLOW_USPS_ADDR, REQUIRE_USPS_ADDR, ALLOW_COMPANY_ADDR, REQUIRE_COMPANY_ADDR, 
+    INCLUDE_NO_CHARGE_ITEMS, INCLUDE_FEATURE_GROUP, EXCLUDE_FEATURE_GROUP, INCLUDE_GEO_ID, 
+    EXCLUDE_GEO_ID, SERVICE_NAME, CONFIG_PROPS, SHIPMENT_CUSTOM_METHOD_ID, SHIPMENT_GATEWAY_CONFIG_ID, 
+    SEQUENCE_NUMBER, ALLOWANCE_PERCENT, MINIMUM_PRICE, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, 
+    CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.store.model.ProductStoreShipmentMethExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_store_shipment_meth
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_store_shipment_meth
+    where PRODUCT_STORE_SHIP_METH_ID = #{productStoreShipMethId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_store_shipment_meth
+    where PRODUCT_STORE_SHIP_METH_ID = #{productStoreShipMethId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.store.model.ProductStoreShipmentMethExample">
+    delete from product_store_shipment_meth
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.store.model.ProductStoreShipmentMeth">
+    insert into product_store_shipment_meth (PRODUCT_STORE_SHIP_METH_ID, PRODUCT_STORE_ID, 
+      SHIPMENT_METHOD_TYPE_ID, PARTY_ID, ROLE_TYPE_ID, 
+      COMPANY_PARTY_ID, MIN_WEIGHT, MAX_WEIGHT, 
+      MIN_SIZE, MAX_SIZE, MIN_TOTAL, 
+      MAX_TOTAL, ALLOW_USPS_ADDR, REQUIRE_USPS_ADDR, 
+      ALLOW_COMPANY_ADDR, REQUIRE_COMPANY_ADDR, INCLUDE_NO_CHARGE_ITEMS, 
+      INCLUDE_FEATURE_GROUP, EXCLUDE_FEATURE_GROUP, 
+      INCLUDE_GEO_ID, EXCLUDE_GEO_ID, SERVICE_NAME, 
+      CONFIG_PROPS, SHIPMENT_CUSTOM_METHOD_ID, SHIPMENT_GATEWAY_CONFIG_ID, 
+      SEQUENCE_NUMBER, ALLOWANCE_PERCENT, MINIMUM_PRICE, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productStoreShipMethId,jdbcType=VARCHAR}, #{productStoreId,jdbcType=VARCHAR}, 
+      #{shipmentMethodTypeId,jdbcType=VARCHAR}, #{partyId,jdbcType=VARCHAR}, #{roleTypeId,jdbcType=VARCHAR}, 
+      #{companyPartyId,jdbcType=VARCHAR}, #{minWeight,jdbcType=DECIMAL}, #{maxWeight,jdbcType=DECIMAL}, 
+      #{minSize,jdbcType=DECIMAL}, #{maxSize,jdbcType=DECIMAL}, #{minTotal,jdbcType=DECIMAL}, 
+      #{maxTotal,jdbcType=DECIMAL}, #{allowUspsAddr,jdbcType=CHAR}, #{requireUspsAddr,jdbcType=CHAR}, 
+      #{allowCompanyAddr,jdbcType=CHAR}, #{requireCompanyAddr,jdbcType=CHAR}, #{includeNoChargeItems,jdbcType=CHAR}, 
+      #{includeFeatureGroup,jdbcType=VARCHAR}, #{excludeFeatureGroup,jdbcType=VARCHAR}, 
+      #{includeGeoId,jdbcType=VARCHAR}, #{excludeGeoId,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, 
+      #{configProps,jdbcType=VARCHAR}, #{shipmentCustomMethodId,jdbcType=VARCHAR}, #{shipmentGatewayConfigId,jdbcType=VARCHAR}, 
+      #{sequenceNumber,jdbcType=DECIMAL}, #{allowancePercent,jdbcType=DECIMAL}, #{minimumPrice,jdbcType=DECIMAL}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.store.model.ProductStoreShipmentMeth">
+    insert into product_store_shipment_meth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productStoreShipMethId != null">
+        PRODUCT_STORE_SHIP_METH_ID,
+      </if>
+      <if test="productStoreId != null">
+        PRODUCT_STORE_ID,
+      </if>
+      <if test="shipmentMethodTypeId != null">
+        SHIPMENT_METHOD_TYPE_ID,
+      </if>
+      <if test="partyId != null">
+        PARTY_ID,
+      </if>
+      <if test="roleTypeId != null">
+        ROLE_TYPE_ID,
+      </if>
+      <if test="companyPartyId != null">
+        COMPANY_PARTY_ID,
+      </if>
+      <if test="minWeight != null">
+        MIN_WEIGHT,
+      </if>
+      <if test="maxWeight != null">
+        MAX_WEIGHT,
+      </if>
+      <if test="minSize != null">
+        MIN_SIZE,
+      </if>
+      <if test="maxSize != null">
+        MAX_SIZE,
+      </if>
+      <if test="minTotal != null">
+        MIN_TOTAL,
+      </if>
+      <if test="maxTotal != null">
+        MAX_TOTAL,
+      </if>
+      <if test="allowUspsAddr != null">
+        ALLOW_USPS_ADDR,
+      </if>
+      <if test="requireUspsAddr != null">
+        REQUIRE_USPS_ADDR,
+      </if>
+      <if test="allowCompanyAddr != null">
+        ALLOW_COMPANY_ADDR,
+      </if>
+      <if test="requireCompanyAddr != null">
+        REQUIRE_COMPANY_ADDR,
+      </if>
+      <if test="includeNoChargeItems != null">
+        INCLUDE_NO_CHARGE_ITEMS,
+      </if>
+      <if test="includeFeatureGroup != null">
+        INCLUDE_FEATURE_GROUP,
+      </if>
+      <if test="excludeFeatureGroup != null">
+        EXCLUDE_FEATURE_GROUP,
+      </if>
+      <if test="includeGeoId != null">
+        INCLUDE_GEO_ID,
+      </if>
+      <if test="excludeGeoId != null">
+        EXCLUDE_GEO_ID,
+      </if>
+      <if test="serviceName != null">
+        SERVICE_NAME,
+      </if>
+      <if test="configProps != null">
+        CONFIG_PROPS,
+      </if>
+      <if test="shipmentCustomMethodId != null">
+        SHIPMENT_CUSTOM_METHOD_ID,
+      </if>
+      <if test="shipmentGatewayConfigId != null">
+        SHIPMENT_GATEWAY_CONFIG_ID,
+      </if>
+      <if test="sequenceNumber != null">
+        SEQUENCE_NUMBER,
+      </if>
+      <if test="allowancePercent != null">
+        ALLOWANCE_PERCENT,
+      </if>
+      <if test="minimumPrice != null">
+        MINIMUM_PRICE,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productStoreShipMethId != null">
+        #{productStoreShipMethId,jdbcType=VARCHAR},
+      </if>
+      <if test="productStoreId != null">
+        #{productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentMethodTypeId != null">
+        #{shipmentMethodTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="partyId != null">
+        #{partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleTypeId != null">
+        #{roleTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPartyId != null">
+        #{companyPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="minWeight != null">
+        #{minWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="maxWeight != null">
+        #{maxWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="minSize != null">
+        #{minSize,jdbcType=DECIMAL},
+      </if>
+      <if test="maxSize != null">
+        #{maxSize,jdbcType=DECIMAL},
+      </if>
+      <if test="minTotal != null">
+        #{minTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="maxTotal != null">
+        #{maxTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="allowUspsAddr != null">
+        #{allowUspsAddr,jdbcType=CHAR},
+      </if>
+      <if test="requireUspsAddr != null">
+        #{requireUspsAddr,jdbcType=CHAR},
+      </if>
+      <if test="allowCompanyAddr != null">
+        #{allowCompanyAddr,jdbcType=CHAR},
+      </if>
+      <if test="requireCompanyAddr != null">
+        #{requireCompanyAddr,jdbcType=CHAR},
+      </if>
+      <if test="includeNoChargeItems != null">
+        #{includeNoChargeItems,jdbcType=CHAR},
+      </if>
+      <if test="includeFeatureGroup != null">
+        #{includeFeatureGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="excludeFeatureGroup != null">
+        #{excludeFeatureGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="includeGeoId != null">
+        #{includeGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="excludeGeoId != null">
+        #{excludeGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null">
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="configProps != null">
+        #{configProps,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentCustomMethodId != null">
+        #{shipmentCustomMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentGatewayConfigId != null">
+        #{shipmentGatewayConfigId,jdbcType=VARCHAR},
+      </if>
+      <if test="sequenceNumber != null">
+        #{sequenceNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="allowancePercent != null">
+        #{allowancePercent,jdbcType=DECIMAL},
+      </if>
+      <if test="minimumPrice != null">
+        #{minimumPrice,jdbcType=DECIMAL},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.store.model.ProductStoreShipmentMethExample" resultType="java.lang.Long">
+    select count(*) from product_store_shipment_meth
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_store_shipment_meth
+    <set>
+      <if test="record.productStoreShipMethId != null">
+        PRODUCT_STORE_SHIP_METH_ID = #{record.productStoreShipMethId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productStoreId != null">
+        PRODUCT_STORE_ID = #{record.productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipmentMethodTypeId != null">
+        SHIPMENT_METHOD_TYPE_ID = #{record.shipmentMethodTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partyId != null">
+        PARTY_ID = #{record.partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleTypeId != null">
+        ROLE_TYPE_ID = #{record.roleTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyPartyId != null">
+        COMPANY_PARTY_ID = #{record.companyPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minWeight != null">
+        MIN_WEIGHT = #{record.minWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxWeight != null">
+        MAX_WEIGHT = #{record.maxWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.minSize != null">
+        MIN_SIZE = #{record.minSize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxSize != null">
+        MAX_SIZE = #{record.maxSize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.minTotal != null">
+        MIN_TOTAL = #{record.minTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxTotal != null">
+        MAX_TOTAL = #{record.maxTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.allowUspsAddr != null">
+        ALLOW_USPS_ADDR = #{record.allowUspsAddr,jdbcType=CHAR},
+      </if>
+      <if test="record.requireUspsAddr != null">
+        REQUIRE_USPS_ADDR = #{record.requireUspsAddr,jdbcType=CHAR},
+      </if>
+      <if test="record.allowCompanyAddr != null">
+        ALLOW_COMPANY_ADDR = #{record.allowCompanyAddr,jdbcType=CHAR},
+      </if>
+      <if test="record.requireCompanyAddr != null">
+        REQUIRE_COMPANY_ADDR = #{record.requireCompanyAddr,jdbcType=CHAR},
+      </if>
+      <if test="record.includeNoChargeItems != null">
+        INCLUDE_NO_CHARGE_ITEMS = #{record.includeNoChargeItems,jdbcType=CHAR},
+      </if>
+      <if test="record.includeFeatureGroup != null">
+        INCLUDE_FEATURE_GROUP = #{record.includeFeatureGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.excludeFeatureGroup != null">
+        EXCLUDE_FEATURE_GROUP = #{record.excludeFeatureGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.includeGeoId != null">
+        INCLUDE_GEO_ID = #{record.includeGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.excludeGeoId != null">
+        EXCLUDE_GEO_ID = #{record.excludeGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceName != null">
+        SERVICE_NAME = #{record.serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.configProps != null">
+        CONFIG_PROPS = #{record.configProps,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipmentCustomMethodId != null">
+        SHIPMENT_CUSTOM_METHOD_ID = #{record.shipmentCustomMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipmentGatewayConfigId != null">
+        SHIPMENT_GATEWAY_CONFIG_ID = #{record.shipmentGatewayConfigId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequenceNumber != null">
+        SEQUENCE_NUMBER = #{record.sequenceNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.allowancePercent != null">
+        ALLOWANCE_PERCENT = #{record.allowancePercent,jdbcType=DECIMAL},
+      </if>
+      <if test="record.minimumPrice != null">
+        MINIMUM_PRICE = #{record.minimumPrice,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_store_shipment_meth
+    set PRODUCT_STORE_SHIP_METH_ID = #{record.productStoreShipMethId,jdbcType=VARCHAR},
+      PRODUCT_STORE_ID = #{record.productStoreId,jdbcType=VARCHAR},
+      SHIPMENT_METHOD_TYPE_ID = #{record.shipmentMethodTypeId,jdbcType=VARCHAR},
+      PARTY_ID = #{record.partyId,jdbcType=VARCHAR},
+      ROLE_TYPE_ID = #{record.roleTypeId,jdbcType=VARCHAR},
+      COMPANY_PARTY_ID = #{record.companyPartyId,jdbcType=VARCHAR},
+      MIN_WEIGHT = #{record.minWeight,jdbcType=DECIMAL},
+      MAX_WEIGHT = #{record.maxWeight,jdbcType=DECIMAL},
+      MIN_SIZE = #{record.minSize,jdbcType=DECIMAL},
+      MAX_SIZE = #{record.maxSize,jdbcType=DECIMAL},
+      MIN_TOTAL = #{record.minTotal,jdbcType=DECIMAL},
+      MAX_TOTAL = #{record.maxTotal,jdbcType=DECIMAL},
+      ALLOW_USPS_ADDR = #{record.allowUspsAddr,jdbcType=CHAR},
+      REQUIRE_USPS_ADDR = #{record.requireUspsAddr,jdbcType=CHAR},
+      ALLOW_COMPANY_ADDR = #{record.allowCompanyAddr,jdbcType=CHAR},
+      REQUIRE_COMPANY_ADDR = #{record.requireCompanyAddr,jdbcType=CHAR},
+      INCLUDE_NO_CHARGE_ITEMS = #{record.includeNoChargeItems,jdbcType=CHAR},
+      INCLUDE_FEATURE_GROUP = #{record.includeFeatureGroup,jdbcType=VARCHAR},
+      EXCLUDE_FEATURE_GROUP = #{record.excludeFeatureGroup,jdbcType=VARCHAR},
+      INCLUDE_GEO_ID = #{record.includeGeoId,jdbcType=VARCHAR},
+      EXCLUDE_GEO_ID = #{record.excludeGeoId,jdbcType=VARCHAR},
+      SERVICE_NAME = #{record.serviceName,jdbcType=VARCHAR},
+      CONFIG_PROPS = #{record.configProps,jdbcType=VARCHAR},
+      SHIPMENT_CUSTOM_METHOD_ID = #{record.shipmentCustomMethodId,jdbcType=VARCHAR},
+      SHIPMENT_GATEWAY_CONFIG_ID = #{record.shipmentGatewayConfigId,jdbcType=VARCHAR},
+      SEQUENCE_NUMBER = #{record.sequenceNumber,jdbcType=DECIMAL},
+      ALLOWANCE_PERCENT = #{record.allowancePercent,jdbcType=DECIMAL},
+      MINIMUM_PRICE = #{record.minimumPrice,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.store.model.ProductStoreShipmentMeth">
+    update product_store_shipment_meth
+    <set>
+      <if test="productStoreId != null">
+        PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentMethodTypeId != null">
+        SHIPMENT_METHOD_TYPE_ID = #{shipmentMethodTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="partyId != null">
+        PARTY_ID = #{partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleTypeId != null">
+        ROLE_TYPE_ID = #{roleTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPartyId != null">
+        COMPANY_PARTY_ID = #{companyPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="minWeight != null">
+        MIN_WEIGHT = #{minWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="maxWeight != null">
+        MAX_WEIGHT = #{maxWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="minSize != null">
+        MIN_SIZE = #{minSize,jdbcType=DECIMAL},
+      </if>
+      <if test="maxSize != null">
+        MAX_SIZE = #{maxSize,jdbcType=DECIMAL},
+      </if>
+      <if test="minTotal != null">
+        MIN_TOTAL = #{minTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="maxTotal != null">
+        MAX_TOTAL = #{maxTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="allowUspsAddr != null">
+        ALLOW_USPS_ADDR = #{allowUspsAddr,jdbcType=CHAR},
+      </if>
+      <if test="requireUspsAddr != null">
+        REQUIRE_USPS_ADDR = #{requireUspsAddr,jdbcType=CHAR},
+      </if>
+      <if test="allowCompanyAddr != null">
+        ALLOW_COMPANY_ADDR = #{allowCompanyAddr,jdbcType=CHAR},
+      </if>
+      <if test="requireCompanyAddr != null">
+        REQUIRE_COMPANY_ADDR = #{requireCompanyAddr,jdbcType=CHAR},
+      </if>
+      <if test="includeNoChargeItems != null">
+        INCLUDE_NO_CHARGE_ITEMS = #{includeNoChargeItems,jdbcType=CHAR},
+      </if>
+      <if test="includeFeatureGroup != null">
+        INCLUDE_FEATURE_GROUP = #{includeFeatureGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="excludeFeatureGroup != null">
+        EXCLUDE_FEATURE_GROUP = #{excludeFeatureGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="includeGeoId != null">
+        INCLUDE_GEO_ID = #{includeGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="excludeGeoId != null">
+        EXCLUDE_GEO_ID = #{excludeGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null">
+        SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="configProps != null">
+        CONFIG_PROPS = #{configProps,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentCustomMethodId != null">
+        SHIPMENT_CUSTOM_METHOD_ID = #{shipmentCustomMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentGatewayConfigId != null">
+        SHIPMENT_GATEWAY_CONFIG_ID = #{shipmentGatewayConfigId,jdbcType=VARCHAR},
+      </if>
+      <if test="sequenceNumber != null">
+        SEQUENCE_NUMBER = #{sequenceNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="allowancePercent != null">
+        ALLOWANCE_PERCENT = #{allowancePercent,jdbcType=DECIMAL},
+      </if>
+      <if test="minimumPrice != null">
+        MINIMUM_PRICE = #{minimumPrice,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_STORE_SHIP_METH_ID = #{productStoreShipMethId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.store.model.ProductStoreShipmentMeth">
+    update product_store_shipment_meth
+    set PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR},
+      SHIPMENT_METHOD_TYPE_ID = #{shipmentMethodTypeId,jdbcType=VARCHAR},
+      PARTY_ID = #{partyId,jdbcType=VARCHAR},
+      ROLE_TYPE_ID = #{roleTypeId,jdbcType=VARCHAR},
+      COMPANY_PARTY_ID = #{companyPartyId,jdbcType=VARCHAR},
+      MIN_WEIGHT = #{minWeight,jdbcType=DECIMAL},
+      MAX_WEIGHT = #{maxWeight,jdbcType=DECIMAL},
+      MIN_SIZE = #{minSize,jdbcType=DECIMAL},
+      MAX_SIZE = #{maxSize,jdbcType=DECIMAL},
+      MIN_TOTAL = #{minTotal,jdbcType=DECIMAL},
+      MAX_TOTAL = #{maxTotal,jdbcType=DECIMAL},
+      ALLOW_USPS_ADDR = #{allowUspsAddr,jdbcType=CHAR},
+      REQUIRE_USPS_ADDR = #{requireUspsAddr,jdbcType=CHAR},
+      ALLOW_COMPANY_ADDR = #{allowCompanyAddr,jdbcType=CHAR},
+      REQUIRE_COMPANY_ADDR = #{requireCompanyAddr,jdbcType=CHAR},
+      INCLUDE_NO_CHARGE_ITEMS = #{includeNoChargeItems,jdbcType=CHAR},
+      INCLUDE_FEATURE_GROUP = #{includeFeatureGroup,jdbcType=VARCHAR},
+      EXCLUDE_FEATURE_GROUP = #{excludeFeatureGroup,jdbcType=VARCHAR},
+      INCLUDE_GEO_ID = #{includeGeoId,jdbcType=VARCHAR},
+      EXCLUDE_GEO_ID = #{excludeGeoId,jdbcType=VARCHAR},
+      SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      CONFIG_PROPS = #{configProps,jdbcType=VARCHAR},
+      SHIPMENT_CUSTOM_METHOD_ID = #{shipmentCustomMethodId,jdbcType=VARCHAR},
+      SHIPMENT_GATEWAY_CONFIG_ID = #{shipmentGatewayConfigId,jdbcType=VARCHAR},
+      SEQUENCE_NUMBER = #{sequenceNumber,jdbcType=DECIMAL},
+      ALLOWANCE_PERCENT = #{allowancePercent,jdbcType=DECIMAL},
+      MINIMUM_PRICE = #{minimumPrice,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_STORE_SHIP_METH_ID = #{productStoreShipMethId,jdbcType=VARCHAR}
+  </update>
+</mapper>

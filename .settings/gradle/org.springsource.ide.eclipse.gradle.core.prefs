@@ -1,0 +1,5 @@
+#org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
+#Thu Apr 13 11:38:44 GMT+08:00 2017
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;cart-service;product-service;service-parent;
+org.springsource.ide.eclipse.gradle.linkedresources=
+org.springsource.ide.eclipse.gradle.rootprojectloc=

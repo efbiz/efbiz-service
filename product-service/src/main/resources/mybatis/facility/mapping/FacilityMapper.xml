@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.facility.dao.FacilityMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.facility.model.Facility">
+    <id column="FACILITY_ID" jdbcType="VARCHAR" property="facilityId" />
+    <result column="FACILITY_TYPE_ID" jdbcType="VARCHAR" property="facilityTypeId" />
+    <result column="PARENT_FACILITY_ID" jdbcType="VARCHAR" property="parentFacilityId" />
+    <result column="OWNER_PARTY_ID" jdbcType="VARCHAR" property="ownerPartyId" />
+    <result column="DEFAULT_INVENTORY_ITEM_TYPE_ID" jdbcType="VARCHAR" property="defaultInventoryItemTypeId" />
+    <result column="FACILITY_NAME" jdbcType="VARCHAR" property="facilityName" />
+    <result column="PRIMARY_FACILITY_GROUP_ID" jdbcType="VARCHAR" property="primaryFacilityGroupId" />
+    <result column="SQUARE_FOOTAGE" jdbcType="DECIMAL" property="squareFootage" />
+    <result column="FACILITY_SIZE" jdbcType="DECIMAL" property="facilitySize" />
+    <result column="FACILITY_SIZE_UOM_ID" jdbcType="VARCHAR" property="facilitySizeUomId" />
+    <result column="PRODUCT_STORE_ID" jdbcType="VARCHAR" property="productStoreId" />
+    <result column="DEFAULT_DAYS_TO_SHIP" jdbcType="DECIMAL" property="defaultDaysToShip" />
+    <result column="OPENED_DATE" jdbcType="TIMESTAMP" property="openedDate" />
+    <result column="CLOSED_DATE" jdbcType="TIMESTAMP" property="closedDate" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="DEFAULT_DIMENSION_UOM_ID" jdbcType="VARCHAR" property="defaultDimensionUomId" />
+    <result column="DEFAULT_WEIGHT_UOM_ID" jdbcType="VARCHAR" property="defaultWeightUomId" />
+    <result column="GEO_POINT_ID" jdbcType="VARCHAR" property="geoPointId" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FACILITY_ID, FACILITY_TYPE_ID, PARENT_FACILITY_ID, OWNER_PARTY_ID, DEFAULT_INVENTORY_ITEM_TYPE_ID, 
+    FACILITY_NAME, PRIMARY_FACILITY_GROUP_ID, SQUARE_FOOTAGE, FACILITY_SIZE, FACILITY_SIZE_UOM_ID, 
+    PRODUCT_STORE_ID, DEFAULT_DAYS_TO_SHIP, OPENED_DATE, CLOSED_DATE, DESCRIPTION, DEFAULT_DIMENSION_UOM_ID, 
+    DEFAULT_WEIGHT_UOM_ID, GEO_POINT_ID, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, 
+    CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.facility.model.FacilityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from facility
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from facility
+    where FACILITY_ID = #{facilityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from facility
+    where FACILITY_ID = #{facilityId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.facility.model.FacilityExample">
+    delete from facility
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.facility.model.Facility">
+    insert into facility (FACILITY_ID, FACILITY_TYPE_ID, PARENT_FACILITY_ID, 
+      OWNER_PARTY_ID, DEFAULT_INVENTORY_ITEM_TYPE_ID, 
+      FACILITY_NAME, PRIMARY_FACILITY_GROUP_ID, SQUARE_FOOTAGE, 
+      FACILITY_SIZE, FACILITY_SIZE_UOM_ID, PRODUCT_STORE_ID, 
+      DEFAULT_DAYS_TO_SHIP, OPENED_DATE, CLOSED_DATE, 
+      DESCRIPTION, DEFAULT_DIMENSION_UOM_ID, DEFAULT_WEIGHT_UOM_ID, 
+      GEO_POINT_ID, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{facilityId,jdbcType=VARCHAR}, #{facilityTypeId,jdbcType=VARCHAR}, #{parentFacilityId,jdbcType=VARCHAR}, 
+      #{ownerPartyId,jdbcType=VARCHAR}, #{defaultInventoryItemTypeId,jdbcType=VARCHAR}, 
+      #{facilityName,jdbcType=VARCHAR}, #{primaryFacilityGroupId,jdbcType=VARCHAR}, #{squareFootage,jdbcType=DECIMAL}, 
+      #{facilitySize,jdbcType=DECIMAL}, #{facilitySizeUomId,jdbcType=VARCHAR}, #{productStoreId,jdbcType=VARCHAR}, 
+      #{defaultDaysToShip,jdbcType=DECIMAL}, #{openedDate,jdbcType=TIMESTAMP}, #{closedDate,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=VARCHAR}, #{defaultDimensionUomId,jdbcType=VARCHAR}, #{defaultWeightUomId,jdbcType=VARCHAR}, 
+      #{geoPointId,jdbcType=VARCHAR}, NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.facility.model.Facility">
+    insert into facility
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="facilityId != null">
+        FACILITY_ID,
+      </if>
+      <if test="facilityTypeId != null">
+        FACILITY_TYPE_ID,
+      </if>
+      <if test="parentFacilityId != null">
+        PARENT_FACILITY_ID,
+      </if>
+      <if test="ownerPartyId != null">
+        OWNER_PARTY_ID,
+      </if>
+      <if test="defaultInventoryItemTypeId != null">
+        DEFAULT_INVENTORY_ITEM_TYPE_ID,
+      </if>
+      <if test="facilityName != null">
+        FACILITY_NAME,
+      </if>
+      <if test="primaryFacilityGroupId != null">
+        PRIMARY_FACILITY_GROUP_ID,
+      </if>
+      <if test="squareFootage != null">
+        SQUARE_FOOTAGE,
+      </if>
+      <if test="facilitySize != null">
+        FACILITY_SIZE,
+      </if>
+      <if test="facilitySizeUomId != null">
+        FACILITY_SIZE_UOM_ID,
+      </if>
+      <if test="productStoreId != null">
+        PRODUCT_STORE_ID,
+      </if>
+      <if test="defaultDaysToShip != null">
+        DEFAULT_DAYS_TO_SHIP,
+      </if>
+      <if test="openedDate != null">
+        OPENED_DATE,
+      </if>
+      <if test="closedDate != null">
+        CLOSED_DATE,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="defaultDimensionUomId != null">
+        DEFAULT_DIMENSION_UOM_ID,
+      </if>
+      <if test="defaultWeightUomId != null">
+        DEFAULT_WEIGHT_UOM_ID,
+      </if>
+      <if test="geoPointId != null">
+        GEO_POINT_ID,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="facilityId != null">
+        #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityTypeId != null">
+        #{facilityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentFacilityId != null">
+        #{parentFacilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPartyId != null">
+        #{ownerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultInventoryItemTypeId != null">
+        #{defaultInventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityName != null">
+        #{facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryFacilityGroupId != null">
+        #{primaryFacilityGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="squareFootage != null">
+        #{squareFootage,jdbcType=DECIMAL},
+      </if>
+      <if test="facilitySize != null">
+        #{facilitySize,jdbcType=DECIMAL},
+      </if>
+      <if test="facilitySizeUomId != null">
+        #{facilitySizeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productStoreId != null">
+        #{productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultDaysToShip != null">
+        #{defaultDaysToShip,jdbcType=DECIMAL},
+      </if>
+      <if test="openedDate != null">
+        #{openedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closedDate != null">
+        #{closedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultDimensionUomId != null">
+        #{defaultDimensionUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultWeightUomId != null">
+        #{defaultWeightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="geoPointId != null">
+        #{geoPointId,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.facility.model.FacilityExample" resultType="java.lang.Long">
+    select count(*) from facility
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update facility
+    <set>
+      <if test="record.facilityId != null">
+        FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facilityTypeId != null">
+        FACILITY_TYPE_ID = #{record.facilityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentFacilityId != null">
+        PARENT_FACILITY_ID = #{record.parentFacilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerPartyId != null">
+        OWNER_PARTY_ID = #{record.ownerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultInventoryItemTypeId != null">
+        DEFAULT_INVENTORY_ITEM_TYPE_ID = #{record.defaultInventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facilityName != null">
+        FACILITY_NAME = #{record.facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.primaryFacilityGroupId != null">
+        PRIMARY_FACILITY_GROUP_ID = #{record.primaryFacilityGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.squareFootage != null">
+        SQUARE_FOOTAGE = #{record.squareFootage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.facilitySize != null">
+        FACILITY_SIZE = #{record.facilitySize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.facilitySizeUomId != null">
+        FACILITY_SIZE_UOM_ID = #{record.facilitySizeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productStoreId != null">
+        PRODUCT_STORE_ID = #{record.productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultDaysToShip != null">
+        DEFAULT_DAYS_TO_SHIP = #{record.defaultDaysToShip,jdbcType=DECIMAL},
+      </if>
+      <if test="record.openedDate != null">
+        OPENED_DATE = #{record.openedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.closedDate != null">
+        CLOSED_DATE = #{record.closedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultDimensionUomId != null">
+        DEFAULT_DIMENSION_UOM_ID = #{record.defaultDimensionUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultWeightUomId != null">
+        DEFAULT_WEIGHT_UOM_ID = #{record.defaultWeightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.geoPointId != null">
+        GEO_POINT_ID = #{record.geoPointId,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update facility
+    set FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      FACILITY_TYPE_ID = #{record.facilityTypeId,jdbcType=VARCHAR},
+      PARENT_FACILITY_ID = #{record.parentFacilityId,jdbcType=VARCHAR},
+      OWNER_PARTY_ID = #{record.ownerPartyId,jdbcType=VARCHAR},
+      DEFAULT_INVENTORY_ITEM_TYPE_ID = #{record.defaultInventoryItemTypeId,jdbcType=VARCHAR},
+      FACILITY_NAME = #{record.facilityName,jdbcType=VARCHAR},
+      PRIMARY_FACILITY_GROUP_ID = #{record.primaryFacilityGroupId,jdbcType=VARCHAR},
+      SQUARE_FOOTAGE = #{record.squareFootage,jdbcType=DECIMAL},
+      FACILITY_SIZE = #{record.facilitySize,jdbcType=DECIMAL},
+      FACILITY_SIZE_UOM_ID = #{record.facilitySizeUomId,jdbcType=VARCHAR},
+      PRODUCT_STORE_ID = #{record.productStoreId,jdbcType=VARCHAR},
+      DEFAULT_DAYS_TO_SHIP = #{record.defaultDaysToShip,jdbcType=DECIMAL},
+      OPENED_DATE = #{record.openedDate,jdbcType=TIMESTAMP},
+      CLOSED_DATE = #{record.closedDate,jdbcType=TIMESTAMP},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      DEFAULT_DIMENSION_UOM_ID = #{record.defaultDimensionUomId,jdbcType=VARCHAR},
+      DEFAULT_WEIGHT_UOM_ID = #{record.defaultWeightUomId,jdbcType=VARCHAR},
+      GEO_POINT_ID = #{record.geoPointId,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.facility.model.Facility">
+    update facility
+    <set>
+      <if test="facilityTypeId != null">
+        FACILITY_TYPE_ID = #{facilityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentFacilityId != null">
+        PARENT_FACILITY_ID = #{parentFacilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPartyId != null">
+        OWNER_PARTY_ID = #{ownerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultInventoryItemTypeId != null">
+        DEFAULT_INVENTORY_ITEM_TYPE_ID = #{defaultInventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityName != null">
+        FACILITY_NAME = #{facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryFacilityGroupId != null">
+        PRIMARY_FACILITY_GROUP_ID = #{primaryFacilityGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="squareFootage != null">
+        SQUARE_FOOTAGE = #{squareFootage,jdbcType=DECIMAL},
+      </if>
+      <if test="facilitySize != null">
+        FACILITY_SIZE = #{facilitySize,jdbcType=DECIMAL},
+      </if>
+      <if test="facilitySizeUomId != null">
+        FACILITY_SIZE_UOM_ID = #{facilitySizeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productStoreId != null">
+        PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultDaysToShip != null">
+        DEFAULT_DAYS_TO_SHIP = #{defaultDaysToShip,jdbcType=DECIMAL},
+      </if>
+      <if test="openedDate != null">
+        OPENED_DATE = #{openedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closedDate != null">
+        CLOSED_DATE = #{closedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultDimensionUomId != null">
+        DEFAULT_DIMENSION_UOM_ID = #{defaultDimensionUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultWeightUomId != null">
+        DEFAULT_WEIGHT_UOM_ID = #{defaultWeightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="geoPointId != null">
+        GEO_POINT_ID = #{geoPointId,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where FACILITY_ID = #{facilityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.facility.model.Facility">
+    update facility
+    set FACILITY_TYPE_ID = #{facilityTypeId,jdbcType=VARCHAR},
+      PARENT_FACILITY_ID = #{parentFacilityId,jdbcType=VARCHAR},
+      OWNER_PARTY_ID = #{ownerPartyId,jdbcType=VARCHAR},
+      DEFAULT_INVENTORY_ITEM_TYPE_ID = #{defaultInventoryItemTypeId,jdbcType=VARCHAR},
+      FACILITY_NAME = #{facilityName,jdbcType=VARCHAR},
+      PRIMARY_FACILITY_GROUP_ID = #{primaryFacilityGroupId,jdbcType=VARCHAR},
+      SQUARE_FOOTAGE = #{squareFootage,jdbcType=DECIMAL},
+      FACILITY_SIZE = #{facilitySize,jdbcType=DECIMAL},
+      FACILITY_SIZE_UOM_ID = #{facilitySizeUomId,jdbcType=VARCHAR},
+      PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR},
+      DEFAULT_DAYS_TO_SHIP = #{defaultDaysToShip,jdbcType=DECIMAL},
+      OPENED_DATE = #{openedDate,jdbcType=TIMESTAMP},
+      CLOSED_DATE = #{closedDate,jdbcType=TIMESTAMP},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      DEFAULT_DIMENSION_UOM_ID = #{defaultDimensionUomId,jdbcType=VARCHAR},
+      DEFAULT_WEIGHT_UOM_ID = #{defaultWeightUomId,jdbcType=VARCHAR},
+      GEO_POINT_ID = #{geoPointId,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where FACILITY_ID = #{facilityId,jdbcType=VARCHAR}
+  </update>
+</mapper>

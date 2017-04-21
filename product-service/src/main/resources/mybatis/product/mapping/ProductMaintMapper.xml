@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.product.dao.ProductMaintMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.product.model.ProductMaint">
+    <id column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <id column="PRODUCT_MAINT_SEQ_ID" jdbcType="VARCHAR" property="productMaintSeqId" />
+    <result column="PRODUCT_MAINT_TYPE_ID" jdbcType="VARCHAR" property="productMaintTypeId" />
+    <result column="MAINT_NAME" jdbcType="VARCHAR" property="maintName" />
+    <result column="MAINT_TEMPLATE_WORK_EFFORT_ID" jdbcType="VARCHAR" property="maintTemplateWorkEffortId" />
+    <result column="INTERVAL_QUANTITY" jdbcType="DECIMAL" property="intervalQuantity" />
+    <result column="INTERVAL_UOM_ID" jdbcType="VARCHAR" property="intervalUomId" />
+    <result column="INTERVAL_METER_TYPE_ID" jdbcType="VARCHAR" property="intervalMeterTypeId" />
+    <result column="REPEAT_COUNT" jdbcType="DECIMAL" property="repeatCount" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, PRODUCT_MAINT_SEQ_ID, PRODUCT_MAINT_TYPE_ID, MAINT_NAME, MAINT_TEMPLATE_WORK_EFFORT_ID, 
+    INTERVAL_QUANTITY, INTERVAL_UOM_ID, INTERVAL_METER_TYPE_ID, REPEAT_COUNT, LAST_UPDATED_STAMP, 
+    LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.product.model.ProductMaintExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_maint
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.product.model.ProductMaintKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_maint
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_MAINT_SEQ_ID = #{productMaintSeqId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.product.model.ProductMaintKey">
+    delete from product_maint
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_MAINT_SEQ_ID = #{productMaintSeqId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.product.model.ProductMaintExample">
+    delete from product_maint
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.product.model.ProductMaint">
+    insert into product_maint (PRODUCT_ID, PRODUCT_MAINT_SEQ_ID, PRODUCT_MAINT_TYPE_ID, 
+      MAINT_NAME, MAINT_TEMPLATE_WORK_EFFORT_ID, INTERVAL_QUANTITY, 
+      INTERVAL_UOM_ID, INTERVAL_METER_TYPE_ID, REPEAT_COUNT, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productId,jdbcType=VARCHAR}, #{productMaintSeqId,jdbcType=VARCHAR}, #{productMaintTypeId,jdbcType=VARCHAR}, 
+      #{maintName,jdbcType=VARCHAR}, #{maintTemplateWorkEffortId,jdbcType=VARCHAR}, #{intervalQuantity,jdbcType=DECIMAL}, 
+      #{intervalUomId,jdbcType=VARCHAR}, #{intervalMeterTypeId,jdbcType=VARCHAR}, #{repeatCount,jdbcType=DECIMAL}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.product.model.ProductMaint">
+    insert into product_maint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="productMaintSeqId != null">
+        PRODUCT_MAINT_SEQ_ID,
+      </if>
+      <if test="productMaintTypeId != null">
+        PRODUCT_MAINT_TYPE_ID,
+      </if>
+      <if test="maintName != null">
+        MAINT_NAME,
+      </if>
+      <if test="maintTemplateWorkEffortId != null">
+        MAINT_TEMPLATE_WORK_EFFORT_ID,
+      </if>
+      <if test="intervalQuantity != null">
+        INTERVAL_QUANTITY,
+      </if>
+      <if test="intervalUomId != null">
+        INTERVAL_UOM_ID,
+      </if>
+      <if test="intervalMeterTypeId != null">
+        INTERVAL_METER_TYPE_ID,
+      </if>
+      <if test="repeatCount != null">
+        REPEAT_COUNT,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productMaintSeqId != null">
+        #{productMaintSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="productMaintTypeId != null">
+        #{productMaintTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="maintName != null">
+        #{maintName,jdbcType=VARCHAR},
+      </if>
+      <if test="maintTemplateWorkEffortId != null">
+        #{maintTemplateWorkEffortId,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalQuantity != null">
+        #{intervalQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="intervalUomId != null">
+        #{intervalUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalMeterTypeId != null">
+        #{intervalMeterTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatCount != null">
+        #{repeatCount,jdbcType=DECIMAL},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.product.model.ProductMaintExample" resultType="java.lang.Long">
+    select count(*) from product_maint
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_maint
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productMaintSeqId != null">
+        PRODUCT_MAINT_SEQ_ID = #{record.productMaintSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productMaintTypeId != null">
+        PRODUCT_MAINT_TYPE_ID = #{record.productMaintTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintName != null">
+        MAINT_NAME = #{record.maintName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintTemplateWorkEffortId != null">
+        MAINT_TEMPLATE_WORK_EFFORT_ID = #{record.maintTemplateWorkEffortId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intervalQuantity != null">
+        INTERVAL_QUANTITY = #{record.intervalQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="record.intervalUomId != null">
+        INTERVAL_UOM_ID = #{record.intervalUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intervalMeterTypeId != null">
+        INTERVAL_METER_TYPE_ID = #{record.intervalMeterTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repeatCount != null">
+        REPEAT_COUNT = #{record.repeatCount,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_maint
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PRODUCT_MAINT_SEQ_ID = #{record.productMaintSeqId,jdbcType=VARCHAR},
+      PRODUCT_MAINT_TYPE_ID = #{record.productMaintTypeId,jdbcType=VARCHAR},
+      MAINT_NAME = #{record.maintName,jdbcType=VARCHAR},
+      MAINT_TEMPLATE_WORK_EFFORT_ID = #{record.maintTemplateWorkEffortId,jdbcType=VARCHAR},
+      INTERVAL_QUANTITY = #{record.intervalQuantity,jdbcType=DECIMAL},
+      INTERVAL_UOM_ID = #{record.intervalUomId,jdbcType=VARCHAR},
+      INTERVAL_METER_TYPE_ID = #{record.intervalMeterTypeId,jdbcType=VARCHAR},
+      REPEAT_COUNT = #{record.repeatCount,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.product.model.ProductMaint">
+    update product_maint
+    <set>
+      <if test="productMaintTypeId != null">
+        PRODUCT_MAINT_TYPE_ID = #{productMaintTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="maintName != null">
+        MAINT_NAME = #{maintName,jdbcType=VARCHAR},
+      </if>
+      <if test="maintTemplateWorkEffortId != null">
+        MAINT_TEMPLATE_WORK_EFFORT_ID = #{maintTemplateWorkEffortId,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalQuantity != null">
+        INTERVAL_QUANTITY = #{intervalQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="intervalUomId != null">
+        INTERVAL_UOM_ID = #{intervalUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalMeterTypeId != null">
+        INTERVAL_METER_TYPE_ID = #{intervalMeterTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatCount != null">
+        REPEAT_COUNT = #{repeatCount,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_MAINT_SEQ_ID = #{productMaintSeqId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.product.model.ProductMaint">
+    update product_maint
+    set PRODUCT_MAINT_TYPE_ID = #{productMaintTypeId,jdbcType=VARCHAR},
+      MAINT_NAME = #{maintName,jdbcType=VARCHAR},
+      MAINT_TEMPLATE_WORK_EFFORT_ID = #{maintTemplateWorkEffortId,jdbcType=VARCHAR},
+      INTERVAL_QUANTITY = #{intervalQuantity,jdbcType=DECIMAL},
+      INTERVAL_UOM_ID = #{intervalUomId,jdbcType=VARCHAR},
+      INTERVAL_METER_TYPE_ID = #{intervalMeterTypeId,jdbcType=VARCHAR},
+      REPEAT_COUNT = #{repeatCount,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_MAINT_SEQ_ID = #{productMaintSeqId,jdbcType=VARCHAR}
+  </update>
+</mapper>

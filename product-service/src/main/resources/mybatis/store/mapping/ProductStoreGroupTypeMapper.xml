@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.store.dao.ProductStoreGroupTypeMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.store.model.ProductStoreGroupType">
+    <id column="PRODUCT_STORE_GROUP_TYPE_ID" jdbcType="VARCHAR" property="productStoreGroupTypeId" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_STORE_GROUP_TYPE_ID, DESCRIPTION, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, 
+    CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.store.model.ProductStoreGroupTypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_store_group_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_store_group_type
+    where PRODUCT_STORE_GROUP_TYPE_ID = #{productStoreGroupTypeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_store_group_type
+    where PRODUCT_STORE_GROUP_TYPE_ID = #{productStoreGroupTypeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.store.model.ProductStoreGroupTypeExample">
+    delete from product_store_group_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.store.model.ProductStoreGroupType">
+    insert into product_store_group_type (PRODUCT_STORE_GROUP_TYPE_ID, DESCRIPTION, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productStoreGroupTypeId,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.store.model.ProductStoreGroupType">
+    insert into product_store_group_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productStoreGroupTypeId != null">
+        PRODUCT_STORE_GROUP_TYPE_ID,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productStoreGroupTypeId != null">
+        #{productStoreGroupTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.store.model.ProductStoreGroupTypeExample" resultType="java.lang.Long">
+    select count(*) from product_store_group_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_store_group_type
+    <set>
+      <if test="record.productStoreGroupTypeId != null">
+        PRODUCT_STORE_GROUP_TYPE_ID = #{record.productStoreGroupTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_store_group_type
+    set PRODUCT_STORE_GROUP_TYPE_ID = #{record.productStoreGroupTypeId,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.store.model.ProductStoreGroupType">
+    update product_store_group_type
+    <set>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_STORE_GROUP_TYPE_ID = #{productStoreGroupTypeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.store.model.ProductStoreGroupType">
+    update product_store_group_type
+    set DESCRIPTION = #{description,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_STORE_GROUP_TYPE_ID = #{productStoreGroupTypeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

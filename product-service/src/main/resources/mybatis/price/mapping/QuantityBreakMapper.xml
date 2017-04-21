@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.price.dao.QuantityBreakMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.price.model.QuantityBreak">
+    <id column="QUANTITY_BREAK_ID" jdbcType="VARCHAR" property="quantityBreakId" />
+    <result column="QUANTITY_BREAK_TYPE_ID" jdbcType="VARCHAR" property="quantityBreakTypeId" />
+    <result column="FROM_QUANTITY" jdbcType="DECIMAL" property="fromQuantity" />
+    <result column="THRU_QUANTITY" jdbcType="DECIMAL" property="thruQuantity" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    QUANTITY_BREAK_ID, QUANTITY_BREAK_TYPE_ID, FROM_QUANTITY, THRU_QUANTITY, LAST_UPDATED_STAMP, 
+    LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.price.model.QuantityBreakExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from quantity_break
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from quantity_break
+    where QUANTITY_BREAK_ID = #{quantityBreakId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from quantity_break
+    where QUANTITY_BREAK_ID = #{quantityBreakId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.price.model.QuantityBreakExample">
+    delete from quantity_break
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.price.model.QuantityBreak">
+    insert into quantity_break (QUANTITY_BREAK_ID, QUANTITY_BREAK_TYPE_ID, 
+      FROM_QUANTITY, THRU_QUANTITY, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, 
+      CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{quantityBreakId,jdbcType=VARCHAR}, #{quantityBreakTypeId,jdbcType=VARCHAR}, 
+      #{fromQuantity,jdbcType=DECIMAL}, #{thruQuantity,jdbcType=DECIMAL}, NOW(), NOW(), 
+      NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.price.model.QuantityBreak">
+    insert into quantity_break
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="quantityBreakId != null">
+        QUANTITY_BREAK_ID,
+      </if>
+      <if test="quantityBreakTypeId != null">
+        QUANTITY_BREAK_TYPE_ID,
+      </if>
+      <if test="fromQuantity != null">
+        FROM_QUANTITY,
+      </if>
+      <if test="thruQuantity != null">
+        THRU_QUANTITY,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="quantityBreakId != null">
+        #{quantityBreakId,jdbcType=VARCHAR},
+      </if>
+      <if test="quantityBreakTypeId != null">
+        #{quantityBreakTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromQuantity != null">
+        #{fromQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="thruQuantity != null">
+        #{thruQuantity,jdbcType=DECIMAL},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.price.model.QuantityBreakExample" resultType="java.lang.Long">
+    select count(*) from quantity_break
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update quantity_break
+    <set>
+      <if test="record.quantityBreakId != null">
+        QUANTITY_BREAK_ID = #{record.quantityBreakId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantityBreakTypeId != null">
+        QUANTITY_BREAK_TYPE_ID = #{record.quantityBreakTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromQuantity != null">
+        FROM_QUANTITY = #{record.fromQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="record.thruQuantity != null">
+        THRU_QUANTITY = #{record.thruQuantity,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update quantity_break
+    set QUANTITY_BREAK_ID = #{record.quantityBreakId,jdbcType=VARCHAR},
+      QUANTITY_BREAK_TYPE_ID = #{record.quantityBreakTypeId,jdbcType=VARCHAR},
+      FROM_QUANTITY = #{record.fromQuantity,jdbcType=DECIMAL},
+      THRU_QUANTITY = #{record.thruQuantity,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.price.model.QuantityBreak">
+    update quantity_break
+    <set>
+      <if test="quantityBreakTypeId != null">
+        QUANTITY_BREAK_TYPE_ID = #{quantityBreakTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromQuantity != null">
+        FROM_QUANTITY = #{fromQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="thruQuantity != null">
+        THRU_QUANTITY = #{thruQuantity,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where QUANTITY_BREAK_ID = #{quantityBreakId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.price.model.QuantityBreak">
+    update quantity_break
+    set QUANTITY_BREAK_TYPE_ID = #{quantityBreakTypeId,jdbcType=VARCHAR},
+      FROM_QUANTITY = #{fromQuantity,jdbcType=DECIMAL},
+      THRU_QUANTITY = #{thruQuantity,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where QUANTITY_BREAK_ID = #{quantityBreakId,jdbcType=VARCHAR}
+  </update>
+</mapper>

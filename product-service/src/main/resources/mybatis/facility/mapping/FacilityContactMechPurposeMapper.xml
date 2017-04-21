@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.facility.dao.FacilityContactMechPurposeMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.facility.model.FacilityContactMechPurpose">
+    <id column="FACILITY_ID" jdbcType="VARCHAR" property="facilityId" />
+    <id column="CONTACT_MECH_ID" jdbcType="VARCHAR" property="contactMechId" />
+    <id column="CONTACT_MECH_PURPOSE_TYPE_ID" jdbcType="VARCHAR" property="contactMechPurposeTypeId" />
+    <id column="FROM_DATE" jdbcType="TIMESTAMP" property="fromDate" />
+    <result column="THRU_DATE" jdbcType="TIMESTAMP" property="thruDate" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FACILITY_ID, CONTACT_MECH_ID, CONTACT_MECH_PURPOSE_TYPE_ID, FROM_DATE, THRU_DATE, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurposeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from facility_contact_mech_purpose
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurposeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from facility_contact_mech_purpose
+    where FACILITY_ID = #{facilityId,jdbcType=VARCHAR}
+      and CONTACT_MECH_ID = #{contactMechId,jdbcType=VARCHAR}
+      and CONTACT_MECH_PURPOSE_TYPE_ID = #{contactMechPurposeTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurposeKey">
+    delete from facility_contact_mech_purpose
+    where FACILITY_ID = #{facilityId,jdbcType=VARCHAR}
+      and CONTACT_MECH_ID = #{contactMechId,jdbcType=VARCHAR}
+      and CONTACT_MECH_PURPOSE_TYPE_ID = #{contactMechPurposeTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurposeExample">
+    delete from facility_contact_mech_purpose
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurpose">
+    insert into facility_contact_mech_purpose (FACILITY_ID, CONTACT_MECH_ID, CONTACT_MECH_PURPOSE_TYPE_ID, 
+      FROM_DATE, THRU_DATE, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, 
+      CREATED_TX_STAMP)
+    values (#{facilityId,jdbcType=VARCHAR}, #{contactMechId,jdbcType=VARCHAR}, #{contactMechPurposeTypeId,jdbcType=VARCHAR}, 
+      #{fromDate,jdbcType=TIMESTAMP}, #{thruDate,jdbcType=TIMESTAMP}, NOW(), NOW(), NOW(), 
+      NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurpose">
+    insert into facility_contact_mech_purpose
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="facilityId != null">
+        FACILITY_ID,
+      </if>
+      <if test="contactMechId != null">
+        CONTACT_MECH_ID,
+      </if>
+      <if test="contactMechPurposeTypeId != null">
+        CONTACT_MECH_PURPOSE_TYPE_ID,
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE,
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="facilityId != null">
+        #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMechId != null">
+        #{contactMechId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMechPurposeTypeId != null">
+        #{contactMechPurposeTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurposeExample" resultType="java.lang.Long">
+    select count(*) from facility_contact_mech_purpose
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update facility_contact_mech_purpose
+    <set>
+      <if test="record.facilityId != null">
+        FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactMechId != null">
+        CONTACT_MECH_ID = #{record.contactMechId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactMechPurposeTypeId != null">
+        CONTACT_MECH_PURPOSE_TYPE_ID = #{record.contactMechPurposeTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromDate != null">
+        FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thruDate != null">
+        THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update facility_contact_mech_purpose
+    set FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      CONTACT_MECH_ID = #{record.contactMechId,jdbcType=VARCHAR},
+      CONTACT_MECH_PURPOSE_TYPE_ID = #{record.contactMechPurposeTypeId,jdbcType=VARCHAR},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurpose">
+    update facility_contact_mech_purpose
+    <set>
+      <if test="thruDate != null">
+        THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where FACILITY_ID = #{facilityId,jdbcType=VARCHAR}
+      and CONTACT_MECH_ID = #{contactMechId,jdbcType=VARCHAR}
+      and CONTACT_MECH_PURPOSE_TYPE_ID = #{contactMechPurposeTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.facility.model.FacilityContactMechPurpose">
+    update facility_contact_mech_purpose
+    set THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where FACILITY_ID = #{facilityId,jdbcType=VARCHAR}
+      and CONTACT_MECH_ID = #{contactMechId,jdbcType=VARCHAR}
+      and CONTACT_MECH_PURPOSE_TYPE_ID = #{contactMechPurposeTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

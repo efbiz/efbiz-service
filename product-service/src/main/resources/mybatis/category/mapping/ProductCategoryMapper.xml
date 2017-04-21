@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.category.dao.ProductCategoryMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.category.model.ProductCategory">
+    <id column="PRODUCT_CATEGORY_ID" jdbcType="VARCHAR" property="productCategoryId" />
+    <result column="PRODUCT_CATEGORY_TYPE_ID" jdbcType="VARCHAR" property="productCategoryTypeId" />
+    <result column="PRIMARY_PARENT_CATEGORY_ID" jdbcType="VARCHAR" property="primaryParentCategoryId" />
+    <result column="CATEGORY_NAME" jdbcType="VARCHAR" property="categoryName" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="CATEGORY_IMAGE_URL" jdbcType="VARCHAR" property="categoryImageUrl" />
+    <result column="LINK_ONE_IMAGE_URL" jdbcType="VARCHAR" property="linkOneImageUrl" />
+    <result column="LINK_TWO_IMAGE_URL" jdbcType="VARCHAR" property="linkTwoImageUrl" />
+    <result column="DETAIL_SCREEN" jdbcType="VARCHAR" property="detailScreen" />
+    <result column="SHOW_IN_SELECT" jdbcType="CHAR" property="showInSelect" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.efbiz.product.category.model.ProductCategory">
+    <result column="LONG_DESCRIPTION" jdbcType="LONGVARCHAR" property="longDescription" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_CATEGORY_ID, PRODUCT_CATEGORY_TYPE_ID, PRIMARY_PARENT_CATEGORY_ID, CATEGORY_NAME, 
+    DESCRIPTION, CATEGORY_IMAGE_URL, LINK_ONE_IMAGE_URL, LINK_TWO_IMAGE_URL, DETAIL_SCREEN, 
+    SHOW_IN_SELECT, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <sql id="Blob_Column_List">
+    LONG_DESCRIPTION
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="org.efbiz.product.category.model.ProductCategoryExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="org.efbiz.product.category.model.ProductCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product_category
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_category
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.category.model.ProductCategoryExample">
+    delete from product_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.category.model.ProductCategory">
+    insert into product_category (PRODUCT_CATEGORY_ID, PRODUCT_CATEGORY_TYPE_ID, 
+      PRIMARY_PARENT_CATEGORY_ID, CATEGORY_NAME, 
+      DESCRIPTION, CATEGORY_IMAGE_URL, LINK_ONE_IMAGE_URL, 
+      LINK_TWO_IMAGE_URL, DETAIL_SCREEN, SHOW_IN_SELECT, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP, LONG_DESCRIPTION)
+    values (#{productCategoryId,jdbcType=VARCHAR}, #{productCategoryTypeId,jdbcType=VARCHAR}, 
+      #{primaryParentCategoryId,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{categoryImageUrl,jdbcType=VARCHAR}, #{linkOneImageUrl,jdbcType=VARCHAR}, 
+      #{linkTwoImageUrl,jdbcType=VARCHAR}, #{detailScreen,jdbcType=VARCHAR}, #{showInSelect,jdbcType=CHAR}, 
+      NOW(), NOW(), NOW(), NOW(), #{longDescription,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.category.model.ProductCategory">
+    insert into product_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productCategoryId != null">
+        PRODUCT_CATEGORY_ID,
+      </if>
+      <if test="productCategoryTypeId != null">
+        PRODUCT_CATEGORY_TYPE_ID,
+      </if>
+      <if test="primaryParentCategoryId != null">
+        PRIMARY_PARENT_CATEGORY_ID,
+      </if>
+      <if test="categoryName != null">
+        CATEGORY_NAME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="categoryImageUrl != null">
+        CATEGORY_IMAGE_URL,
+      </if>
+      <if test="linkOneImageUrl != null">
+        LINK_ONE_IMAGE_URL,
+      </if>
+      <if test="linkTwoImageUrl != null">
+        LINK_TWO_IMAGE_URL,
+      </if>
+      <if test="detailScreen != null">
+        DETAIL_SCREEN,
+      </if>
+      <if test="showInSelect != null">
+        SHOW_IN_SELECT,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+      <if test="longDescription != null">
+        LONG_DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productCategoryId != null">
+        #{productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="productCategoryTypeId != null">
+        #{productCategoryTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryParentCategoryId != null">
+        #{primaryParentCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryImageUrl != null">
+        #{categoryImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkOneImageUrl != null">
+        #{linkOneImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTwoImageUrl != null">
+        #{linkTwoImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailScreen != null">
+        #{detailScreen,jdbcType=VARCHAR},
+      </if>
+      <if test="showInSelect != null">
+        #{showInSelect,jdbcType=CHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+      <if test="longDescription != null">
+        #{longDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.category.model.ProductCategoryExample" resultType="java.lang.Long">
+    select count(*) from product_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_category
+    <set>
+      <if test="record.productCategoryId != null">
+        PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productCategoryTypeId != null">
+        PRODUCT_CATEGORY_TYPE_ID = #{record.productCategoryTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.primaryParentCategoryId != null">
+        PRIMARY_PARENT_CATEGORY_ID = #{record.primaryParentCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryName != null">
+        CATEGORY_NAME = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryImageUrl != null">
+        CATEGORY_IMAGE_URL = #{record.categoryImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkOneImageUrl != null">
+        LINK_ONE_IMAGE_URL = #{record.linkOneImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkTwoImageUrl != null">
+        LINK_TWO_IMAGE_URL = #{record.linkTwoImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailScreen != null">
+        DETAIL_SCREEN = #{record.detailScreen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showInSelect != null">
+        SHOW_IN_SELECT = #{record.showInSelect,jdbcType=CHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      <if test="record.longDescription != null">
+        LONG_DESCRIPTION = #{record.longDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update product_category
+    set PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      PRODUCT_CATEGORY_TYPE_ID = #{record.productCategoryTypeId,jdbcType=VARCHAR},
+      PRIMARY_PARENT_CATEGORY_ID = #{record.primaryParentCategoryId,jdbcType=VARCHAR},
+      CATEGORY_NAME = #{record.categoryName,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      CATEGORY_IMAGE_URL = #{record.categoryImageUrl,jdbcType=VARCHAR},
+      LINK_ONE_IMAGE_URL = #{record.linkOneImageUrl,jdbcType=VARCHAR},
+      LINK_TWO_IMAGE_URL = #{record.linkTwoImageUrl,jdbcType=VARCHAR},
+      DETAIL_SCREEN = #{record.detailScreen,jdbcType=VARCHAR},
+      SHOW_IN_SELECT = #{record.showInSelect,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      LONG_DESCRIPTION = #{record.longDescription,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_category
+    set PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      PRODUCT_CATEGORY_TYPE_ID = #{record.productCategoryTypeId,jdbcType=VARCHAR},
+      PRIMARY_PARENT_CATEGORY_ID = #{record.primaryParentCategoryId,jdbcType=VARCHAR},
+      CATEGORY_NAME = #{record.categoryName,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      CATEGORY_IMAGE_URL = #{record.categoryImageUrl,jdbcType=VARCHAR},
+      LINK_ONE_IMAGE_URL = #{record.linkOneImageUrl,jdbcType=VARCHAR},
+      LINK_TWO_IMAGE_URL = #{record.linkTwoImageUrl,jdbcType=VARCHAR},
+      DETAIL_SCREEN = #{record.detailScreen,jdbcType=VARCHAR},
+      SHOW_IN_SELECT = #{record.showInSelect,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.category.model.ProductCategory">
+    update product_category
+    <set>
+      <if test="productCategoryTypeId != null">
+        PRODUCT_CATEGORY_TYPE_ID = #{productCategoryTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryParentCategoryId != null">
+        PRIMARY_PARENT_CATEGORY_ID = #{primaryParentCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null">
+        CATEGORY_NAME = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryImageUrl != null">
+        CATEGORY_IMAGE_URL = #{categoryImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkOneImageUrl != null">
+        LINK_ONE_IMAGE_URL = #{linkOneImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTwoImageUrl != null">
+        LINK_TWO_IMAGE_URL = #{linkTwoImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailScreen != null">
+        DETAIL_SCREEN = #{detailScreen,jdbcType=VARCHAR},
+      </if>
+      <if test="showInSelect != null">
+        SHOW_IN_SELECT = #{showInSelect,jdbcType=CHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      <if test="longDescription != null">
+        LONG_DESCRIPTION = #{longDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.efbiz.product.category.model.ProductCategory">
+    update product_category
+    set PRODUCT_CATEGORY_TYPE_ID = #{productCategoryTypeId,jdbcType=VARCHAR},
+      PRIMARY_PARENT_CATEGORY_ID = #{primaryParentCategoryId,jdbcType=VARCHAR},
+      CATEGORY_NAME = #{categoryName,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CATEGORY_IMAGE_URL = #{categoryImageUrl,jdbcType=VARCHAR},
+      LINK_ONE_IMAGE_URL = #{linkOneImageUrl,jdbcType=VARCHAR},
+      LINK_TWO_IMAGE_URL = #{linkTwoImageUrl,jdbcType=VARCHAR},
+      DETAIL_SCREEN = #{detailScreen,jdbcType=VARCHAR},
+      SHOW_IN_SELECT = #{showInSelect,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      LONG_DESCRIPTION = #{longDescription,jdbcType=LONGVARCHAR}
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.category.model.ProductCategory">
+    update product_category
+    set PRODUCT_CATEGORY_TYPE_ID = #{productCategoryTypeId,jdbcType=VARCHAR},
+      PRIMARY_PARENT_CATEGORY_ID = #{primaryParentCategoryId,jdbcType=VARCHAR},
+      CATEGORY_NAME = #{categoryName,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CATEGORY_IMAGE_URL = #{categoryImageUrl,jdbcType=VARCHAR},
+      LINK_ONE_IMAGE_URL = #{linkOneImageUrl,jdbcType=VARCHAR},
+      LINK_TWO_IMAGE_URL = #{linkTwoImageUrl,jdbcType=VARCHAR},
+      DETAIL_SCREEN = #{detailScreen,jdbcType=VARCHAR},
+      SHOW_IN_SELECT = #{showInSelect,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+  </update>
+</mapper>

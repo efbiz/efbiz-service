@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.feature.dao.ProductFeatureMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.feature.model.ProductFeature">
+    <id column="PRODUCT_FEATURE_ID" jdbcType="VARCHAR" property="productFeatureId" />
+    <result column="PRODUCT_FEATURE_TYPE_ID" jdbcType="VARCHAR" property="productFeatureTypeId" />
+    <result column="PRODUCT_FEATURE_CATEGORY_ID" jdbcType="VARCHAR" property="productFeatureCategoryId" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="UOM_ID" jdbcType="VARCHAR" property="uomId" />
+    <result column="NUMBER_SPECIFIED" jdbcType="DECIMAL" property="numberSpecified" />
+    <result column="DEFAULT_AMOUNT" jdbcType="DECIMAL" property="defaultAmount" />
+    <result column="DEFAULT_SEQUENCE_NUM" jdbcType="DECIMAL" property="defaultSequenceNum" />
+    <result column="ABBREV" jdbcType="VARCHAR" property="abbrev" />
+    <result column="ID_CODE" jdbcType="VARCHAR" property="idCode" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_FEATURE_ID, PRODUCT_FEATURE_TYPE_ID, PRODUCT_FEATURE_CATEGORY_ID, DESCRIPTION, 
+    UOM_ID, NUMBER_SPECIFIED, DEFAULT_AMOUNT, DEFAULT_SEQUENCE_NUM, ABBREV, ID_CODE, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.feature.model.ProductFeatureExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_feature
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_feature
+    where PRODUCT_FEATURE_ID = #{productFeatureId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_feature
+    where PRODUCT_FEATURE_ID = #{productFeatureId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.feature.model.ProductFeatureExample">
+    delete from product_feature
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.feature.model.ProductFeature">
+    insert into product_feature (PRODUCT_FEATURE_ID, PRODUCT_FEATURE_TYPE_ID, 
+      PRODUCT_FEATURE_CATEGORY_ID, DESCRIPTION, 
+      UOM_ID, NUMBER_SPECIFIED, DEFAULT_AMOUNT, 
+      DEFAULT_SEQUENCE_NUM, ABBREV, ID_CODE, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productFeatureId,jdbcType=VARCHAR}, #{productFeatureTypeId,jdbcType=VARCHAR}, 
+      #{productFeatureCategoryId,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{uomId,jdbcType=VARCHAR}, #{numberSpecified,jdbcType=DECIMAL}, #{defaultAmount,jdbcType=DECIMAL}, 
+      #{defaultSequenceNum,jdbcType=DECIMAL}, #{abbrev,jdbcType=VARCHAR}, #{idCode,jdbcType=VARCHAR}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.feature.model.ProductFeature">
+    insert into product_feature
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productFeatureId != null">
+        PRODUCT_FEATURE_ID,
+      </if>
+      <if test="productFeatureTypeId != null">
+        PRODUCT_FEATURE_TYPE_ID,
+      </if>
+      <if test="productFeatureCategoryId != null">
+        PRODUCT_FEATURE_CATEGORY_ID,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="uomId != null">
+        UOM_ID,
+      </if>
+      <if test="numberSpecified != null">
+        NUMBER_SPECIFIED,
+      </if>
+      <if test="defaultAmount != null">
+        DEFAULT_AMOUNT,
+      </if>
+      <if test="defaultSequenceNum != null">
+        DEFAULT_SEQUENCE_NUM,
+      </if>
+      <if test="abbrev != null">
+        ABBREV,
+      </if>
+      <if test="idCode != null">
+        ID_CODE,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productFeatureId != null">
+        #{productFeatureId,jdbcType=VARCHAR},
+      </if>
+      <if test="productFeatureTypeId != null">
+        #{productFeatureTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="productFeatureCategoryId != null">
+        #{productFeatureCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="uomId != null">
+        #{uomId,jdbcType=VARCHAR},
+      </if>
+      <if test="numberSpecified != null">
+        #{numberSpecified,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultAmount != null">
+        #{defaultAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultSequenceNum != null">
+        #{defaultSequenceNum,jdbcType=DECIMAL},
+      </if>
+      <if test="abbrev != null">
+        #{abbrev,jdbcType=VARCHAR},
+      </if>
+      <if test="idCode != null">
+        #{idCode,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.feature.model.ProductFeatureExample" resultType="java.lang.Long">
+    select count(*) from product_feature
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_feature
+    <set>
+      <if test="record.productFeatureId != null">
+        PRODUCT_FEATURE_ID = #{record.productFeatureId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productFeatureTypeId != null">
+        PRODUCT_FEATURE_TYPE_ID = #{record.productFeatureTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productFeatureCategoryId != null">
+        PRODUCT_FEATURE_CATEGORY_ID = #{record.productFeatureCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uomId != null">
+        UOM_ID = #{record.uomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberSpecified != null">
+        NUMBER_SPECIFIED = #{record.numberSpecified,jdbcType=DECIMAL},
+      </if>
+      <if test="record.defaultAmount != null">
+        DEFAULT_AMOUNT = #{record.defaultAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.defaultSequenceNum != null">
+        DEFAULT_SEQUENCE_NUM = #{record.defaultSequenceNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.abbrev != null">
+        ABBREV = #{record.abbrev,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCode != null">
+        ID_CODE = #{record.idCode,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_feature
+    set PRODUCT_FEATURE_ID = #{record.productFeatureId,jdbcType=VARCHAR},
+      PRODUCT_FEATURE_TYPE_ID = #{record.productFeatureTypeId,jdbcType=VARCHAR},
+      PRODUCT_FEATURE_CATEGORY_ID = #{record.productFeatureCategoryId,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      UOM_ID = #{record.uomId,jdbcType=VARCHAR},
+      NUMBER_SPECIFIED = #{record.numberSpecified,jdbcType=DECIMAL},
+      DEFAULT_AMOUNT = #{record.defaultAmount,jdbcType=DECIMAL},
+      DEFAULT_SEQUENCE_NUM = #{record.defaultSequenceNum,jdbcType=DECIMAL},
+      ABBREV = #{record.abbrev,jdbcType=VARCHAR},
+      ID_CODE = #{record.idCode,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.feature.model.ProductFeature">
+    update product_feature
+    <set>
+      <if test="productFeatureTypeId != null">
+        PRODUCT_FEATURE_TYPE_ID = #{productFeatureTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="productFeatureCategoryId != null">
+        PRODUCT_FEATURE_CATEGORY_ID = #{productFeatureCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="uomId != null">
+        UOM_ID = #{uomId,jdbcType=VARCHAR},
+      </if>
+      <if test="numberSpecified != null">
+        NUMBER_SPECIFIED = #{numberSpecified,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultAmount != null">
+        DEFAULT_AMOUNT = #{defaultAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultSequenceNum != null">
+        DEFAULT_SEQUENCE_NUM = #{defaultSequenceNum,jdbcType=DECIMAL},
+      </if>
+      <if test="abbrev != null">
+        ABBREV = #{abbrev,jdbcType=VARCHAR},
+      </if>
+      <if test="idCode != null">
+        ID_CODE = #{idCode,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_FEATURE_ID = #{productFeatureId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.feature.model.ProductFeature">
+    update product_feature
+    set PRODUCT_FEATURE_TYPE_ID = #{productFeatureTypeId,jdbcType=VARCHAR},
+      PRODUCT_FEATURE_CATEGORY_ID = #{productFeatureCategoryId,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      UOM_ID = #{uomId,jdbcType=VARCHAR},
+      NUMBER_SPECIFIED = #{numberSpecified,jdbcType=DECIMAL},
+      DEFAULT_AMOUNT = #{defaultAmount,jdbcType=DECIMAL},
+      DEFAULT_SEQUENCE_NUM = #{defaultSequenceNum,jdbcType=DECIMAL},
+      ABBREV = #{abbrev,jdbcType=VARCHAR},
+      ID_CODE = #{idCode,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_FEATURE_ID = #{productFeatureId,jdbcType=VARCHAR}
+  </update>
+</mapper>

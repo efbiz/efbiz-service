@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.subscription.dao.ProductSubscriptionResourceMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.subscription.model.ProductSubscriptionResource">
+    <id column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <id column="SUBSCRIPTION_RESOURCE_ID" jdbcType="VARCHAR" property="subscriptionResourceId" />
+    <id column="FROM_DATE" jdbcType="TIMESTAMP" property="fromDate" />
+    <result column="THRU_DATE" jdbcType="TIMESTAMP" property="thruDate" />
+    <result column="PURCHASE_FROM_DATE" jdbcType="TIMESTAMP" property="purchaseFromDate" />
+    <result column="PURCHASE_THRU_DATE" jdbcType="TIMESTAMP" property="purchaseThruDate" />
+    <result column="MAX_LIFE_TIME" jdbcType="DECIMAL" property="maxLifeTime" />
+    <result column="MAX_LIFE_TIME_UOM_ID" jdbcType="VARCHAR" property="maxLifeTimeUomId" />
+    <result column="AVAILABLE_TIME" jdbcType="DECIMAL" property="availableTime" />
+    <result column="AVAILABLE_TIME_UOM_ID" jdbcType="VARCHAR" property="availableTimeUomId" />
+    <result column="USE_COUNT_LIMIT" jdbcType="DECIMAL" property="useCountLimit" />
+    <result column="USE_TIME" jdbcType="DECIMAL" property="useTime" />
+    <result column="USE_TIME_UOM_ID" jdbcType="VARCHAR" property="useTimeUomId" />
+    <result column="USE_ROLE_TYPE_ID" jdbcType="VARCHAR" property="useRoleTypeId" />
+    <result column="AUTOMATIC_EXTEND" jdbcType="CHAR" property="automaticExtend" />
+    <result column="CANCL_AUTM_EXT_TIME" jdbcType="DECIMAL" property="canclAutmExtTime" />
+    <result column="CANCL_AUTM_EXT_TIME_UOM_ID" jdbcType="VARCHAR" property="canclAutmExtTimeUomId" />
+    <result column="GRACE_PERIOD_ON_EXPIRY" jdbcType="DECIMAL" property="gracePeriodOnExpiry" />
+    <result column="GRACE_PERIOD_ON_EXPIRY_UOM_ID" jdbcType="VARCHAR" property="gracePeriodOnExpiryUomId" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, SUBSCRIPTION_RESOURCE_ID, FROM_DATE, THRU_DATE, PURCHASE_FROM_DATE, PURCHASE_THRU_DATE, 
+    MAX_LIFE_TIME, MAX_LIFE_TIME_UOM_ID, AVAILABLE_TIME, AVAILABLE_TIME_UOM_ID, USE_COUNT_LIMIT, 
+    USE_TIME, USE_TIME_UOM_ID, USE_ROLE_TYPE_ID, AUTOMATIC_EXTEND, CANCL_AUTM_EXT_TIME, 
+    CANCL_AUTM_EXT_TIME_UOM_ID, GRACE_PERIOD_ON_EXPIRY, GRACE_PERIOD_ON_EXPIRY_UOM_ID, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_subscription_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResourceKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_subscription_resource
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and SUBSCRIPTION_RESOURCE_ID = #{subscriptionResourceId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResourceKey">
+    delete from product_subscription_resource
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and SUBSCRIPTION_RESOURCE_ID = #{subscriptionResourceId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResourceExample">
+    delete from product_subscription_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResource">
+    insert into product_subscription_resource (PRODUCT_ID, SUBSCRIPTION_RESOURCE_ID, 
+      FROM_DATE, THRU_DATE, PURCHASE_FROM_DATE, 
+      PURCHASE_THRU_DATE, MAX_LIFE_TIME, MAX_LIFE_TIME_UOM_ID, 
+      AVAILABLE_TIME, AVAILABLE_TIME_UOM_ID, USE_COUNT_LIMIT, 
+      USE_TIME, USE_TIME_UOM_ID, USE_ROLE_TYPE_ID, 
+      AUTOMATIC_EXTEND, CANCL_AUTM_EXT_TIME, CANCL_AUTM_EXT_TIME_UOM_ID, 
+      GRACE_PERIOD_ON_EXPIRY, GRACE_PERIOD_ON_EXPIRY_UOM_ID, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productId,jdbcType=VARCHAR}, #{subscriptionResourceId,jdbcType=VARCHAR}, 
+      #{fromDate,jdbcType=TIMESTAMP}, #{thruDate,jdbcType=TIMESTAMP}, #{purchaseFromDate,jdbcType=TIMESTAMP}, 
+      #{purchaseThruDate,jdbcType=TIMESTAMP}, #{maxLifeTime,jdbcType=DECIMAL}, #{maxLifeTimeUomId,jdbcType=VARCHAR}, 
+      #{availableTime,jdbcType=DECIMAL}, #{availableTimeUomId,jdbcType=VARCHAR}, #{useCountLimit,jdbcType=DECIMAL}, 
+      #{useTime,jdbcType=DECIMAL}, #{useTimeUomId,jdbcType=VARCHAR}, #{useRoleTypeId,jdbcType=VARCHAR}, 
+      #{automaticExtend,jdbcType=CHAR}, #{canclAutmExtTime,jdbcType=DECIMAL}, #{canclAutmExtTimeUomId,jdbcType=VARCHAR}, 
+      #{gracePeriodOnExpiry,jdbcType=DECIMAL}, #{gracePeriodOnExpiryUomId,jdbcType=VARCHAR}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResource">
+    insert into product_subscription_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="subscriptionResourceId != null">
+        SUBSCRIPTION_RESOURCE_ID,
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE,
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE,
+      </if>
+      <if test="purchaseFromDate != null">
+        PURCHASE_FROM_DATE,
+      </if>
+      <if test="purchaseThruDate != null">
+        PURCHASE_THRU_DATE,
+      </if>
+      <if test="maxLifeTime != null">
+        MAX_LIFE_TIME,
+      </if>
+      <if test="maxLifeTimeUomId != null">
+        MAX_LIFE_TIME_UOM_ID,
+      </if>
+      <if test="availableTime != null">
+        AVAILABLE_TIME,
+      </if>
+      <if test="availableTimeUomId != null">
+        AVAILABLE_TIME_UOM_ID,
+      </if>
+      <if test="useCountLimit != null">
+        USE_COUNT_LIMIT,
+      </if>
+      <if test="useTime != null">
+        USE_TIME,
+      </if>
+      <if test="useTimeUomId != null">
+        USE_TIME_UOM_ID,
+      </if>
+      <if test="useRoleTypeId != null">
+        USE_ROLE_TYPE_ID,
+      </if>
+      <if test="automaticExtend != null">
+        AUTOMATIC_EXTEND,
+      </if>
+      <if test="canclAutmExtTime != null">
+        CANCL_AUTM_EXT_TIME,
+      </if>
+      <if test="canclAutmExtTimeUomId != null">
+        CANCL_AUTM_EXT_TIME_UOM_ID,
+      </if>
+      <if test="gracePeriodOnExpiry != null">
+        GRACE_PERIOD_ON_EXPIRY,
+      </if>
+      <if test="gracePeriodOnExpiryUomId != null">
+        GRACE_PERIOD_ON_EXPIRY_UOM_ID,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptionResourceId != null">
+        #{subscriptionResourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseFromDate != null">
+        #{purchaseFromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseThruDate != null">
+        #{purchaseThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maxLifeTime != null">
+        #{maxLifeTime,jdbcType=DECIMAL},
+      </if>
+      <if test="maxLifeTimeUomId != null">
+        #{maxLifeTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="availableTime != null">
+        #{availableTime,jdbcType=DECIMAL},
+      </if>
+      <if test="availableTimeUomId != null">
+        #{availableTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="useCountLimit != null">
+        #{useCountLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="useTime != null">
+        #{useTime,jdbcType=DECIMAL},
+      </if>
+      <if test="useTimeUomId != null">
+        #{useTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="useRoleTypeId != null">
+        #{useRoleTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="automaticExtend != null">
+        #{automaticExtend,jdbcType=CHAR},
+      </if>
+      <if test="canclAutmExtTime != null">
+        #{canclAutmExtTime,jdbcType=DECIMAL},
+      </if>
+      <if test="canclAutmExtTimeUomId != null">
+        #{canclAutmExtTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="gracePeriodOnExpiry != null">
+        #{gracePeriodOnExpiry,jdbcType=DECIMAL},
+      </if>
+      <if test="gracePeriodOnExpiryUomId != null">
+        #{gracePeriodOnExpiryUomId,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResourceExample" resultType="java.lang.Long">
+    select count(*) from product_subscription_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_subscription_resource
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subscriptionResourceId != null">
+        SUBSCRIPTION_RESOURCE_ID = #{record.subscriptionResourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromDate != null">
+        FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thruDate != null">
+        THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.purchaseFromDate != null">
+        PURCHASE_FROM_DATE = #{record.purchaseFromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.purchaseThruDate != null">
+        PURCHASE_THRU_DATE = #{record.purchaseThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.maxLifeTime != null">
+        MAX_LIFE_TIME = #{record.maxLifeTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxLifeTimeUomId != null">
+        MAX_LIFE_TIME_UOM_ID = #{record.maxLifeTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.availableTime != null">
+        AVAILABLE_TIME = #{record.availableTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.availableTimeUomId != null">
+        AVAILABLE_TIME_UOM_ID = #{record.availableTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useCountLimit != null">
+        USE_COUNT_LIMIT = #{record.useCountLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.useTime != null">
+        USE_TIME = #{record.useTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.useTimeUomId != null">
+        USE_TIME_UOM_ID = #{record.useTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useRoleTypeId != null">
+        USE_ROLE_TYPE_ID = #{record.useRoleTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.automaticExtend != null">
+        AUTOMATIC_EXTEND = #{record.automaticExtend,jdbcType=CHAR},
+      </if>
+      <if test="record.canclAutmExtTime != null">
+        CANCL_AUTM_EXT_TIME = #{record.canclAutmExtTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.canclAutmExtTimeUomId != null">
+        CANCL_AUTM_EXT_TIME_UOM_ID = #{record.canclAutmExtTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gracePeriodOnExpiry != null">
+        GRACE_PERIOD_ON_EXPIRY = #{record.gracePeriodOnExpiry,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gracePeriodOnExpiryUomId != null">
+        GRACE_PERIOD_ON_EXPIRY_UOM_ID = #{record.gracePeriodOnExpiryUomId,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_subscription_resource
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      SUBSCRIPTION_RESOURCE_ID = #{record.subscriptionResourceId,jdbcType=VARCHAR},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      PURCHASE_FROM_DATE = #{record.purchaseFromDate,jdbcType=TIMESTAMP},
+      PURCHASE_THRU_DATE = #{record.purchaseThruDate,jdbcType=TIMESTAMP},
+      MAX_LIFE_TIME = #{record.maxLifeTime,jdbcType=DECIMAL},
+      MAX_LIFE_TIME_UOM_ID = #{record.maxLifeTimeUomId,jdbcType=VARCHAR},
+      AVAILABLE_TIME = #{record.availableTime,jdbcType=DECIMAL},
+      AVAILABLE_TIME_UOM_ID = #{record.availableTimeUomId,jdbcType=VARCHAR},
+      USE_COUNT_LIMIT = #{record.useCountLimit,jdbcType=DECIMAL},
+      USE_TIME = #{record.useTime,jdbcType=DECIMAL},
+      USE_TIME_UOM_ID = #{record.useTimeUomId,jdbcType=VARCHAR},
+      USE_ROLE_TYPE_ID = #{record.useRoleTypeId,jdbcType=VARCHAR},
+      AUTOMATIC_EXTEND = #{record.automaticExtend,jdbcType=CHAR},
+      CANCL_AUTM_EXT_TIME = #{record.canclAutmExtTime,jdbcType=DECIMAL},
+      CANCL_AUTM_EXT_TIME_UOM_ID = #{record.canclAutmExtTimeUomId,jdbcType=VARCHAR},
+      GRACE_PERIOD_ON_EXPIRY = #{record.gracePeriodOnExpiry,jdbcType=DECIMAL},
+      GRACE_PERIOD_ON_EXPIRY_UOM_ID = #{record.gracePeriodOnExpiryUomId,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResource">
+    update product_subscription_resource
+    <set>
+      <if test="thruDate != null">
+        THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseFromDate != null">
+        PURCHASE_FROM_DATE = #{purchaseFromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseThruDate != null">
+        PURCHASE_THRU_DATE = #{purchaseThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maxLifeTime != null">
+        MAX_LIFE_TIME = #{maxLifeTime,jdbcType=DECIMAL},
+      </if>
+      <if test="maxLifeTimeUomId != null">
+        MAX_LIFE_TIME_UOM_ID = #{maxLifeTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="availableTime != null">
+        AVAILABLE_TIME = #{availableTime,jdbcType=DECIMAL},
+      </if>
+      <if test="availableTimeUomId != null">
+        AVAILABLE_TIME_UOM_ID = #{availableTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="useCountLimit != null">
+        USE_COUNT_LIMIT = #{useCountLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="useTime != null">
+        USE_TIME = #{useTime,jdbcType=DECIMAL},
+      </if>
+      <if test="useTimeUomId != null">
+        USE_TIME_UOM_ID = #{useTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="useRoleTypeId != null">
+        USE_ROLE_TYPE_ID = #{useRoleTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="automaticExtend != null">
+        AUTOMATIC_EXTEND = #{automaticExtend,jdbcType=CHAR},
+      </if>
+      <if test="canclAutmExtTime != null">
+        CANCL_AUTM_EXT_TIME = #{canclAutmExtTime,jdbcType=DECIMAL},
+      </if>
+      <if test="canclAutmExtTimeUomId != null">
+        CANCL_AUTM_EXT_TIME_UOM_ID = #{canclAutmExtTimeUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="gracePeriodOnExpiry != null">
+        GRACE_PERIOD_ON_EXPIRY = #{gracePeriodOnExpiry,jdbcType=DECIMAL},
+      </if>
+      <if test="gracePeriodOnExpiryUomId != null">
+        GRACE_PERIOD_ON_EXPIRY_UOM_ID = #{gracePeriodOnExpiryUomId,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and SUBSCRIPTION_RESOURCE_ID = #{subscriptionResourceId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.subscription.model.ProductSubscriptionResource">
+    update product_subscription_resource
+    set THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      PURCHASE_FROM_DATE = #{purchaseFromDate,jdbcType=TIMESTAMP},
+      PURCHASE_THRU_DATE = #{purchaseThruDate,jdbcType=TIMESTAMP},
+      MAX_LIFE_TIME = #{maxLifeTime,jdbcType=DECIMAL},
+      MAX_LIFE_TIME_UOM_ID = #{maxLifeTimeUomId,jdbcType=VARCHAR},
+      AVAILABLE_TIME = #{availableTime,jdbcType=DECIMAL},
+      AVAILABLE_TIME_UOM_ID = #{availableTimeUomId,jdbcType=VARCHAR},
+      USE_COUNT_LIMIT = #{useCountLimit,jdbcType=DECIMAL},
+      USE_TIME = #{useTime,jdbcType=DECIMAL},
+      USE_TIME_UOM_ID = #{useTimeUomId,jdbcType=VARCHAR},
+      USE_ROLE_TYPE_ID = #{useRoleTypeId,jdbcType=VARCHAR},
+      AUTOMATIC_EXTEND = #{automaticExtend,jdbcType=CHAR},
+      CANCL_AUTM_EXT_TIME = #{canclAutmExtTime,jdbcType=DECIMAL},
+      CANCL_AUTM_EXT_TIME_UOM_ID = #{canclAutmExtTimeUomId,jdbcType=VARCHAR},
+      GRACE_PERIOD_ON_EXPIRY = #{gracePeriodOnExpiry,jdbcType=DECIMAL},
+      GRACE_PERIOD_ON_EXPIRY_UOM_ID = #{gracePeriodOnExpiryUomId,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and SUBSCRIPTION_RESOURCE_ID = #{subscriptionResourceId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.price.dao.ProductPriceMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.price.model.ProductPrice">
+    <id column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <id column="PRODUCT_PRICE_TYPE_ID" jdbcType="VARCHAR" property="productPriceTypeId" />
+    <id column="PRODUCT_PRICE_PURPOSE_ID" jdbcType="VARCHAR" property="productPricePurposeId" />
+    <id column="CURRENCY_UOM_ID" jdbcType="VARCHAR" property="currencyUomId" />
+    <id column="PRODUCT_STORE_GROUP_ID" jdbcType="VARCHAR" property="productStoreGroupId" />
+    <id column="FROM_DATE" jdbcType="TIMESTAMP" property="fromDate" />
+    <result column="THRU_DATE" jdbcType="TIMESTAMP" property="thruDate" />
+    <result column="PRICE" jdbcType="DECIMAL" property="price" />
+    <result column="TERM_UOM_ID" jdbcType="VARCHAR" property="termUomId" />
+    <result column="CUSTOM_PRICE_CALC_SERVICE" jdbcType="VARCHAR" property="customPriceCalcService" />
+    <result column="PRICE_WITHOUT_TAX" jdbcType="DECIMAL" property="priceWithoutTax" />
+    <result column="PRICE_WITH_TAX" jdbcType="DECIMAL" property="priceWithTax" />
+    <result column="TAX_AMOUNT" jdbcType="DECIMAL" property="taxAmount" />
+    <result column="TAX_PERCENTAGE" jdbcType="DECIMAL" property="taxPercentage" />
+    <result column="TAX_AUTH_PARTY_ID" jdbcType="VARCHAR" property="taxAuthPartyId" />
+    <result column="TAX_AUTH_GEO_ID" jdbcType="VARCHAR" property="taxAuthGeoId" />
+    <result column="TAX_IN_PRICE" jdbcType="CHAR" property="taxInPrice" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="CREATED_BY_USER_LOGIN" jdbcType="VARCHAR" property="createdByUserLogin" />
+    <result column="LAST_MODIFIED_DATE" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    <result column="LAST_MODIFIED_BY_USER_LOGIN" jdbcType="VARCHAR" property="lastModifiedByUserLogin" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, PRODUCT_PRICE_TYPE_ID, PRODUCT_PRICE_PURPOSE_ID, CURRENCY_UOM_ID, PRODUCT_STORE_GROUP_ID, 
+    FROM_DATE, THRU_DATE, PRICE, TERM_UOM_ID, CUSTOM_PRICE_CALC_SERVICE, PRICE_WITHOUT_TAX, 
+    PRICE_WITH_TAX, TAX_AMOUNT, TAX_PERCENTAGE, TAX_AUTH_PARTY_ID, TAX_AUTH_GEO_ID, TAX_IN_PRICE, 
+    CREATED_DATE, CREATED_BY_USER_LOGIN, LAST_MODIFIED_DATE, LAST_MODIFIED_BY_USER_LOGIN, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.price.model.ProductPriceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_price
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.price.model.ProductPriceKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_price
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_TYPE_ID = #{productPriceTypeId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_PURPOSE_ID = #{productPricePurposeId,jdbcType=VARCHAR}
+      and CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR}
+      and PRODUCT_STORE_GROUP_ID = #{productStoreGroupId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.price.model.ProductPriceKey">
+    delete from product_price
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_TYPE_ID = #{productPriceTypeId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_PURPOSE_ID = #{productPricePurposeId,jdbcType=VARCHAR}
+      and CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR}
+      and PRODUCT_STORE_GROUP_ID = #{productStoreGroupId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.price.model.ProductPriceExample">
+    delete from product_price
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.price.model.ProductPrice">
+    insert into product_price (PRODUCT_ID, PRODUCT_PRICE_TYPE_ID, PRODUCT_PRICE_PURPOSE_ID, 
+      CURRENCY_UOM_ID, PRODUCT_STORE_GROUP_ID, FROM_DATE, 
+      THRU_DATE, PRICE, TERM_UOM_ID, 
+      CUSTOM_PRICE_CALC_SERVICE, PRICE_WITHOUT_TAX, 
+      PRICE_WITH_TAX, TAX_AMOUNT, TAX_PERCENTAGE, 
+      TAX_AUTH_PARTY_ID, TAX_AUTH_GEO_ID, TAX_IN_PRICE, 
+      CREATED_DATE, CREATED_BY_USER_LOGIN, LAST_MODIFIED_DATE, 
+      LAST_MODIFIED_BY_USER_LOGIN, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productId,jdbcType=VARCHAR}, #{productPriceTypeId,jdbcType=VARCHAR}, #{productPricePurposeId,jdbcType=VARCHAR}, 
+      #{currencyUomId,jdbcType=VARCHAR}, #{productStoreGroupId,jdbcType=VARCHAR}, #{fromDate,jdbcType=TIMESTAMP}, 
+      #{thruDate,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, #{termUomId,jdbcType=VARCHAR}, 
+      #{customPriceCalcService,jdbcType=VARCHAR}, #{priceWithoutTax,jdbcType=DECIMAL}, 
+      #{priceWithTax,jdbcType=DECIMAL}, #{taxAmount,jdbcType=DECIMAL}, #{taxPercentage,jdbcType=DECIMAL}, 
+      #{taxAuthPartyId,jdbcType=VARCHAR}, #{taxAuthGeoId,jdbcType=VARCHAR}, #{taxInPrice,jdbcType=CHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{createdByUserLogin,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP}, 
+      #{lastModifiedByUserLogin,jdbcType=VARCHAR}, NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.price.model.ProductPrice">
+    insert into product_price
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="productPriceTypeId != null">
+        PRODUCT_PRICE_TYPE_ID,
+      </if>
+      <if test="productPricePurposeId != null">
+        PRODUCT_PRICE_PURPOSE_ID,
+      </if>
+      <if test="currencyUomId != null">
+        CURRENCY_UOM_ID,
+      </if>
+      <if test="productStoreGroupId != null">
+        PRODUCT_STORE_GROUP_ID,
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE,
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="termUomId != null">
+        TERM_UOM_ID,
+      </if>
+      <if test="customPriceCalcService != null">
+        CUSTOM_PRICE_CALC_SERVICE,
+      </if>
+      <if test="priceWithoutTax != null">
+        PRICE_WITHOUT_TAX,
+      </if>
+      <if test="priceWithTax != null">
+        PRICE_WITH_TAX,
+      </if>
+      <if test="taxAmount != null">
+        TAX_AMOUNT,
+      </if>
+      <if test="taxPercentage != null">
+        TAX_PERCENTAGE,
+      </if>
+      <if test="taxAuthPartyId != null">
+        TAX_AUTH_PARTY_ID,
+      </if>
+      <if test="taxAuthGeoId != null">
+        TAX_AUTH_GEO_ID,
+      </if>
+      <if test="taxInPrice != null">
+        TAX_IN_PRICE,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN,
+      </if>
+      <if test="lastModifiedDate != null">
+        LAST_MODIFIED_DATE,
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPriceTypeId != null">
+        #{productPriceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPricePurposeId != null">
+        #{productPricePurposeId,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyUomId != null">
+        #{currencyUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productStoreGroupId != null">
+        #{productStoreGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="termUomId != null">
+        #{termUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="customPriceCalcService != null">
+        #{customPriceCalcService,jdbcType=VARCHAR},
+      </if>
+      <if test="priceWithoutTax != null">
+        #{priceWithoutTax,jdbcType=DECIMAL},
+      </if>
+      <if test="priceWithTax != null">
+        #{priceWithTax,jdbcType=DECIMAL},
+      </if>
+      <if test="taxAmount != null">
+        #{taxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="taxPercentage != null">
+        #{taxPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="taxAuthPartyId != null">
+        #{taxAuthPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxAuthGeoId != null">
+        #{taxAuthGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxInPrice != null">
+        #{taxInPrice,jdbcType=CHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdByUserLogin != null">
+        #{createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedDate != null">
+        #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.price.model.ProductPriceExample" resultType="java.lang.Long">
+    select count(*) from product_price
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_price
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPriceTypeId != null">
+        PRODUCT_PRICE_TYPE_ID = #{record.productPriceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPricePurposeId != null">
+        PRODUCT_PRICE_PURPOSE_ID = #{record.productPricePurposeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currencyUomId != null">
+        CURRENCY_UOM_ID = #{record.currencyUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productStoreGroupId != null">
+        PRODUCT_STORE_GROUP_ID = #{record.productStoreGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromDate != null">
+        FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thruDate != null">
+        THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.termUomId != null">
+        TERM_UOM_ID = #{record.termUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customPriceCalcService != null">
+        CUSTOM_PRICE_CALC_SERVICE = #{record.customPriceCalcService,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceWithoutTax != null">
+        PRICE_WITHOUT_TAX = #{record.priceWithoutTax,jdbcType=DECIMAL},
+      </if>
+      <if test="record.priceWithTax != null">
+        PRICE_WITH_TAX = #{record.priceWithTax,jdbcType=DECIMAL},
+      </if>
+      <if test="record.taxAmount != null">
+        TAX_AMOUNT = #{record.taxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.taxPercentage != null">
+        TAX_PERCENTAGE = #{record.taxPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.taxAuthPartyId != null">
+        TAX_AUTH_PARTY_ID = #{record.taxAuthPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxAuthGeoId != null">
+        TAX_AUTH_GEO_ID = #{record.taxAuthGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxInPrice != null">
+        TAX_IN_PRICE = #{record.taxInPrice,jdbcType=CHAR},
+      </if>
+      <if test="record.createdDate != null">
+        CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN = #{record.createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastModifiedDate != null">
+        LAST_MODIFIED_DATE = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN = #{record.lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_price
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PRODUCT_PRICE_TYPE_ID = #{record.productPriceTypeId,jdbcType=VARCHAR},
+      PRODUCT_PRICE_PURPOSE_ID = #{record.productPricePurposeId,jdbcType=VARCHAR},
+      CURRENCY_UOM_ID = #{record.currencyUomId,jdbcType=VARCHAR},
+      PRODUCT_STORE_GROUP_ID = #{record.productStoreGroupId,jdbcType=VARCHAR},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      PRICE = #{record.price,jdbcType=DECIMAL},
+      TERM_UOM_ID = #{record.termUomId,jdbcType=VARCHAR},
+      CUSTOM_PRICE_CALC_SERVICE = #{record.customPriceCalcService,jdbcType=VARCHAR},
+      PRICE_WITHOUT_TAX = #{record.priceWithoutTax,jdbcType=DECIMAL},
+      PRICE_WITH_TAX = #{record.priceWithTax,jdbcType=DECIMAL},
+      TAX_AMOUNT = #{record.taxAmount,jdbcType=DECIMAL},
+      TAX_PERCENTAGE = #{record.taxPercentage,jdbcType=DECIMAL},
+      TAX_AUTH_PARTY_ID = #{record.taxAuthPartyId,jdbcType=VARCHAR},
+      TAX_AUTH_GEO_ID = #{record.taxAuthGeoId,jdbcType=VARCHAR},
+      TAX_IN_PRICE = #{record.taxInPrice,jdbcType=CHAR},
+      CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      CREATED_BY_USER_LOGIN = #{record.createdByUserLogin,jdbcType=VARCHAR},
+      LAST_MODIFIED_DATE = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
+      LAST_MODIFIED_BY_USER_LOGIN = #{record.lastModifiedByUserLogin,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.price.model.ProductPrice">
+    update product_price
+    <set>
+      <if test="thruDate != null">
+        THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="termUomId != null">
+        TERM_UOM_ID = #{termUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="customPriceCalcService != null">
+        CUSTOM_PRICE_CALC_SERVICE = #{customPriceCalcService,jdbcType=VARCHAR},
+      </if>
+      <if test="priceWithoutTax != null">
+        PRICE_WITHOUT_TAX = #{priceWithoutTax,jdbcType=DECIMAL},
+      </if>
+      <if test="priceWithTax != null">
+        PRICE_WITH_TAX = #{priceWithTax,jdbcType=DECIMAL},
+      </if>
+      <if test="taxAmount != null">
+        TAX_AMOUNT = #{taxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="taxPercentage != null">
+        TAX_PERCENTAGE = #{taxPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="taxAuthPartyId != null">
+        TAX_AUTH_PARTY_ID = #{taxAuthPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxAuthGeoId != null">
+        TAX_AUTH_GEO_ID = #{taxAuthGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxInPrice != null">
+        TAX_IN_PRICE = #{taxInPrice,jdbcType=CHAR},
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN = #{createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedDate != null">
+        LAST_MODIFIED_DATE = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN = #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_TYPE_ID = #{productPriceTypeId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_PURPOSE_ID = #{productPricePurposeId,jdbcType=VARCHAR}
+      and CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR}
+      and PRODUCT_STORE_GROUP_ID = #{productStoreGroupId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.price.model.ProductPrice">
+    update product_price
+    set THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      PRICE = #{price,jdbcType=DECIMAL},
+      TERM_UOM_ID = #{termUomId,jdbcType=VARCHAR},
+      CUSTOM_PRICE_CALC_SERVICE = #{customPriceCalcService,jdbcType=VARCHAR},
+      PRICE_WITHOUT_TAX = #{priceWithoutTax,jdbcType=DECIMAL},
+      PRICE_WITH_TAX = #{priceWithTax,jdbcType=DECIMAL},
+      TAX_AMOUNT = #{taxAmount,jdbcType=DECIMAL},
+      TAX_PERCENTAGE = #{taxPercentage,jdbcType=DECIMAL},
+      TAX_AUTH_PARTY_ID = #{taxAuthPartyId,jdbcType=VARCHAR},
+      TAX_AUTH_GEO_ID = #{taxAuthGeoId,jdbcType=VARCHAR},
+      TAX_IN_PRICE = #{taxInPrice,jdbcType=CHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      CREATED_BY_USER_LOGIN = #{createdByUserLogin,jdbcType=VARCHAR},
+      LAST_MODIFIED_DATE = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      LAST_MODIFIED_BY_USER_LOGIN = #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_TYPE_ID = #{productPriceTypeId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_PURPOSE_ID = #{productPricePurposeId,jdbcType=VARCHAR}
+      and CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR}
+      and PRODUCT_STORE_GROUP_ID = #{productStoreGroupId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

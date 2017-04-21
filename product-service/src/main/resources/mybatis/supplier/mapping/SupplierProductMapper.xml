@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.supplier.dao.SupplierProductMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.supplier.model.SupplierProduct">
+    <id column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <id column="PARTY_ID" jdbcType="VARCHAR" property="partyId" />
+    <id column="CURRENCY_UOM_ID" jdbcType="VARCHAR" property="currencyUomId" />
+    <id column="MINIMUM_ORDER_QUANTITY" jdbcType="DECIMAL" property="minimumOrderQuantity" />
+    <id column="AVAILABLE_FROM_DATE" jdbcType="TIMESTAMP" property="availableFromDate" />
+    <result column="AVAILABLE_THRU_DATE" jdbcType="TIMESTAMP" property="availableThruDate" />
+    <result column="SUPPLIER_PREF_ORDER_ID" jdbcType="VARCHAR" property="supplierPrefOrderId" />
+    <result column="SUPPLIER_RATING_TYPE_ID" jdbcType="VARCHAR" property="supplierRatingTypeId" />
+    <result column="STANDARD_LEAD_TIME_DAYS" jdbcType="DECIMAL" property="standardLeadTimeDays" />
+    <result column="ORDER_QTY_INCREMENTS" jdbcType="DECIMAL" property="orderQtyIncrements" />
+    <result column="UNITS_INCLUDED" jdbcType="DECIMAL" property="unitsIncluded" />
+    <result column="QUANTITY_UOM_ID" jdbcType="VARCHAR" property="quantityUomId" />
+    <result column="AGREEMENT_ID" jdbcType="VARCHAR" property="agreementId" />
+    <result column="AGREEMENT_ITEM_SEQ_ID" jdbcType="VARCHAR" property="agreementItemSeqId" />
+    <result column="LAST_PRICE" jdbcType="DECIMAL" property="lastPrice" />
+    <result column="SHIPPING_PRICE" jdbcType="DECIMAL" property="shippingPrice" />
+    <result column="SUPPLIER_PRODUCT_NAME" jdbcType="VARCHAR" property="supplierProductName" />
+    <result column="SUPPLIER_PRODUCT_ID" jdbcType="VARCHAR" property="supplierProductId" />
+    <result column="CAN_DROP_SHIP" jdbcType="CHAR" property="canDropShip" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="comments" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, PARTY_ID, CURRENCY_UOM_ID, MINIMUM_ORDER_QUANTITY, AVAILABLE_FROM_DATE, 
+    AVAILABLE_THRU_DATE, SUPPLIER_PREF_ORDER_ID, SUPPLIER_RATING_TYPE_ID, STANDARD_LEAD_TIME_DAYS, 
+    ORDER_QTY_INCREMENTS, UNITS_INCLUDED, QUANTITY_UOM_ID, AGREEMENT_ID, AGREEMENT_ITEM_SEQ_ID, 
+    LAST_PRICE, SHIPPING_PRICE, SUPPLIER_PRODUCT_NAME, SUPPLIER_PRODUCT_ID, CAN_DROP_SHIP, 
+    COMMENTS, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.supplier.model.SupplierProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from supplier_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.supplier.model.SupplierProductKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier_product
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PARTY_ID = #{partyId,jdbcType=VARCHAR}
+      and CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR}
+      and MINIMUM_ORDER_QUANTITY = #{minimumOrderQuantity,jdbcType=DECIMAL}
+      and AVAILABLE_FROM_DATE = #{availableFromDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.supplier.model.SupplierProductKey">
+    delete from supplier_product
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PARTY_ID = #{partyId,jdbcType=VARCHAR}
+      and CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR}
+      and MINIMUM_ORDER_QUANTITY = #{minimumOrderQuantity,jdbcType=DECIMAL}
+      and AVAILABLE_FROM_DATE = #{availableFromDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.supplier.model.SupplierProductExample">
+    delete from supplier_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.supplier.model.SupplierProduct">
+    insert into supplier_product (PRODUCT_ID, PARTY_ID, CURRENCY_UOM_ID, 
+      MINIMUM_ORDER_QUANTITY, AVAILABLE_FROM_DATE, 
+      AVAILABLE_THRU_DATE, SUPPLIER_PREF_ORDER_ID, 
+      SUPPLIER_RATING_TYPE_ID, STANDARD_LEAD_TIME_DAYS, 
+      ORDER_QTY_INCREMENTS, UNITS_INCLUDED, QUANTITY_UOM_ID, 
+      AGREEMENT_ID, AGREEMENT_ITEM_SEQ_ID, LAST_PRICE, 
+      SHIPPING_PRICE, SUPPLIER_PRODUCT_NAME, SUPPLIER_PRODUCT_ID, 
+      CAN_DROP_SHIP, COMMENTS, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, 
+      CREATED_TX_STAMP)
+    values (#{productId,jdbcType=VARCHAR}, #{partyId,jdbcType=VARCHAR}, #{currencyUomId,jdbcType=VARCHAR}, 
+      #{minimumOrderQuantity,jdbcType=DECIMAL}, #{availableFromDate,jdbcType=TIMESTAMP}, 
+      #{availableThruDate,jdbcType=TIMESTAMP}, #{supplierPrefOrderId,jdbcType=VARCHAR}, 
+      #{supplierRatingTypeId,jdbcType=VARCHAR}, #{standardLeadTimeDays,jdbcType=DECIMAL}, 
+      #{orderQtyIncrements,jdbcType=DECIMAL}, #{unitsIncluded,jdbcType=DECIMAL}, #{quantityUomId,jdbcType=VARCHAR}, 
+      #{agreementId,jdbcType=VARCHAR}, #{agreementItemSeqId,jdbcType=VARCHAR}, #{lastPrice,jdbcType=DECIMAL}, 
+      #{shippingPrice,jdbcType=DECIMAL}, #{supplierProductName,jdbcType=VARCHAR}, #{supplierProductId,jdbcType=VARCHAR}, 
+      #{canDropShip,jdbcType=CHAR}, #{comments,jdbcType=VARCHAR}, NOW(), NOW(), NOW(), 
+      NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.supplier.model.SupplierProduct">
+    insert into supplier_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="partyId != null">
+        PARTY_ID,
+      </if>
+      <if test="currencyUomId != null">
+        CURRENCY_UOM_ID,
+      </if>
+      <if test="minimumOrderQuantity != null">
+        MINIMUM_ORDER_QUANTITY,
+      </if>
+      <if test="availableFromDate != null">
+        AVAILABLE_FROM_DATE,
+      </if>
+      <if test="availableThruDate != null">
+        AVAILABLE_THRU_DATE,
+      </if>
+      <if test="supplierPrefOrderId != null">
+        SUPPLIER_PREF_ORDER_ID,
+      </if>
+      <if test="supplierRatingTypeId != null">
+        SUPPLIER_RATING_TYPE_ID,
+      </if>
+      <if test="standardLeadTimeDays != null">
+        STANDARD_LEAD_TIME_DAYS,
+      </if>
+      <if test="orderQtyIncrements != null">
+        ORDER_QTY_INCREMENTS,
+      </if>
+      <if test="unitsIncluded != null">
+        UNITS_INCLUDED,
+      </if>
+      <if test="quantityUomId != null">
+        QUANTITY_UOM_ID,
+      </if>
+      <if test="agreementId != null">
+        AGREEMENT_ID,
+      </if>
+      <if test="agreementItemSeqId != null">
+        AGREEMENT_ITEM_SEQ_ID,
+      </if>
+      <if test="lastPrice != null">
+        LAST_PRICE,
+      </if>
+      <if test="shippingPrice != null">
+        SHIPPING_PRICE,
+      </if>
+      <if test="supplierProductName != null">
+        SUPPLIER_PRODUCT_NAME,
+      </if>
+      <if test="supplierProductId != null">
+        SUPPLIER_PRODUCT_ID,
+      </if>
+      <if test="canDropShip != null">
+        CAN_DROP_SHIP,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="partyId != null">
+        #{partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyUomId != null">
+        #{currencyUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="minimumOrderQuantity != null">
+        #{minimumOrderQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="availableFromDate != null">
+        #{availableFromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="availableThruDate != null">
+        #{availableThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierPrefOrderId != null">
+        #{supplierPrefOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierRatingTypeId != null">
+        #{supplierRatingTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="standardLeadTimeDays != null">
+        #{standardLeadTimeDays,jdbcType=DECIMAL},
+      </if>
+      <if test="orderQtyIncrements != null">
+        #{orderQtyIncrements,jdbcType=DECIMAL},
+      </if>
+      <if test="unitsIncluded != null">
+        #{unitsIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="quantityUomId != null">
+        #{quantityUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementId != null">
+        #{agreementId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementItemSeqId != null">
+        #{agreementItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPrice != null">
+        #{lastPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingPrice != null">
+        #{shippingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierProductName != null">
+        #{supplierProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierProductId != null">
+        #{supplierProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="canDropShip != null">
+        #{canDropShip,jdbcType=CHAR},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.supplier.model.SupplierProductExample" resultType="java.lang.Long">
+    select count(*) from supplier_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update supplier_product
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partyId != null">
+        PARTY_ID = #{record.partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currencyUomId != null">
+        CURRENCY_UOM_ID = #{record.currencyUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minimumOrderQuantity != null">
+        MINIMUM_ORDER_QUANTITY = #{record.minimumOrderQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="record.availableFromDate != null">
+        AVAILABLE_FROM_DATE = #{record.availableFromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.availableThruDate != null">
+        AVAILABLE_THRU_DATE = #{record.availableThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.supplierPrefOrderId != null">
+        SUPPLIER_PREF_ORDER_ID = #{record.supplierPrefOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierRatingTypeId != null">
+        SUPPLIER_RATING_TYPE_ID = #{record.supplierRatingTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standardLeadTimeDays != null">
+        STANDARD_LEAD_TIME_DAYS = #{record.standardLeadTimeDays,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderQtyIncrements != null">
+        ORDER_QTY_INCREMENTS = #{record.orderQtyIncrements,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitsIncluded != null">
+        UNITS_INCLUDED = #{record.unitsIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="record.quantityUomId != null">
+        QUANTITY_UOM_ID = #{record.quantityUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agreementId != null">
+        AGREEMENT_ID = #{record.agreementId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agreementItemSeqId != null">
+        AGREEMENT_ITEM_SEQ_ID = #{record.agreementItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastPrice != null">
+        LAST_PRICE = #{record.lastPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shippingPrice != null">
+        SHIPPING_PRICE = #{record.shippingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.supplierProductName != null">
+        SUPPLIER_PRODUCT_NAME = #{record.supplierProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierProductId != null">
+        SUPPLIER_PRODUCT_ID = #{record.supplierProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.canDropShip != null">
+        CAN_DROP_SHIP = #{record.canDropShip,jdbcType=CHAR},
+      </if>
+      <if test="record.comments != null">
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update supplier_product
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PARTY_ID = #{record.partyId,jdbcType=VARCHAR},
+      CURRENCY_UOM_ID = #{record.currencyUomId,jdbcType=VARCHAR},
+      MINIMUM_ORDER_QUANTITY = #{record.minimumOrderQuantity,jdbcType=DECIMAL},
+      AVAILABLE_FROM_DATE = #{record.availableFromDate,jdbcType=TIMESTAMP},
+      AVAILABLE_THRU_DATE = #{record.availableThruDate,jdbcType=TIMESTAMP},
+      SUPPLIER_PREF_ORDER_ID = #{record.supplierPrefOrderId,jdbcType=VARCHAR},
+      SUPPLIER_RATING_TYPE_ID = #{record.supplierRatingTypeId,jdbcType=VARCHAR},
+      STANDARD_LEAD_TIME_DAYS = #{record.standardLeadTimeDays,jdbcType=DECIMAL},
+      ORDER_QTY_INCREMENTS = #{record.orderQtyIncrements,jdbcType=DECIMAL},
+      UNITS_INCLUDED = #{record.unitsIncluded,jdbcType=DECIMAL},
+      QUANTITY_UOM_ID = #{record.quantityUomId,jdbcType=VARCHAR},
+      AGREEMENT_ID = #{record.agreementId,jdbcType=VARCHAR},
+      AGREEMENT_ITEM_SEQ_ID = #{record.agreementItemSeqId,jdbcType=VARCHAR},
+      LAST_PRICE = #{record.lastPrice,jdbcType=DECIMAL},
+      SHIPPING_PRICE = #{record.shippingPrice,jdbcType=DECIMAL},
+      SUPPLIER_PRODUCT_NAME = #{record.supplierProductName,jdbcType=VARCHAR},
+      SUPPLIER_PRODUCT_ID = #{record.supplierProductId,jdbcType=VARCHAR},
+      CAN_DROP_SHIP = #{record.canDropShip,jdbcType=CHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.supplier.model.SupplierProduct">
+    update supplier_product
+    <set>
+      <if test="availableThruDate != null">
+        AVAILABLE_THRU_DATE = #{availableThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierPrefOrderId != null">
+        SUPPLIER_PREF_ORDER_ID = #{supplierPrefOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierRatingTypeId != null">
+        SUPPLIER_RATING_TYPE_ID = #{supplierRatingTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="standardLeadTimeDays != null">
+        STANDARD_LEAD_TIME_DAYS = #{standardLeadTimeDays,jdbcType=DECIMAL},
+      </if>
+      <if test="orderQtyIncrements != null">
+        ORDER_QTY_INCREMENTS = #{orderQtyIncrements,jdbcType=DECIMAL},
+      </if>
+      <if test="unitsIncluded != null">
+        UNITS_INCLUDED = #{unitsIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="quantityUomId != null">
+        QUANTITY_UOM_ID = #{quantityUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementId != null">
+        AGREEMENT_ID = #{agreementId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementItemSeqId != null">
+        AGREEMENT_ITEM_SEQ_ID = #{agreementItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPrice != null">
+        LAST_PRICE = #{lastPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingPrice != null">
+        SHIPPING_PRICE = #{shippingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierProductName != null">
+        SUPPLIER_PRODUCT_NAME = #{supplierProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierProductId != null">
+        SUPPLIER_PRODUCT_ID = #{supplierProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="canDropShip != null">
+        CAN_DROP_SHIP = #{canDropShip,jdbcType=CHAR},
+      </if>
+      <if test="comments != null">
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PARTY_ID = #{partyId,jdbcType=VARCHAR}
+      and CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR}
+      and MINIMUM_ORDER_QUANTITY = #{minimumOrderQuantity,jdbcType=DECIMAL}
+      and AVAILABLE_FROM_DATE = #{availableFromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.supplier.model.SupplierProduct">
+    update supplier_product
+    set AVAILABLE_THRU_DATE = #{availableThruDate,jdbcType=TIMESTAMP},
+      SUPPLIER_PREF_ORDER_ID = #{supplierPrefOrderId,jdbcType=VARCHAR},
+      SUPPLIER_RATING_TYPE_ID = #{supplierRatingTypeId,jdbcType=VARCHAR},
+      STANDARD_LEAD_TIME_DAYS = #{standardLeadTimeDays,jdbcType=DECIMAL},
+      ORDER_QTY_INCREMENTS = #{orderQtyIncrements,jdbcType=DECIMAL},
+      UNITS_INCLUDED = #{unitsIncluded,jdbcType=DECIMAL},
+      QUANTITY_UOM_ID = #{quantityUomId,jdbcType=VARCHAR},
+      AGREEMENT_ID = #{agreementId,jdbcType=VARCHAR},
+      AGREEMENT_ITEM_SEQ_ID = #{agreementItemSeqId,jdbcType=VARCHAR},
+      LAST_PRICE = #{lastPrice,jdbcType=DECIMAL},
+      SHIPPING_PRICE = #{shippingPrice,jdbcType=DECIMAL},
+      SUPPLIER_PRODUCT_NAME = #{supplierProductName,jdbcType=VARCHAR},
+      SUPPLIER_PRODUCT_ID = #{supplierProductId,jdbcType=VARCHAR},
+      CAN_DROP_SHIP = #{canDropShip,jdbcType=CHAR},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PARTY_ID = #{partyId,jdbcType=VARCHAR}
+      and CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR}
+      and MINIMUM_ORDER_QUANTITY = #{minimumOrderQuantity,jdbcType=DECIMAL}
+      and AVAILABLE_FROM_DATE = #{availableFromDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

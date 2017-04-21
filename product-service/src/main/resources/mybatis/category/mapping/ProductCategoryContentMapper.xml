@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.category.dao.ProductCategoryContentMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.category.model.ProductCategoryContent">
+    <id column="PRODUCT_CATEGORY_ID" jdbcType="VARCHAR" property="productCategoryId" />
+    <id column="CONTENT_ID" jdbcType="VARCHAR" property="contentId" />
+    <id column="PROD_CAT_CONTENT_TYPE_ID" jdbcType="VARCHAR" property="prodCatContentTypeId" />
+    <id column="FROM_DATE" jdbcType="TIMESTAMP" property="fromDate" />
+    <result column="THRU_DATE" jdbcType="TIMESTAMP" property="thruDate" />
+    <result column="PURCHASE_FROM_DATE" jdbcType="TIMESTAMP" property="purchaseFromDate" />
+    <result column="PURCHASE_THRU_DATE" jdbcType="TIMESTAMP" property="purchaseThruDate" />
+    <result column="USE_COUNT_LIMIT" jdbcType="DECIMAL" property="useCountLimit" />
+    <result column="USE_DAYS_LIMIT" jdbcType="DECIMAL" property="useDaysLimit" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_CATEGORY_ID, CONTENT_ID, PROD_CAT_CONTENT_TYPE_ID, FROM_DATE, THRU_DATE, 
+    PURCHASE_FROM_DATE, PURCHASE_THRU_DATE, USE_COUNT_LIMIT, USE_DAYS_LIMIT, LAST_UPDATED_STAMP, 
+    LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.category.model.ProductCategoryContentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_category_content
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.category.model.ProductCategoryContentKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_category_content
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and CONTENT_ID = #{contentId,jdbcType=VARCHAR}
+      and PROD_CAT_CONTENT_TYPE_ID = #{prodCatContentTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.category.model.ProductCategoryContentKey">
+    delete from product_category_content
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and CONTENT_ID = #{contentId,jdbcType=VARCHAR}
+      and PROD_CAT_CONTENT_TYPE_ID = #{prodCatContentTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.category.model.ProductCategoryContentExample">
+    delete from product_category_content
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.category.model.ProductCategoryContent">
+    insert into product_category_content (PRODUCT_CATEGORY_ID, CONTENT_ID, PROD_CAT_CONTENT_TYPE_ID, 
+      FROM_DATE, THRU_DATE, PURCHASE_FROM_DATE, 
+      PURCHASE_THRU_DATE, USE_COUNT_LIMIT, USE_DAYS_LIMIT, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productCategoryId,jdbcType=VARCHAR}, #{contentId,jdbcType=VARCHAR}, #{prodCatContentTypeId,jdbcType=VARCHAR}, 
+      #{fromDate,jdbcType=TIMESTAMP}, #{thruDate,jdbcType=TIMESTAMP}, #{purchaseFromDate,jdbcType=TIMESTAMP}, 
+      #{purchaseThruDate,jdbcType=TIMESTAMP}, #{useCountLimit,jdbcType=DECIMAL}, #{useDaysLimit,jdbcType=DECIMAL}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.category.model.ProductCategoryContent">
+    insert into product_category_content
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productCategoryId != null">
+        PRODUCT_CATEGORY_ID,
+      </if>
+      <if test="contentId != null">
+        CONTENT_ID,
+      </if>
+      <if test="prodCatContentTypeId != null">
+        PROD_CAT_CONTENT_TYPE_ID,
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE,
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE,
+      </if>
+      <if test="purchaseFromDate != null">
+        PURCHASE_FROM_DATE,
+      </if>
+      <if test="purchaseThruDate != null">
+        PURCHASE_THRU_DATE,
+      </if>
+      <if test="useCountLimit != null">
+        USE_COUNT_LIMIT,
+      </if>
+      <if test="useDaysLimit != null">
+        USE_DAYS_LIMIT,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productCategoryId != null">
+        #{productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="contentId != null">
+        #{contentId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCatContentTypeId != null">
+        #{prodCatContentTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseFromDate != null">
+        #{purchaseFromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseThruDate != null">
+        #{purchaseThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useCountLimit != null">
+        #{useCountLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="useDaysLimit != null">
+        #{useDaysLimit,jdbcType=DECIMAL},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.category.model.ProductCategoryContentExample" resultType="java.lang.Long">
+    select count(*) from product_category_content
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_category_content
+    <set>
+      <if test="record.productCategoryId != null">
+        PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentId != null">
+        CONTENT_ID = #{record.contentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCatContentTypeId != null">
+        PROD_CAT_CONTENT_TYPE_ID = #{record.prodCatContentTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromDate != null">
+        FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thruDate != null">
+        THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.purchaseFromDate != null">
+        PURCHASE_FROM_DATE = #{record.purchaseFromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.purchaseThruDate != null">
+        PURCHASE_THRU_DATE = #{record.purchaseThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.useCountLimit != null">
+        USE_COUNT_LIMIT = #{record.useCountLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.useDaysLimit != null">
+        USE_DAYS_LIMIT = #{record.useDaysLimit,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_category_content
+    set PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      CONTENT_ID = #{record.contentId,jdbcType=VARCHAR},
+      PROD_CAT_CONTENT_TYPE_ID = #{record.prodCatContentTypeId,jdbcType=VARCHAR},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      PURCHASE_FROM_DATE = #{record.purchaseFromDate,jdbcType=TIMESTAMP},
+      PURCHASE_THRU_DATE = #{record.purchaseThruDate,jdbcType=TIMESTAMP},
+      USE_COUNT_LIMIT = #{record.useCountLimit,jdbcType=DECIMAL},
+      USE_DAYS_LIMIT = #{record.useDaysLimit,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.category.model.ProductCategoryContent">
+    update product_category_content
+    <set>
+      <if test="thruDate != null">
+        THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseFromDate != null">
+        PURCHASE_FROM_DATE = #{purchaseFromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseThruDate != null">
+        PURCHASE_THRU_DATE = #{purchaseThruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useCountLimit != null">
+        USE_COUNT_LIMIT = #{useCountLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="useDaysLimit != null">
+        USE_DAYS_LIMIT = #{useDaysLimit,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and CONTENT_ID = #{contentId,jdbcType=VARCHAR}
+      and PROD_CAT_CONTENT_TYPE_ID = #{prodCatContentTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.category.model.ProductCategoryContent">
+    update product_category_content
+    set THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      PURCHASE_FROM_DATE = #{purchaseFromDate,jdbcType=TIMESTAMP},
+      PURCHASE_THRU_DATE = #{purchaseThruDate,jdbcType=TIMESTAMP},
+      USE_COUNT_LIMIT = #{useCountLimit,jdbcType=DECIMAL},
+      USE_DAYS_LIMIT = #{useDaysLimit,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and CONTENT_ID = #{contentId,jdbcType=VARCHAR}
+      and PROD_CAT_CONTENT_TYPE_ID = #{prodCatContentTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

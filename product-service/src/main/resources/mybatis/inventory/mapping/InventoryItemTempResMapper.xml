@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.inventory.dao.InventoryItemTempResMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.inventory.model.InventoryItemTempRes">
+    <id column="VISIT_ID" jdbcType="VARCHAR" property="visitId" />
+    <id column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <id column="PRODUCT_STORE_ID" jdbcType="VARCHAR" property="productStoreId" />
+    <result column="QUANTITY" jdbcType="DECIMAL" property="quantity" />
+    <result column="RESERVED_DATE" jdbcType="TIMESTAMP" property="reservedDate" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VISIT_ID, PRODUCT_ID, PRODUCT_STORE_ID, QUANTITY, RESERVED_DATE, LAST_UPDATED_STAMP, 
+    LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemTempResExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from inventory_item_temp_res
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.inventory.model.InventoryItemTempResKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_item_temp_res
+    where VISIT_ID = #{visitId,jdbcType=VARCHAR}
+      and PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.inventory.model.InventoryItemTempResKey">
+    delete from inventory_item_temp_res
+    where VISIT_ID = #{visitId,jdbcType=VARCHAR}
+      and PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemTempResExample">
+    delete from inventory_item_temp_res
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.inventory.model.InventoryItemTempRes">
+    insert into inventory_item_temp_res (VISIT_ID, PRODUCT_ID, PRODUCT_STORE_ID, 
+      QUANTITY, RESERVED_DATE, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, 
+      CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{visitId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{productStoreId,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=DECIMAL}, #{reservedDate,jdbcType=TIMESTAMP}, NOW(), NOW(), 
+      NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.inventory.model.InventoryItemTempRes">
+    insert into inventory_item_temp_res
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="productStoreId != null">
+        PRODUCT_STORE_ID,
+      </if>
+      <if test="quantity != null">
+        QUANTITY,
+      </if>
+      <if test="reservedDate != null">
+        RESERVED_DATE,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="visitId != null">
+        #{visitId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productStoreId != null">
+        #{productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=DECIMAL},
+      </if>
+      <if test="reservedDate != null">
+        #{reservedDate,jdbcType=TIMESTAMP},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemTempResExample" resultType="java.lang.Long">
+    select count(*) from inventory_item_temp_res
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update inventory_item_temp_res
+    <set>
+      <if test="record.visitId != null">
+        VISIT_ID = #{record.visitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productStoreId != null">
+        PRODUCT_STORE_ID = #{record.productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        QUANTITY = #{record.quantity,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reservedDate != null">
+        RESERVED_DATE = #{record.reservedDate,jdbcType=TIMESTAMP},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update inventory_item_temp_res
+    set VISIT_ID = #{record.visitId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PRODUCT_STORE_ID = #{record.productStoreId,jdbcType=VARCHAR},
+      QUANTITY = #{record.quantity,jdbcType=DECIMAL},
+      RESERVED_DATE = #{record.reservedDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.inventory.model.InventoryItemTempRes">
+    update inventory_item_temp_res
+    <set>
+      <if test="quantity != null">
+        QUANTITY = #{quantity,jdbcType=DECIMAL},
+      </if>
+      <if test="reservedDate != null">
+        RESERVED_DATE = #{reservedDate,jdbcType=TIMESTAMP},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where VISIT_ID = #{visitId,jdbcType=VARCHAR}
+      and PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.inventory.model.InventoryItemTempRes">
+    update inventory_item_temp_res
+    set QUANTITY = #{quantity,jdbcType=DECIMAL},
+      RESERVED_DATE = #{reservedDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where VISIT_ID = #{visitId,jdbcType=VARCHAR}
+      and PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+      and PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR}
+  </update>
+</mapper>

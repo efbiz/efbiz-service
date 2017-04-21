@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.promo.dao.ProductPromoUseMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.promo.model.ProductPromoUse">
+    <id column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <id column="PROMO_SEQUENCE_ID" jdbcType="VARCHAR" property="promoSequenceId" />
+    <result column="PRODUCT_PROMO_ID" jdbcType="VARCHAR" property="productPromoId" />
+    <result column="PRODUCT_PROMO_CODE_ID" jdbcType="VARCHAR" property="productPromoCodeId" />
+    <result column="PARTY_ID" jdbcType="VARCHAR" property="partyId" />
+    <result column="TOTAL_DISCOUNT_AMOUNT" jdbcType="DECIMAL" property="totalDiscountAmount" />
+    <result column="QUANTITY_LEFT_IN_ACTIONS" jdbcType="DECIMAL" property="quantityLeftInActions" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ORDER_ID, PROMO_SEQUENCE_ID, PRODUCT_PROMO_ID, PRODUCT_PROMO_CODE_ID, PARTY_ID, TOTAL_DISCOUNT_AMOUNT, 
+    QUANTITY_LEFT_IN_ACTIONS, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, 
+    CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.promo.model.ProductPromoUseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_promo_use
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.promo.model.ProductPromoUseKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_promo_use
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+      and PROMO_SEQUENCE_ID = #{promoSequenceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.promo.model.ProductPromoUseKey">
+    delete from product_promo_use
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+      and PROMO_SEQUENCE_ID = #{promoSequenceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.promo.model.ProductPromoUseExample">
+    delete from product_promo_use
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.promo.model.ProductPromoUse">
+    insert into product_promo_use (ORDER_ID, PROMO_SEQUENCE_ID, PRODUCT_PROMO_ID, 
+      PRODUCT_PROMO_CODE_ID, PARTY_ID, TOTAL_DISCOUNT_AMOUNT, 
+      QUANTITY_LEFT_IN_ACTIONS, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{orderId,jdbcType=VARCHAR}, #{promoSequenceId,jdbcType=VARCHAR}, #{productPromoId,jdbcType=VARCHAR}, 
+      #{productPromoCodeId,jdbcType=VARCHAR}, #{partyId,jdbcType=VARCHAR}, #{totalDiscountAmount,jdbcType=DECIMAL}, 
+      #{quantityLeftInActions,jdbcType=DECIMAL}, NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.promo.model.ProductPromoUse">
+    insert into product_promo_use
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="promoSequenceId != null">
+        PROMO_SEQUENCE_ID,
+      </if>
+      <if test="productPromoId != null">
+        PRODUCT_PROMO_ID,
+      </if>
+      <if test="productPromoCodeId != null">
+        PRODUCT_PROMO_CODE_ID,
+      </if>
+      <if test="partyId != null">
+        PARTY_ID,
+      </if>
+      <if test="totalDiscountAmount != null">
+        TOTAL_DISCOUNT_AMOUNT,
+      </if>
+      <if test="quantityLeftInActions != null">
+        QUANTITY_LEFT_IN_ACTIONS,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="promoSequenceId != null">
+        #{promoSequenceId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPromoId != null">
+        #{productPromoId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPromoCodeId != null">
+        #{productPromoCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="partyId != null">
+        #{partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalDiscountAmount != null">
+        #{totalDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="quantityLeftInActions != null">
+        #{quantityLeftInActions,jdbcType=DECIMAL},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.promo.model.ProductPromoUseExample" resultType="java.lang.Long">
+    select count(*) from product_promo_use
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_promo_use
+    <set>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promoSequenceId != null">
+        PROMO_SEQUENCE_ID = #{record.promoSequenceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPromoId != null">
+        PRODUCT_PROMO_ID = #{record.productPromoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPromoCodeId != null">
+        PRODUCT_PROMO_CODE_ID = #{record.productPromoCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partyId != null">
+        PARTY_ID = #{record.partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalDiscountAmount != null">
+        TOTAL_DISCOUNT_AMOUNT = #{record.totalDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.quantityLeftInActions != null">
+        QUANTITY_LEFT_IN_ACTIONS = #{record.quantityLeftInActions,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_promo_use
+    set ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      PROMO_SEQUENCE_ID = #{record.promoSequenceId,jdbcType=VARCHAR},
+      PRODUCT_PROMO_ID = #{record.productPromoId,jdbcType=VARCHAR},
+      PRODUCT_PROMO_CODE_ID = #{record.productPromoCodeId,jdbcType=VARCHAR},
+      PARTY_ID = #{record.partyId,jdbcType=VARCHAR},
+      TOTAL_DISCOUNT_AMOUNT = #{record.totalDiscountAmount,jdbcType=DECIMAL},
+      QUANTITY_LEFT_IN_ACTIONS = #{record.quantityLeftInActions,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.promo.model.ProductPromoUse">
+    update product_promo_use
+    <set>
+      <if test="productPromoId != null">
+        PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPromoCodeId != null">
+        PRODUCT_PROMO_CODE_ID = #{productPromoCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="partyId != null">
+        PARTY_ID = #{partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalDiscountAmount != null">
+        TOTAL_DISCOUNT_AMOUNT = #{totalDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="quantityLeftInActions != null">
+        QUANTITY_LEFT_IN_ACTIONS = #{quantityLeftInActions,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+      and PROMO_SEQUENCE_ID = #{promoSequenceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.promo.model.ProductPromoUse">
+    update product_promo_use
+    set PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR},
+      PRODUCT_PROMO_CODE_ID = #{productPromoCodeId,jdbcType=VARCHAR},
+      PARTY_ID = #{partyId,jdbcType=VARCHAR},
+      TOTAL_DISCOUNT_AMOUNT = #{totalDiscountAmount,jdbcType=DECIMAL},
+      QUANTITY_LEFT_IN_ACTIONS = #{quantityLeftInActions,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+      and PROMO_SEQUENCE_ID = #{promoSequenceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

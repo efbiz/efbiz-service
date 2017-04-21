@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.product.dao.ProductSearchResultMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.product.model.ProductSearchResult">
+    <id column="PRODUCT_SEARCH_RESULT_ID" jdbcType="VARCHAR" property="productSearchResultId" />
+    <result column="VISIT_ID" jdbcType="VARCHAR" property="visitId" />
+    <result column="ORDER_BY_NAME" jdbcType="VARCHAR" property="orderByName" />
+    <result column="IS_ASCENDING" jdbcType="CHAR" property="isAscending" />
+    <result column="NUM_RESULTS" jdbcType="DECIMAL" property="numResults" />
+    <result column="SECONDS_TOTAL" jdbcType="DOUBLE" property="secondsTotal" />
+    <result column="SEARCH_DATE" jdbcType="TIMESTAMP" property="searchDate" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_SEARCH_RESULT_ID, VISIT_ID, ORDER_BY_NAME, IS_ASCENDING, NUM_RESULTS, SECONDS_TOTAL, 
+    SEARCH_DATE, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.product.model.ProductSearchResultExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_search_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_search_result
+    where PRODUCT_SEARCH_RESULT_ID = #{productSearchResultId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_search_result
+    where PRODUCT_SEARCH_RESULT_ID = #{productSearchResultId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.product.model.ProductSearchResultExample">
+    delete from product_search_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.product.model.ProductSearchResult">
+    insert into product_search_result (PRODUCT_SEARCH_RESULT_ID, VISIT_ID, ORDER_BY_NAME, 
+      IS_ASCENDING, NUM_RESULTS, SECONDS_TOTAL, 
+      SEARCH_DATE, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productSearchResultId,jdbcType=VARCHAR}, #{visitId,jdbcType=VARCHAR}, #{orderByName,jdbcType=VARCHAR}, 
+      #{isAscending,jdbcType=CHAR}, #{numResults,jdbcType=DECIMAL}, #{secondsTotal,jdbcType=DOUBLE}, 
+      #{searchDate,jdbcType=TIMESTAMP}, NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.product.model.ProductSearchResult">
+    insert into product_search_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productSearchResultId != null">
+        PRODUCT_SEARCH_RESULT_ID,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="orderByName != null">
+        ORDER_BY_NAME,
+      </if>
+      <if test="isAscending != null">
+        IS_ASCENDING,
+      </if>
+      <if test="numResults != null">
+        NUM_RESULTS,
+      </if>
+      <if test="secondsTotal != null">
+        SECONDS_TOTAL,
+      </if>
+      <if test="searchDate != null">
+        SEARCH_DATE,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productSearchResultId != null">
+        #{productSearchResultId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderByName != null">
+        #{orderByName,jdbcType=VARCHAR},
+      </if>
+      <if test="isAscending != null">
+        #{isAscending,jdbcType=CHAR},
+      </if>
+      <if test="numResults != null">
+        #{numResults,jdbcType=DECIMAL},
+      </if>
+      <if test="secondsTotal != null">
+        #{secondsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="searchDate != null">
+        #{searchDate,jdbcType=TIMESTAMP},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.product.model.ProductSearchResultExample" resultType="java.lang.Long">
+    select count(*) from product_search_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_search_result
+    <set>
+      <if test="record.productSearchResultId != null">
+        PRODUCT_SEARCH_RESULT_ID = #{record.productSearchResultId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitId != null">
+        VISIT_ID = #{record.visitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderByName != null">
+        ORDER_BY_NAME = #{record.orderByName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAscending != null">
+        IS_ASCENDING = #{record.isAscending,jdbcType=CHAR},
+      </if>
+      <if test="record.numResults != null">
+        NUM_RESULTS = #{record.numResults,jdbcType=DECIMAL},
+      </if>
+      <if test="record.secondsTotal != null">
+        SECONDS_TOTAL = #{record.secondsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.searchDate != null">
+        SEARCH_DATE = #{record.searchDate,jdbcType=TIMESTAMP},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_search_result
+    set PRODUCT_SEARCH_RESULT_ID = #{record.productSearchResultId,jdbcType=VARCHAR},
+      VISIT_ID = #{record.visitId,jdbcType=VARCHAR},
+      ORDER_BY_NAME = #{record.orderByName,jdbcType=VARCHAR},
+      IS_ASCENDING = #{record.isAscending,jdbcType=CHAR},
+      NUM_RESULTS = #{record.numResults,jdbcType=DECIMAL},
+      SECONDS_TOTAL = #{record.secondsTotal,jdbcType=DOUBLE},
+      SEARCH_DATE = #{record.searchDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.product.model.ProductSearchResult">
+    update product_search_result
+    <set>
+      <if test="visitId != null">
+        VISIT_ID = #{visitId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderByName != null">
+        ORDER_BY_NAME = #{orderByName,jdbcType=VARCHAR},
+      </if>
+      <if test="isAscending != null">
+        IS_ASCENDING = #{isAscending,jdbcType=CHAR},
+      </if>
+      <if test="numResults != null">
+        NUM_RESULTS = #{numResults,jdbcType=DECIMAL},
+      </if>
+      <if test="secondsTotal != null">
+        SECONDS_TOTAL = #{secondsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="searchDate != null">
+        SEARCH_DATE = #{searchDate,jdbcType=TIMESTAMP},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_SEARCH_RESULT_ID = #{productSearchResultId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.product.model.ProductSearchResult">
+    update product_search_result
+    set VISIT_ID = #{visitId,jdbcType=VARCHAR},
+      ORDER_BY_NAME = #{orderByName,jdbcType=VARCHAR},
+      IS_ASCENDING = #{isAscending,jdbcType=CHAR},
+      NUM_RESULTS = #{numResults,jdbcType=DECIMAL},
+      SECONDS_TOTAL = #{secondsTotal,jdbcType=DOUBLE},
+      SEARCH_DATE = #{searchDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_SEARCH_RESULT_ID = #{productSearchResultId,jdbcType=VARCHAR}
+  </update>
+</mapper>

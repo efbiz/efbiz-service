@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.facility.dao.FacilityGroupRollupMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.facility.model.FacilityGroupRollup">
+    <id column="FACILITY_GROUP_ID" jdbcType="VARCHAR" property="facilityGroupId" />
+    <id column="PARENT_FACILITY_GROUP_ID" jdbcType="VARCHAR" property="parentFacilityGroupId" />
+    <id column="FROM_DATE" jdbcType="TIMESTAMP" property="fromDate" />
+    <result column="THRU_DATE" jdbcType="TIMESTAMP" property="thruDate" />
+    <result column="SEQUENCE_NUM" jdbcType="DECIMAL" property="sequenceNum" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FACILITY_GROUP_ID, PARENT_FACILITY_GROUP_ID, FROM_DATE, THRU_DATE, SEQUENCE_NUM, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.facility.model.FacilityGroupRollupExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from facility_group_rollup
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.facility.model.FacilityGroupRollupKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from facility_group_rollup
+    where FACILITY_GROUP_ID = #{facilityGroupId,jdbcType=VARCHAR}
+      and PARENT_FACILITY_GROUP_ID = #{parentFacilityGroupId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.facility.model.FacilityGroupRollupKey">
+    delete from facility_group_rollup
+    where FACILITY_GROUP_ID = #{facilityGroupId,jdbcType=VARCHAR}
+      and PARENT_FACILITY_GROUP_ID = #{parentFacilityGroupId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.facility.model.FacilityGroupRollupExample">
+    delete from facility_group_rollup
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.facility.model.FacilityGroupRollup">
+    insert into facility_group_rollup (FACILITY_GROUP_ID, PARENT_FACILITY_GROUP_ID, 
+      FROM_DATE, THRU_DATE, SEQUENCE_NUM, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{facilityGroupId,jdbcType=VARCHAR}, #{parentFacilityGroupId,jdbcType=VARCHAR}, 
+      #{fromDate,jdbcType=TIMESTAMP}, #{thruDate,jdbcType=TIMESTAMP}, #{sequenceNum,jdbcType=DECIMAL}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.facility.model.FacilityGroupRollup">
+    insert into facility_group_rollup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="facilityGroupId != null">
+        FACILITY_GROUP_ID,
+      </if>
+      <if test="parentFacilityGroupId != null">
+        PARENT_FACILITY_GROUP_ID,
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE,
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE,
+      </if>
+      <if test="sequenceNum != null">
+        SEQUENCE_NUM,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="facilityGroupId != null">
+        #{facilityGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentFacilityGroupId != null">
+        #{parentFacilityGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sequenceNum != null">
+        #{sequenceNum,jdbcType=DECIMAL},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.facility.model.FacilityGroupRollupExample" resultType="java.lang.Long">
+    select count(*) from facility_group_rollup
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update facility_group_rollup
+    <set>
+      <if test="record.facilityGroupId != null">
+        FACILITY_GROUP_ID = #{record.facilityGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentFacilityGroupId != null">
+        PARENT_FACILITY_GROUP_ID = #{record.parentFacilityGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromDate != null">
+        FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thruDate != null">
+        THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sequenceNum != null">
+        SEQUENCE_NUM = #{record.sequenceNum,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update facility_group_rollup
+    set FACILITY_GROUP_ID = #{record.facilityGroupId,jdbcType=VARCHAR},
+      PARENT_FACILITY_GROUP_ID = #{record.parentFacilityGroupId,jdbcType=VARCHAR},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      SEQUENCE_NUM = #{record.sequenceNum,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.facility.model.FacilityGroupRollup">
+    update facility_group_rollup
+    <set>
+      <if test="thruDate != null">
+        THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sequenceNum != null">
+        SEQUENCE_NUM = #{sequenceNum,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where FACILITY_GROUP_ID = #{facilityGroupId,jdbcType=VARCHAR}
+      and PARENT_FACILITY_GROUP_ID = #{parentFacilityGroupId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.facility.model.FacilityGroupRollup">
+    update facility_group_rollup
+    set THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      SEQUENCE_NUM = #{sequenceNum,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where FACILITY_GROUP_ID = #{facilityGroupId,jdbcType=VARCHAR}
+      and PARENT_FACILITY_GROUP_ID = #{parentFacilityGroupId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

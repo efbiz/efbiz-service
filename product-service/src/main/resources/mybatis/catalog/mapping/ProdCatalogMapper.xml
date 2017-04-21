@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.catalog.dao.ProdCatalogMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.catalog.model.ProdCatalog">
+    <id column="PROD_CATALOG_ID" jdbcType="VARCHAR" property="prodCatalogId" />
+    <result column="CATALOG_NAME" jdbcType="VARCHAR" property="catalogName" />
+    <result column="USE_QUICK_ADD" jdbcType="CHAR" property="useQuickAdd" />
+    <result column="STYLE_SHEET" jdbcType="VARCHAR" property="styleSheet" />
+    <result column="HEADER_LOGO" jdbcType="VARCHAR" property="headerLogo" />
+    <result column="CONTENT_PATH_PREFIX" jdbcType="VARCHAR" property="contentPathPrefix" />
+    <result column="TEMPLATE_PATH_PREFIX" jdbcType="VARCHAR" property="templatePathPrefix" />
+    <result column="VIEW_ALLOW_PERM_REQD" jdbcType="CHAR" property="viewAllowPermReqd" />
+    <result column="PURCHASE_ALLOW_PERM_REQD" jdbcType="CHAR" property="purchaseAllowPermReqd" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PROD_CATALOG_ID, CATALOG_NAME, USE_QUICK_ADD, STYLE_SHEET, HEADER_LOGO, CONTENT_PATH_PREFIX, 
+    TEMPLATE_PATH_PREFIX, VIEW_ALLOW_PERM_REQD, PURCHASE_ALLOW_PERM_REQD, LAST_UPDATED_STAMP, 
+    LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.catalog.model.ProdCatalogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from prod_catalog
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_catalog
+    where PROD_CATALOG_ID = #{prodCatalogId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from prod_catalog
+    where PROD_CATALOG_ID = #{prodCatalogId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.catalog.model.ProdCatalogExample">
+    delete from prod_catalog
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.catalog.model.ProdCatalog">
+    insert into prod_catalog (PROD_CATALOG_ID, CATALOG_NAME, USE_QUICK_ADD, 
+      STYLE_SHEET, HEADER_LOGO, CONTENT_PATH_PREFIX, 
+      TEMPLATE_PATH_PREFIX, VIEW_ALLOW_PERM_REQD, PURCHASE_ALLOW_PERM_REQD, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{prodCatalogId,jdbcType=VARCHAR}, #{catalogName,jdbcType=VARCHAR}, #{useQuickAdd,jdbcType=CHAR}, 
+      #{styleSheet,jdbcType=VARCHAR}, #{headerLogo,jdbcType=VARCHAR}, #{contentPathPrefix,jdbcType=VARCHAR}, 
+      #{templatePathPrefix,jdbcType=VARCHAR}, #{viewAllowPermReqd,jdbcType=CHAR}, #{purchaseAllowPermReqd,jdbcType=CHAR}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.catalog.model.ProdCatalog">
+    insert into prod_catalog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodCatalogId != null">
+        PROD_CATALOG_ID,
+      </if>
+      <if test="catalogName != null">
+        CATALOG_NAME,
+      </if>
+      <if test="useQuickAdd != null">
+        USE_QUICK_ADD,
+      </if>
+      <if test="styleSheet != null">
+        STYLE_SHEET,
+      </if>
+      <if test="headerLogo != null">
+        HEADER_LOGO,
+      </if>
+      <if test="contentPathPrefix != null">
+        CONTENT_PATH_PREFIX,
+      </if>
+      <if test="templatePathPrefix != null">
+        TEMPLATE_PATH_PREFIX,
+      </if>
+      <if test="viewAllowPermReqd != null">
+        VIEW_ALLOW_PERM_REQD,
+      </if>
+      <if test="purchaseAllowPermReqd != null">
+        PURCHASE_ALLOW_PERM_REQD,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodCatalogId != null">
+        #{prodCatalogId,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogName != null">
+        #{catalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="useQuickAdd != null">
+        #{useQuickAdd,jdbcType=CHAR},
+      </if>
+      <if test="styleSheet != null">
+        #{styleSheet,jdbcType=VARCHAR},
+      </if>
+      <if test="headerLogo != null">
+        #{headerLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="contentPathPrefix != null">
+        #{contentPathPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="templatePathPrefix != null">
+        #{templatePathPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="viewAllowPermReqd != null">
+        #{viewAllowPermReqd,jdbcType=CHAR},
+      </if>
+      <if test="purchaseAllowPermReqd != null">
+        #{purchaseAllowPermReqd,jdbcType=CHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.catalog.model.ProdCatalogExample" resultType="java.lang.Long">
+    select count(*) from prod_catalog
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_catalog
+    <set>
+      <if test="record.prodCatalogId != null">
+        PROD_CATALOG_ID = #{record.prodCatalogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalogName != null">
+        CATALOG_NAME = #{record.catalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useQuickAdd != null">
+        USE_QUICK_ADD = #{record.useQuickAdd,jdbcType=CHAR},
+      </if>
+      <if test="record.styleSheet != null">
+        STYLE_SHEET = #{record.styleSheet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerLogo != null">
+        HEADER_LOGO = #{record.headerLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentPathPrefix != null">
+        CONTENT_PATH_PREFIX = #{record.contentPathPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templatePathPrefix != null">
+        TEMPLATE_PATH_PREFIX = #{record.templatePathPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.viewAllowPermReqd != null">
+        VIEW_ALLOW_PERM_REQD = #{record.viewAllowPermReqd,jdbcType=CHAR},
+      </if>
+      <if test="record.purchaseAllowPermReqd != null">
+        PURCHASE_ALLOW_PERM_REQD = #{record.purchaseAllowPermReqd,jdbcType=CHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_catalog
+    set PROD_CATALOG_ID = #{record.prodCatalogId,jdbcType=VARCHAR},
+      CATALOG_NAME = #{record.catalogName,jdbcType=VARCHAR},
+      USE_QUICK_ADD = #{record.useQuickAdd,jdbcType=CHAR},
+      STYLE_SHEET = #{record.styleSheet,jdbcType=VARCHAR},
+      HEADER_LOGO = #{record.headerLogo,jdbcType=VARCHAR},
+      CONTENT_PATH_PREFIX = #{record.contentPathPrefix,jdbcType=VARCHAR},
+      TEMPLATE_PATH_PREFIX = #{record.templatePathPrefix,jdbcType=VARCHAR},
+      VIEW_ALLOW_PERM_REQD = #{record.viewAllowPermReqd,jdbcType=CHAR},
+      PURCHASE_ALLOW_PERM_REQD = #{record.purchaseAllowPermReqd,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.catalog.model.ProdCatalog">
+    update prod_catalog
+    <set>
+      <if test="catalogName != null">
+        CATALOG_NAME = #{catalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="useQuickAdd != null">
+        USE_QUICK_ADD = #{useQuickAdd,jdbcType=CHAR},
+      </if>
+      <if test="styleSheet != null">
+        STYLE_SHEET = #{styleSheet,jdbcType=VARCHAR},
+      </if>
+      <if test="headerLogo != null">
+        HEADER_LOGO = #{headerLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="contentPathPrefix != null">
+        CONTENT_PATH_PREFIX = #{contentPathPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="templatePathPrefix != null">
+        TEMPLATE_PATH_PREFIX = #{templatePathPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="viewAllowPermReqd != null">
+        VIEW_ALLOW_PERM_REQD = #{viewAllowPermReqd,jdbcType=CHAR},
+      </if>
+      <if test="purchaseAllowPermReqd != null">
+        PURCHASE_ALLOW_PERM_REQD = #{purchaseAllowPermReqd,jdbcType=CHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PROD_CATALOG_ID = #{prodCatalogId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.catalog.model.ProdCatalog">
+    update prod_catalog
+    set CATALOG_NAME = #{catalogName,jdbcType=VARCHAR},
+      USE_QUICK_ADD = #{useQuickAdd,jdbcType=CHAR},
+      STYLE_SHEET = #{styleSheet,jdbcType=VARCHAR},
+      HEADER_LOGO = #{headerLogo,jdbcType=VARCHAR},
+      CONTENT_PATH_PREFIX = #{contentPathPrefix,jdbcType=VARCHAR},
+      TEMPLATE_PATH_PREFIX = #{templatePathPrefix,jdbcType=VARCHAR},
+      VIEW_ALLOW_PERM_REQD = #{viewAllowPermReqd,jdbcType=CHAR},
+      PURCHASE_ALLOW_PERM_REQD = #{purchaseAllowPermReqd,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PROD_CATALOG_ID = #{prodCatalogId,jdbcType=VARCHAR}
+  </update>
+</mapper>

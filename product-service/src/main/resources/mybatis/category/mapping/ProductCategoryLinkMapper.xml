@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.category.dao.ProductCategoryLinkMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.category.model.ProductCategoryLink">
+    <id column="PRODUCT_CATEGORY_ID" jdbcType="VARCHAR" property="productCategoryId" />
+    <id column="LINK_SEQ_ID" jdbcType="VARCHAR" property="linkSeqId" />
+    <id column="FROM_DATE" jdbcType="TIMESTAMP" property="fromDate" />
+    <result column="THRU_DATE" jdbcType="TIMESTAMP" property="thruDate" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="comments" />
+    <result column="SEQUENCE_NUM" jdbcType="DECIMAL" property="sequenceNum" />
+    <result column="TITLE_TEXT" jdbcType="VARCHAR" property="titleText" />
+    <result column="IMAGE_URL" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="IMAGE_TWO_URL" jdbcType="VARCHAR" property="imageTwoUrl" />
+    <result column="LINK_TYPE_ENUM_ID" jdbcType="VARCHAR" property="linkTypeEnumId" />
+    <result column="LINK_INFO" jdbcType="VARCHAR" property="linkInfo" />
+    <result column="DETAIL_SUB_SCREEN" jdbcType="VARCHAR" property="detailSubScreen" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.efbiz.product.category.model.ProductCategoryLink">
+    <result column="DETAIL_TEXT" jdbcType="LONGVARCHAR" property="detailText" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_CATEGORY_ID, LINK_SEQ_ID, FROM_DATE, THRU_DATE, COMMENTS, SEQUENCE_NUM, TITLE_TEXT, 
+    IMAGE_URL, IMAGE_TWO_URL, LINK_TYPE_ENUM_ID, LINK_INFO, DETAIL_SUB_SCREEN, LAST_UPDATED_STAMP, 
+    LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <sql id="Blob_Column_List">
+    DETAIL_TEXT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="org.efbiz.product.category.model.ProductCategoryLinkExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product_category_link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="org.efbiz.product.category.model.ProductCategoryLinkExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_category_link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.category.model.ProductCategoryLinkKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product_category_link
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and LINK_SEQ_ID = #{linkSeqId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.category.model.ProductCategoryLinkKey">
+    delete from product_category_link
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and LINK_SEQ_ID = #{linkSeqId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.category.model.ProductCategoryLinkExample">
+    delete from product_category_link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.category.model.ProductCategoryLink">
+    insert into product_category_link (PRODUCT_CATEGORY_ID, LINK_SEQ_ID, FROM_DATE, 
+      THRU_DATE, COMMENTS, SEQUENCE_NUM, 
+      TITLE_TEXT, IMAGE_URL, IMAGE_TWO_URL, 
+      LINK_TYPE_ENUM_ID, LINK_INFO, DETAIL_SUB_SCREEN, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP, DETAIL_TEXT)
+    values (#{productCategoryId,jdbcType=VARCHAR}, #{linkSeqId,jdbcType=VARCHAR}, #{fromDate,jdbcType=TIMESTAMP}, 
+      #{thruDate,jdbcType=TIMESTAMP}, #{comments,jdbcType=VARCHAR}, #{sequenceNum,jdbcType=DECIMAL}, 
+      #{titleText,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{imageTwoUrl,jdbcType=VARCHAR}, 
+      #{linkTypeEnumId,jdbcType=VARCHAR}, #{linkInfo,jdbcType=VARCHAR}, #{detailSubScreen,jdbcType=VARCHAR}, 
+      NOW(), NOW(), NOW(), NOW(), #{detailText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.category.model.ProductCategoryLink">
+    insert into product_category_link
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productCategoryId != null">
+        PRODUCT_CATEGORY_ID,
+      </if>
+      <if test="linkSeqId != null">
+        LINK_SEQ_ID,
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE,
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+      <if test="sequenceNum != null">
+        SEQUENCE_NUM,
+      </if>
+      <if test="titleText != null">
+        TITLE_TEXT,
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL,
+      </if>
+      <if test="imageTwoUrl != null">
+        IMAGE_TWO_URL,
+      </if>
+      <if test="linkTypeEnumId != null">
+        LINK_TYPE_ENUM_ID,
+      </if>
+      <if test="linkInfo != null">
+        LINK_INFO,
+      </if>
+      <if test="detailSubScreen != null">
+        DETAIL_SUB_SCREEN,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+      <if test="detailText != null">
+        DETAIL_TEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productCategoryId != null">
+        #{productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="linkSeqId != null">
+        #{linkSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="sequenceNum != null">
+        #{sequenceNum,jdbcType=DECIMAL},
+      </if>
+      <if test="titleText != null">
+        #{titleText,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageTwoUrl != null">
+        #{imageTwoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTypeEnumId != null">
+        #{linkTypeEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="linkInfo != null">
+        #{linkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="detailSubScreen != null">
+        #{detailSubScreen,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+      <if test="detailText != null">
+        #{detailText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.category.model.ProductCategoryLinkExample" resultType="java.lang.Long">
+    select count(*) from product_category_link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_category_link
+    <set>
+      <if test="record.productCategoryId != null">
+        PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkSeqId != null">
+        LINK_SEQ_ID = #{record.linkSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromDate != null">
+        FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thruDate != null">
+        THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.comments != null">
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequenceNum != null">
+        SEQUENCE_NUM = #{record.sequenceNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.titleText != null">
+        TITLE_TEXT = #{record.titleText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageUrl != null">
+        IMAGE_URL = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageTwoUrl != null">
+        IMAGE_TWO_URL = #{record.imageTwoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkTypeEnumId != null">
+        LINK_TYPE_ENUM_ID = #{record.linkTypeEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkInfo != null">
+        LINK_INFO = #{record.linkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailSubScreen != null">
+        DETAIL_SUB_SCREEN = #{record.detailSubScreen,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      <if test="record.detailText != null">
+        DETAIL_TEXT = #{record.detailText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update product_category_link
+    set PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      LINK_SEQ_ID = #{record.linkSeqId,jdbcType=VARCHAR},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      SEQUENCE_NUM = #{record.sequenceNum,jdbcType=DECIMAL},
+      TITLE_TEXT = #{record.titleText,jdbcType=VARCHAR},
+      IMAGE_URL = #{record.imageUrl,jdbcType=VARCHAR},
+      IMAGE_TWO_URL = #{record.imageTwoUrl,jdbcType=VARCHAR},
+      LINK_TYPE_ENUM_ID = #{record.linkTypeEnumId,jdbcType=VARCHAR},
+      LINK_INFO = #{record.linkInfo,jdbcType=VARCHAR},
+      DETAIL_SUB_SCREEN = #{record.detailSubScreen,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      DETAIL_TEXT = #{record.detailText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_category_link
+    set PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      LINK_SEQ_ID = #{record.linkSeqId,jdbcType=VARCHAR},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      SEQUENCE_NUM = #{record.sequenceNum,jdbcType=DECIMAL},
+      TITLE_TEXT = #{record.titleText,jdbcType=VARCHAR},
+      IMAGE_URL = #{record.imageUrl,jdbcType=VARCHAR},
+      IMAGE_TWO_URL = #{record.imageTwoUrl,jdbcType=VARCHAR},
+      LINK_TYPE_ENUM_ID = #{record.linkTypeEnumId,jdbcType=VARCHAR},
+      LINK_INFO = #{record.linkInfo,jdbcType=VARCHAR},
+      DETAIL_SUB_SCREEN = #{record.detailSubScreen,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.category.model.ProductCategoryLink">
+    update product_category_link
+    <set>
+      <if test="thruDate != null">
+        THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comments != null">
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="sequenceNum != null">
+        SEQUENCE_NUM = #{sequenceNum,jdbcType=DECIMAL},
+      </if>
+      <if test="titleText != null">
+        TITLE_TEXT = #{titleText,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageTwoUrl != null">
+        IMAGE_TWO_URL = #{imageTwoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTypeEnumId != null">
+        LINK_TYPE_ENUM_ID = #{linkTypeEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="linkInfo != null">
+        LINK_INFO = #{linkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="detailSubScreen != null">
+        DETAIL_SUB_SCREEN = #{detailSubScreen,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      <if test="detailText != null">
+        DETAIL_TEXT = #{detailText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and LINK_SEQ_ID = #{linkSeqId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.efbiz.product.category.model.ProductCategoryLink">
+    update product_category_link
+    set THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      SEQUENCE_NUM = #{sequenceNum,jdbcType=DECIMAL},
+      TITLE_TEXT = #{titleText,jdbcType=VARCHAR},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      IMAGE_TWO_URL = #{imageTwoUrl,jdbcType=VARCHAR},
+      LINK_TYPE_ENUM_ID = #{linkTypeEnumId,jdbcType=VARCHAR},
+      LINK_INFO = #{linkInfo,jdbcType=VARCHAR},
+      DETAIL_SUB_SCREEN = #{detailSubScreen,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      DETAIL_TEXT = #{detailText,jdbcType=LONGVARCHAR}
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and LINK_SEQ_ID = #{linkSeqId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.category.model.ProductCategoryLink">
+    update product_category_link
+    set THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      SEQUENCE_NUM = #{sequenceNum,jdbcType=DECIMAL},
+      TITLE_TEXT = #{titleText,jdbcType=VARCHAR},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      IMAGE_TWO_URL = #{imageTwoUrl,jdbcType=VARCHAR},
+      LINK_TYPE_ENUM_ID = #{linkTypeEnumId,jdbcType=VARCHAR},
+      LINK_INFO = #{linkInfo,jdbcType=VARCHAR},
+      DETAIL_SUB_SCREEN = #{detailSubScreen,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and LINK_SEQ_ID = #{linkSeqId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

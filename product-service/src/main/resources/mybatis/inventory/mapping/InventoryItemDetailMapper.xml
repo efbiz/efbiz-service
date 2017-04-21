@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.inventory.dao.InventoryItemDetailMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.inventory.model.InventoryItemDetail">
+    <id column="INVENTORY_ITEM_ID" jdbcType="VARCHAR" property="inventoryItemId" />
+    <id column="INVENTORY_ITEM_DETAIL_SEQ_ID" jdbcType="VARCHAR" property="inventoryItemDetailSeqId" />
+    <result column="EFFECTIVE_DATE" jdbcType="TIMESTAMP" property="effectiveDate" />
+    <result column="QUANTITY_ON_HAND_DIFF" jdbcType="DECIMAL" property="quantityOnHandDiff" />
+    <result column="AVAILABLE_TO_PROMISE_DIFF" jdbcType="DECIMAL" property="availableToPromiseDiff" />
+    <result column="ACCOUNTING_QUANTITY_DIFF" jdbcType="DECIMAL" property="accountingQuantityDiff" />
+    <result column="UNIT_COST" jdbcType="DECIMAL" property="unitCost" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="ORDER_ITEM_SEQ_ID" jdbcType="VARCHAR" property="orderItemSeqId" />
+    <result column="SHIP_GROUP_SEQ_ID" jdbcType="VARCHAR" property="shipGroupSeqId" />
+    <result column="SHIPMENT_ID" jdbcType="VARCHAR" property="shipmentId" />
+    <result column="SHIPMENT_ITEM_SEQ_ID" jdbcType="VARCHAR" property="shipmentItemSeqId" />
+    <result column="RETURN_ID" jdbcType="VARCHAR" property="returnId" />
+    <result column="RETURN_ITEM_SEQ_ID" jdbcType="VARCHAR" property="returnItemSeqId" />
+    <result column="WORK_EFFORT_ID" jdbcType="VARCHAR" property="workEffortId" />
+    <result column="FIXED_ASSET_ID" jdbcType="VARCHAR" property="fixedAssetId" />
+    <result column="MAINT_HIST_SEQ_ID" jdbcType="VARCHAR" property="maintHistSeqId" />
+    <result column="ITEM_ISSUANCE_ID" jdbcType="VARCHAR" property="itemIssuanceId" />
+    <result column="RECEIPT_ID" jdbcType="VARCHAR" property="receiptId" />
+    <result column="PHYSICAL_INVENTORY_ID" jdbcType="VARCHAR" property="physicalInventoryId" />
+    <result column="REASON_ENUM_ID" jdbcType="VARCHAR" property="reasonEnumId" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    INVENTORY_ITEM_ID, INVENTORY_ITEM_DETAIL_SEQ_ID, EFFECTIVE_DATE, QUANTITY_ON_HAND_DIFF, 
+    AVAILABLE_TO_PROMISE_DIFF, ACCOUNTING_QUANTITY_DIFF, UNIT_COST, ORDER_ID, ORDER_ITEM_SEQ_ID, 
+    SHIP_GROUP_SEQ_ID, SHIPMENT_ID, SHIPMENT_ITEM_SEQ_ID, RETURN_ID, RETURN_ITEM_SEQ_ID, 
+    WORK_EFFORT_ID, FIXED_ASSET_ID, MAINT_HIST_SEQ_ID, ITEM_ISSUANCE_ID, RECEIPT_ID, 
+    PHYSICAL_INVENTORY_ID, REASON_ENUM_ID, DESCRIPTION, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, 
+    CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from inventory_item_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.inventory.model.InventoryItemDetailKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_item_detail
+    where INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=VARCHAR}
+      and INVENTORY_ITEM_DETAIL_SEQ_ID = #{inventoryItemDetailSeqId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.inventory.model.InventoryItemDetailKey">
+    delete from inventory_item_detail
+    where INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=VARCHAR}
+      and INVENTORY_ITEM_DETAIL_SEQ_ID = #{inventoryItemDetailSeqId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemDetailExample">
+    delete from inventory_item_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.inventory.model.InventoryItemDetail">
+    insert into inventory_item_detail (INVENTORY_ITEM_ID, INVENTORY_ITEM_DETAIL_SEQ_ID, 
+      EFFECTIVE_DATE, QUANTITY_ON_HAND_DIFF, AVAILABLE_TO_PROMISE_DIFF, 
+      ACCOUNTING_QUANTITY_DIFF, UNIT_COST, ORDER_ID, 
+      ORDER_ITEM_SEQ_ID, SHIP_GROUP_SEQ_ID, SHIPMENT_ID, 
+      SHIPMENT_ITEM_SEQ_ID, RETURN_ID, RETURN_ITEM_SEQ_ID, 
+      WORK_EFFORT_ID, FIXED_ASSET_ID, MAINT_HIST_SEQ_ID, 
+      ITEM_ISSUANCE_ID, RECEIPT_ID, PHYSICAL_INVENTORY_ID, 
+      REASON_ENUM_ID, DESCRIPTION, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, 
+      CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{inventoryItemId,jdbcType=VARCHAR}, #{inventoryItemDetailSeqId,jdbcType=VARCHAR}, 
+      #{effectiveDate,jdbcType=TIMESTAMP}, #{quantityOnHandDiff,jdbcType=DECIMAL}, #{availableToPromiseDiff,jdbcType=DECIMAL}, 
+      #{accountingQuantityDiff,jdbcType=DECIMAL}, #{unitCost,jdbcType=DECIMAL}, #{orderId,jdbcType=VARCHAR}, 
+      #{orderItemSeqId,jdbcType=VARCHAR}, #{shipGroupSeqId,jdbcType=VARCHAR}, #{shipmentId,jdbcType=VARCHAR}, 
+      #{shipmentItemSeqId,jdbcType=VARCHAR}, #{returnId,jdbcType=VARCHAR}, #{returnItemSeqId,jdbcType=VARCHAR}, 
+      #{workEffortId,jdbcType=VARCHAR}, #{fixedAssetId,jdbcType=VARCHAR}, #{maintHistSeqId,jdbcType=VARCHAR}, 
+      #{itemIssuanceId,jdbcType=VARCHAR}, #{receiptId,jdbcType=VARCHAR}, #{physicalInventoryId,jdbcType=VARCHAR}, 
+      #{reasonEnumId,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, NOW(), NOW(), 
+      NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.inventory.model.InventoryItemDetail">
+    insert into inventory_item_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inventoryItemId != null">
+        INVENTORY_ITEM_ID,
+      </if>
+      <if test="inventoryItemDetailSeqId != null">
+        INVENTORY_ITEM_DETAIL_SEQ_ID,
+      </if>
+      <if test="effectiveDate != null">
+        EFFECTIVE_DATE,
+      </if>
+      <if test="quantityOnHandDiff != null">
+        QUANTITY_ON_HAND_DIFF,
+      </if>
+      <if test="availableToPromiseDiff != null">
+        AVAILABLE_TO_PROMISE_DIFF,
+      </if>
+      <if test="accountingQuantityDiff != null">
+        ACCOUNTING_QUANTITY_DIFF,
+      </if>
+      <if test="unitCost != null">
+        UNIT_COST,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="orderItemSeqId != null">
+        ORDER_ITEM_SEQ_ID,
+      </if>
+      <if test="shipGroupSeqId != null">
+        SHIP_GROUP_SEQ_ID,
+      </if>
+      <if test="shipmentId != null">
+        SHIPMENT_ID,
+      </if>
+      <if test="shipmentItemSeqId != null">
+        SHIPMENT_ITEM_SEQ_ID,
+      </if>
+      <if test="returnId != null">
+        RETURN_ID,
+      </if>
+      <if test="returnItemSeqId != null">
+        RETURN_ITEM_SEQ_ID,
+      </if>
+      <if test="workEffortId != null">
+        WORK_EFFORT_ID,
+      </if>
+      <if test="fixedAssetId != null">
+        FIXED_ASSET_ID,
+      </if>
+      <if test="maintHistSeqId != null">
+        MAINT_HIST_SEQ_ID,
+      </if>
+      <if test="itemIssuanceId != null">
+        ITEM_ISSUANCE_ID,
+      </if>
+      <if test="receiptId != null">
+        RECEIPT_ID,
+      </if>
+      <if test="physicalInventoryId != null">
+        PHYSICAL_INVENTORY_ID,
+      </if>
+      <if test="reasonEnumId != null">
+        REASON_ENUM_ID,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inventoryItemId != null">
+        #{inventoryItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryItemDetailSeqId != null">
+        #{inventoryItemDetailSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveDate != null">
+        #{effectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quantityOnHandDiff != null">
+        #{quantityOnHandDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="availableToPromiseDiff != null">
+        #{availableToPromiseDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="accountingQuantityDiff != null">
+        #{accountingQuantityDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="unitCost != null">
+        #{unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderItemSeqId != null">
+        #{orderItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipGroupSeqId != null">
+        #{shipGroupSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentItemSeqId != null">
+        #{shipmentItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnId != null">
+        #{returnId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnItemSeqId != null">
+        #{returnItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="workEffortId != null">
+        #{workEffortId,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedAssetId != null">
+        #{fixedAssetId,jdbcType=VARCHAR},
+      </if>
+      <if test="maintHistSeqId != null">
+        #{maintHistSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemIssuanceId != null">
+        #{itemIssuanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptId != null">
+        #{receiptId,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalInventoryId != null">
+        #{physicalInventoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonEnumId != null">
+        #{reasonEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemDetailExample" resultType="java.lang.Long">
+    select count(*) from inventory_item_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update inventory_item_detail
+    <set>
+      <if test="record.inventoryItemId != null">
+        INVENTORY_ITEM_ID = #{record.inventoryItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryItemDetailSeqId != null">
+        INVENTORY_ITEM_DETAIL_SEQ_ID = #{record.inventoryItemDetailSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectiveDate != null">
+        EFFECTIVE_DATE = #{record.effectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.quantityOnHandDiff != null">
+        QUANTITY_ON_HAND_DIFF = #{record.quantityOnHandDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.availableToPromiseDiff != null">
+        AVAILABLE_TO_PROMISE_DIFF = #{record.availableToPromiseDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.accountingQuantityDiff != null">
+        ACCOUNTING_QUANTITY_DIFF = #{record.accountingQuantityDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitCost != null">
+        UNIT_COST = #{record.unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderItemSeqId != null">
+        ORDER_ITEM_SEQ_ID = #{record.orderItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipGroupSeqId != null">
+        SHIP_GROUP_SEQ_ID = #{record.shipGroupSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipmentId != null">
+        SHIPMENT_ID = #{record.shipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipmentItemSeqId != null">
+        SHIPMENT_ITEM_SEQ_ID = #{record.shipmentItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnId != null">
+        RETURN_ID = #{record.returnId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnItemSeqId != null">
+        RETURN_ITEM_SEQ_ID = #{record.returnItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workEffortId != null">
+        WORK_EFFORT_ID = #{record.workEffortId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fixedAssetId != null">
+        FIXED_ASSET_ID = #{record.fixedAssetId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintHistSeqId != null">
+        MAINT_HIST_SEQ_ID = #{record.maintHistSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemIssuanceId != null">
+        ITEM_ISSUANCE_ID = #{record.itemIssuanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiptId != null">
+        RECEIPT_ID = #{record.receiptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.physicalInventoryId != null">
+        PHYSICAL_INVENTORY_ID = #{record.physicalInventoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reasonEnumId != null">
+        REASON_ENUM_ID = #{record.reasonEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update inventory_item_detail
+    set INVENTORY_ITEM_ID = #{record.inventoryItemId,jdbcType=VARCHAR},
+      INVENTORY_ITEM_DETAIL_SEQ_ID = #{record.inventoryItemDetailSeqId,jdbcType=VARCHAR},
+      EFFECTIVE_DATE = #{record.effectiveDate,jdbcType=TIMESTAMP},
+      QUANTITY_ON_HAND_DIFF = #{record.quantityOnHandDiff,jdbcType=DECIMAL},
+      AVAILABLE_TO_PROMISE_DIFF = #{record.availableToPromiseDiff,jdbcType=DECIMAL},
+      ACCOUNTING_QUANTITY_DIFF = #{record.accountingQuantityDiff,jdbcType=DECIMAL},
+      UNIT_COST = #{record.unitCost,jdbcType=DECIMAL},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      ORDER_ITEM_SEQ_ID = #{record.orderItemSeqId,jdbcType=VARCHAR},
+      SHIP_GROUP_SEQ_ID = #{record.shipGroupSeqId,jdbcType=VARCHAR},
+      SHIPMENT_ID = #{record.shipmentId,jdbcType=VARCHAR},
+      SHIPMENT_ITEM_SEQ_ID = #{record.shipmentItemSeqId,jdbcType=VARCHAR},
+      RETURN_ID = #{record.returnId,jdbcType=VARCHAR},
+      RETURN_ITEM_SEQ_ID = #{record.returnItemSeqId,jdbcType=VARCHAR},
+      WORK_EFFORT_ID = #{record.workEffortId,jdbcType=VARCHAR},
+      FIXED_ASSET_ID = #{record.fixedAssetId,jdbcType=VARCHAR},
+      MAINT_HIST_SEQ_ID = #{record.maintHistSeqId,jdbcType=VARCHAR},
+      ITEM_ISSUANCE_ID = #{record.itemIssuanceId,jdbcType=VARCHAR},
+      RECEIPT_ID = #{record.receiptId,jdbcType=VARCHAR},
+      PHYSICAL_INVENTORY_ID = #{record.physicalInventoryId,jdbcType=VARCHAR},
+      REASON_ENUM_ID = #{record.reasonEnumId,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.inventory.model.InventoryItemDetail">
+    update inventory_item_detail
+    <set>
+      <if test="effectiveDate != null">
+        EFFECTIVE_DATE = #{effectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quantityOnHandDiff != null">
+        QUANTITY_ON_HAND_DIFF = #{quantityOnHandDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="availableToPromiseDiff != null">
+        AVAILABLE_TO_PROMISE_DIFF = #{availableToPromiseDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="accountingQuantityDiff != null">
+        ACCOUNTING_QUANTITY_DIFF = #{accountingQuantityDiff,jdbcType=DECIMAL},
+      </if>
+      <if test="unitCost != null">
+        UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderItemSeqId != null">
+        ORDER_ITEM_SEQ_ID = #{orderItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipGroupSeqId != null">
+        SHIP_GROUP_SEQ_ID = #{shipGroupSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentId != null">
+        SHIPMENT_ID = #{shipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentItemSeqId != null">
+        SHIPMENT_ITEM_SEQ_ID = #{shipmentItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnId != null">
+        RETURN_ID = #{returnId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnItemSeqId != null">
+        RETURN_ITEM_SEQ_ID = #{returnItemSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="workEffortId != null">
+        WORK_EFFORT_ID = #{workEffortId,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedAssetId != null">
+        FIXED_ASSET_ID = #{fixedAssetId,jdbcType=VARCHAR},
+      </if>
+      <if test="maintHistSeqId != null">
+        MAINT_HIST_SEQ_ID = #{maintHistSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemIssuanceId != null">
+        ITEM_ISSUANCE_ID = #{itemIssuanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptId != null">
+        RECEIPT_ID = #{receiptId,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalInventoryId != null">
+        PHYSICAL_INVENTORY_ID = #{physicalInventoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonEnumId != null">
+        REASON_ENUM_ID = #{reasonEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=VARCHAR}
+      and INVENTORY_ITEM_DETAIL_SEQ_ID = #{inventoryItemDetailSeqId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.inventory.model.InventoryItemDetail">
+    update inventory_item_detail
+    set EFFECTIVE_DATE = #{effectiveDate,jdbcType=TIMESTAMP},
+      QUANTITY_ON_HAND_DIFF = #{quantityOnHandDiff,jdbcType=DECIMAL},
+      AVAILABLE_TO_PROMISE_DIFF = #{availableToPromiseDiff,jdbcType=DECIMAL},
+      ACCOUNTING_QUANTITY_DIFF = #{accountingQuantityDiff,jdbcType=DECIMAL},
+      UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      ORDER_ITEM_SEQ_ID = #{orderItemSeqId,jdbcType=VARCHAR},
+      SHIP_GROUP_SEQ_ID = #{shipGroupSeqId,jdbcType=VARCHAR},
+      SHIPMENT_ID = #{shipmentId,jdbcType=VARCHAR},
+      SHIPMENT_ITEM_SEQ_ID = #{shipmentItemSeqId,jdbcType=VARCHAR},
+      RETURN_ID = #{returnId,jdbcType=VARCHAR},
+      RETURN_ITEM_SEQ_ID = #{returnItemSeqId,jdbcType=VARCHAR},
+      WORK_EFFORT_ID = #{workEffortId,jdbcType=VARCHAR},
+      FIXED_ASSET_ID = #{fixedAssetId,jdbcType=VARCHAR},
+      MAINT_HIST_SEQ_ID = #{maintHistSeqId,jdbcType=VARCHAR},
+      ITEM_ISSUANCE_ID = #{itemIssuanceId,jdbcType=VARCHAR},
+      RECEIPT_ID = #{receiptId,jdbcType=VARCHAR},
+      PHYSICAL_INVENTORY_ID = #{physicalInventoryId,jdbcType=VARCHAR},
+      REASON_ENUM_ID = #{reasonEnumId,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=VARCHAR}
+      and INVENTORY_ITEM_DETAIL_SEQ_ID = #{inventoryItemDetailSeqId,jdbcType=VARCHAR}
+  </update>
+</mapper>

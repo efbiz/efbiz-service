@@ -1,0 +1,1466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.product.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.product.model.Product">
+    <id column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="PRODUCT_TYPE_ID" jdbcType="VARCHAR" property="productTypeId" />
+    <result column="PRIMARY_PRODUCT_CATEGORY_ID" jdbcType="VARCHAR" property="primaryProductCategoryId" />
+    <result column="MANUFACTURER_PARTY_ID" jdbcType="VARCHAR" property="manufacturerPartyId" />
+    <result column="FACILITY_ID" jdbcType="VARCHAR" property="facilityId" />
+    <result column="INTRODUCTION_DATE" jdbcType="TIMESTAMP" property="introductionDate" />
+    <result column="RELEASE_DATE" jdbcType="TIMESTAMP" property="releaseDate" />
+    <result column="SUPPORT_DISCONTINUATION_DATE" jdbcType="TIMESTAMP" property="supportDiscontinuationDate" />
+    <result column="SALES_DISCONTINUATION_DATE" jdbcType="TIMESTAMP" property="salesDiscontinuationDate" />
+    <result column="SALES_DISC_WHEN_NOT_AVAIL" jdbcType="CHAR" property="salesDiscWhenNotAvail" />
+    <result column="INTERNAL_NAME" jdbcType="VARCHAR" property="internalName" />
+    <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="comments" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="PRICE_DETAIL_TEXT" jdbcType="VARCHAR" property="priceDetailText" />
+    <result column="SMALL_IMAGE_URL" jdbcType="VARCHAR" property="smallImageUrl" />
+    <result column="MEDIUM_IMAGE_URL" jdbcType="VARCHAR" property="mediumImageUrl" />
+    <result column="LARGE_IMAGE_URL" jdbcType="VARCHAR" property="largeImageUrl" />
+    <result column="DETAIL_IMAGE_URL" jdbcType="VARCHAR" property="detailImageUrl" />
+    <result column="ORIGINAL_IMAGE_URL" jdbcType="VARCHAR" property="originalImageUrl" />
+    <result column="DETAIL_SCREEN" jdbcType="VARCHAR" property="detailScreen" />
+    <result column="INVENTORY_MESSAGE" jdbcType="VARCHAR" property="inventoryMessage" />
+    <result column="INVENTORY_ITEM_TYPE_ID" jdbcType="VARCHAR" property="inventoryItemTypeId" />
+    <result column="REQUIRE_INVENTORY" jdbcType="CHAR" property="requireInventory" />
+    <result column="QUANTITY_UOM_ID" jdbcType="VARCHAR" property="quantityUomId" />
+    <result column="QUANTITY_INCLUDED" jdbcType="DECIMAL" property="quantityIncluded" />
+    <result column="PIECES_INCLUDED" jdbcType="DECIMAL" property="piecesIncluded" />
+    <result column="REQUIRE_AMOUNT" jdbcType="CHAR" property="requireAmount" />
+    <result column="FIXED_AMOUNT" jdbcType="DECIMAL" property="fixedAmount" />
+    <result column="AMOUNT_UOM_TYPE_ID" jdbcType="VARCHAR" property="amountUomTypeId" />
+    <result column="WEIGHT_UOM_ID" jdbcType="VARCHAR" property="weightUomId" />
+    <result column="SHIPPING_WEIGHT" jdbcType="DECIMAL" property="shippingWeight" />
+    <result column="PRODUCT_WEIGHT" jdbcType="DECIMAL" property="productWeight" />
+    <result column="HEIGHT_UOM_ID" jdbcType="VARCHAR" property="heightUomId" />
+    <result column="PRODUCT_HEIGHT" jdbcType="DECIMAL" property="productHeight" />
+    <result column="SHIPPING_HEIGHT" jdbcType="DECIMAL" property="shippingHeight" />
+    <result column="WIDTH_UOM_ID" jdbcType="VARCHAR" property="widthUomId" />
+    <result column="PRODUCT_WIDTH" jdbcType="DECIMAL" property="productWidth" />
+    <result column="SHIPPING_WIDTH" jdbcType="DECIMAL" property="shippingWidth" />
+    <result column="DEPTH_UOM_ID" jdbcType="VARCHAR" property="depthUomId" />
+    <result column="PRODUCT_DEPTH" jdbcType="DECIMAL" property="productDepth" />
+    <result column="SHIPPING_DEPTH" jdbcType="DECIMAL" property="shippingDepth" />
+    <result column="DIAMETER_UOM_ID" jdbcType="VARCHAR" property="diameterUomId" />
+    <result column="PRODUCT_DIAMETER" jdbcType="DECIMAL" property="productDiameter" />
+    <result column="PRODUCT_RATING" jdbcType="DECIMAL" property="productRating" />
+    <result column="RATING_TYPE_ENUM" jdbcType="VARCHAR" property="ratingTypeEnum" />
+    <result column="RETURNABLE" jdbcType="CHAR" property="returnable" />
+    <result column="TAXABLE" jdbcType="CHAR" property="taxable" />
+    <result column="CHARGE_SHIPPING" jdbcType="CHAR" property="chargeShipping" />
+    <result column="AUTO_CREATE_KEYWORDS" jdbcType="CHAR" property="autoCreateKeywords" />
+    <result column="INCLUDE_IN_PROMOTIONS" jdbcType="CHAR" property="includeInPromotions" />
+    <result column="IS_VIRTUAL" jdbcType="CHAR" property="isVirtual" />
+    <result column="IS_VARIANT" jdbcType="CHAR" property="isVariant" />
+    <result column="VIRTUAL_VARIANT_METHOD_ENUM" jdbcType="VARCHAR" property="virtualVariantMethodEnum" />
+    <result column="ORIGIN_GEO_ID" jdbcType="VARCHAR" property="originGeoId" />
+    <result column="REQUIREMENT_METHOD_ENUM_ID" jdbcType="VARCHAR" property="requirementMethodEnumId" />
+    <result column="BILL_OF_MATERIAL_LEVEL" jdbcType="DECIMAL" property="billOfMaterialLevel" />
+    <result column="RESERV_MAX_PERSONS" jdbcType="DECIMAL" property="reservMaxPersons" />
+    <result column="RESERV2ND_P_P_PERC" jdbcType="DECIMAL" property="reserv2ndPPPerc" />
+    <result column="RESERV_NTH_P_P_PERC" jdbcType="DECIMAL" property="reservNthPPPerc" />
+    <result column="CONFIG_ID" jdbcType="VARCHAR" property="configId" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="CREATED_BY_USER_LOGIN" jdbcType="VARCHAR" property="createdByUserLogin" />
+    <result column="LAST_MODIFIED_DATE" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    <result column="LAST_MODIFIED_BY_USER_LOGIN" jdbcType="VARCHAR" property="lastModifiedByUserLogin" />
+    <result column="IN_SHIPPING_BOX" jdbcType="CHAR" property="inShippingBox" />
+    <result column="DEFAULT_SHIPMENT_BOX_TYPE_ID" jdbcType="VARCHAR" property="defaultShipmentBoxTypeId" />
+    <result column="LOT_ID_FILLED_IN" jdbcType="VARCHAR" property="lotIdFilledIn" />
+    <result column="ORDER_DECIMAL_QUANTITY" jdbcType="CHAR" property="orderDecimalQuantity" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.efbiz.product.product.model.Product">
+    <result column="LONG_DESCRIPTION" jdbcType="LONGVARCHAR" property="longDescription" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, PRODUCT_TYPE_ID, PRIMARY_PRODUCT_CATEGORY_ID, MANUFACTURER_PARTY_ID, 
+    FACILITY_ID, INTRODUCTION_DATE, RELEASE_DATE, SUPPORT_DISCONTINUATION_DATE, SALES_DISCONTINUATION_DATE, 
+    SALES_DISC_WHEN_NOT_AVAIL, INTERNAL_NAME, BRAND_NAME, COMMENTS, PRODUCT_NAME, DESCRIPTION, 
+    PRICE_DETAIL_TEXT, SMALL_IMAGE_URL, MEDIUM_IMAGE_URL, LARGE_IMAGE_URL, DETAIL_IMAGE_URL, 
+    ORIGINAL_IMAGE_URL, DETAIL_SCREEN, INVENTORY_MESSAGE, INVENTORY_ITEM_TYPE_ID, REQUIRE_INVENTORY, 
+    QUANTITY_UOM_ID, QUANTITY_INCLUDED, PIECES_INCLUDED, REQUIRE_AMOUNT, FIXED_AMOUNT, 
+    AMOUNT_UOM_TYPE_ID, WEIGHT_UOM_ID, SHIPPING_WEIGHT, PRODUCT_WEIGHT, HEIGHT_UOM_ID, 
+    PRODUCT_HEIGHT, SHIPPING_HEIGHT, WIDTH_UOM_ID, PRODUCT_WIDTH, SHIPPING_WIDTH, DEPTH_UOM_ID, 
+    PRODUCT_DEPTH, SHIPPING_DEPTH, DIAMETER_UOM_ID, PRODUCT_DIAMETER, PRODUCT_RATING, 
+    RATING_TYPE_ENUM, RETURNABLE, TAXABLE, CHARGE_SHIPPING, AUTO_CREATE_KEYWORDS, INCLUDE_IN_PROMOTIONS, 
+    IS_VIRTUAL, IS_VARIANT, VIRTUAL_VARIANT_METHOD_ENUM, ORIGIN_GEO_ID, REQUIREMENT_METHOD_ENUM_ID, 
+    BILL_OF_MATERIAL_LEVEL, RESERV_MAX_PERSONS, RESERV2ND_P_P_PERC, RESERV_NTH_P_P_PERC, 
+    CONFIG_ID, CREATED_DATE, CREATED_BY_USER_LOGIN, LAST_MODIFIED_DATE, LAST_MODIFIED_BY_USER_LOGIN, 
+    IN_SHIPPING_BOX, DEFAULT_SHIPMENT_BOX_TYPE_ID, LOT_ID_FILLED_IN, ORDER_DECIMAL_QUANTITY, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <sql id="Blob_Column_List">
+    LONG_DESCRIPTION
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="org.efbiz.product.product.model.ProductExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="org.efbiz.product.product.model.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.product.model.ProductExample">
+    delete from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.product.model.Product">
+    insert into product (PRODUCT_ID, PRODUCT_TYPE_ID, PRIMARY_PRODUCT_CATEGORY_ID, 
+      MANUFACTURER_PARTY_ID, FACILITY_ID, INTRODUCTION_DATE, 
+      RELEASE_DATE, SUPPORT_DISCONTINUATION_DATE, 
+      SALES_DISCONTINUATION_DATE, SALES_DISC_WHEN_NOT_AVAIL, 
+      INTERNAL_NAME, BRAND_NAME, COMMENTS, 
+      PRODUCT_NAME, DESCRIPTION, PRICE_DETAIL_TEXT, 
+      SMALL_IMAGE_URL, MEDIUM_IMAGE_URL, LARGE_IMAGE_URL, 
+      DETAIL_IMAGE_URL, ORIGINAL_IMAGE_URL, DETAIL_SCREEN, 
+      INVENTORY_MESSAGE, INVENTORY_ITEM_TYPE_ID, 
+      REQUIRE_INVENTORY, QUANTITY_UOM_ID, QUANTITY_INCLUDED, 
+      PIECES_INCLUDED, REQUIRE_AMOUNT, FIXED_AMOUNT, 
+      AMOUNT_UOM_TYPE_ID, WEIGHT_UOM_ID, SHIPPING_WEIGHT, 
+      PRODUCT_WEIGHT, HEIGHT_UOM_ID, PRODUCT_HEIGHT, 
+      SHIPPING_HEIGHT, WIDTH_UOM_ID, PRODUCT_WIDTH, 
+      SHIPPING_WIDTH, DEPTH_UOM_ID, PRODUCT_DEPTH, 
+      SHIPPING_DEPTH, DIAMETER_UOM_ID, PRODUCT_DIAMETER, 
+      PRODUCT_RATING, RATING_TYPE_ENUM, RETURNABLE, 
+      TAXABLE, CHARGE_SHIPPING, AUTO_CREATE_KEYWORDS, 
+      INCLUDE_IN_PROMOTIONS, IS_VIRTUAL, IS_VARIANT, 
+      VIRTUAL_VARIANT_METHOD_ENUM, ORIGIN_GEO_ID, 
+      REQUIREMENT_METHOD_ENUM_ID, BILL_OF_MATERIAL_LEVEL, 
+      RESERV_MAX_PERSONS, RESERV2ND_P_P_PERC, RESERV_NTH_P_P_PERC, 
+      CONFIG_ID, CREATED_DATE, CREATED_BY_USER_LOGIN, 
+      LAST_MODIFIED_DATE, LAST_MODIFIED_BY_USER_LOGIN, 
+      IN_SHIPPING_BOX, DEFAULT_SHIPMENT_BOX_TYPE_ID, LOT_ID_FILLED_IN, 
+      ORDER_DECIMAL_QUANTITY, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP, LONG_DESCRIPTION
+      )
+    values (#{productId,jdbcType=VARCHAR}, #{productTypeId,jdbcType=VARCHAR}, #{primaryProductCategoryId,jdbcType=VARCHAR}, 
+      #{manufacturerPartyId,jdbcType=VARCHAR}, #{facilityId,jdbcType=VARCHAR}, #{introductionDate,jdbcType=TIMESTAMP}, 
+      #{releaseDate,jdbcType=TIMESTAMP}, #{supportDiscontinuationDate,jdbcType=TIMESTAMP}, 
+      #{salesDiscontinuationDate,jdbcType=TIMESTAMP}, #{salesDiscWhenNotAvail,jdbcType=CHAR}, 
+      #{internalName,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, #{comments,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{priceDetailText,jdbcType=VARCHAR}, 
+      #{smallImageUrl,jdbcType=VARCHAR}, #{mediumImageUrl,jdbcType=VARCHAR}, #{largeImageUrl,jdbcType=VARCHAR}, 
+      #{detailImageUrl,jdbcType=VARCHAR}, #{originalImageUrl,jdbcType=VARCHAR}, #{detailScreen,jdbcType=VARCHAR}, 
+      #{inventoryMessage,jdbcType=VARCHAR}, #{inventoryItemTypeId,jdbcType=VARCHAR}, 
+      #{requireInventory,jdbcType=CHAR}, #{quantityUomId,jdbcType=VARCHAR}, #{quantityIncluded,jdbcType=DECIMAL}, 
+      #{piecesIncluded,jdbcType=DECIMAL}, #{requireAmount,jdbcType=CHAR}, #{fixedAmount,jdbcType=DECIMAL}, 
+      #{amountUomTypeId,jdbcType=VARCHAR}, #{weightUomId,jdbcType=VARCHAR}, #{shippingWeight,jdbcType=DECIMAL}, 
+      #{productWeight,jdbcType=DECIMAL}, #{heightUomId,jdbcType=VARCHAR}, #{productHeight,jdbcType=DECIMAL}, 
+      #{shippingHeight,jdbcType=DECIMAL}, #{widthUomId,jdbcType=VARCHAR}, #{productWidth,jdbcType=DECIMAL}, 
+      #{shippingWidth,jdbcType=DECIMAL}, #{depthUomId,jdbcType=VARCHAR}, #{productDepth,jdbcType=DECIMAL}, 
+      #{shippingDepth,jdbcType=DECIMAL}, #{diameterUomId,jdbcType=VARCHAR}, #{productDiameter,jdbcType=DECIMAL}, 
+      #{productRating,jdbcType=DECIMAL}, #{ratingTypeEnum,jdbcType=VARCHAR}, #{returnable,jdbcType=CHAR}, 
+      #{taxable,jdbcType=CHAR}, #{chargeShipping,jdbcType=CHAR}, #{autoCreateKeywords,jdbcType=CHAR}, 
+      #{includeInPromotions,jdbcType=CHAR}, #{isVirtual,jdbcType=CHAR}, #{isVariant,jdbcType=CHAR}, 
+      #{virtualVariantMethodEnum,jdbcType=VARCHAR}, #{originGeoId,jdbcType=VARCHAR}, 
+      #{requirementMethodEnumId,jdbcType=VARCHAR}, #{billOfMaterialLevel,jdbcType=DECIMAL}, 
+      #{reservMaxPersons,jdbcType=DECIMAL}, #{reserv2ndPPPerc,jdbcType=DECIMAL}, #{reservNthPPPerc,jdbcType=DECIMAL}, 
+      #{configId,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{createdByUserLogin,jdbcType=VARCHAR}, 
+      #{lastModifiedDate,jdbcType=TIMESTAMP}, #{lastModifiedByUserLogin,jdbcType=VARCHAR}, 
+      #{inShippingBox,jdbcType=CHAR}, #{defaultShipmentBoxTypeId,jdbcType=VARCHAR}, #{lotIdFilledIn,jdbcType=VARCHAR}, 
+      #{orderDecimalQuantity,jdbcType=CHAR}, NOW(), NOW(), NOW(), NOW(), #{longDescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.product.model.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="productTypeId != null">
+        PRODUCT_TYPE_ID,
+      </if>
+      <if test="primaryProductCategoryId != null">
+        PRIMARY_PRODUCT_CATEGORY_ID,
+      </if>
+      <if test="manufacturerPartyId != null">
+        MANUFACTURER_PARTY_ID,
+      </if>
+      <if test="facilityId != null">
+        FACILITY_ID,
+      </if>
+      <if test="introductionDate != null">
+        INTRODUCTION_DATE,
+      </if>
+      <if test="releaseDate != null">
+        RELEASE_DATE,
+      </if>
+      <if test="supportDiscontinuationDate != null">
+        SUPPORT_DISCONTINUATION_DATE,
+      </if>
+      <if test="salesDiscontinuationDate != null">
+        SALES_DISCONTINUATION_DATE,
+      </if>
+      <if test="salesDiscWhenNotAvail != null">
+        SALES_DISC_WHEN_NOT_AVAIL,
+      </if>
+      <if test="internalName != null">
+        INTERNAL_NAME,
+      </if>
+      <if test="brandName != null">
+        BRAND_NAME,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="priceDetailText != null">
+        PRICE_DETAIL_TEXT,
+      </if>
+      <if test="smallImageUrl != null">
+        SMALL_IMAGE_URL,
+      </if>
+      <if test="mediumImageUrl != null">
+        MEDIUM_IMAGE_URL,
+      </if>
+      <if test="largeImageUrl != null">
+        LARGE_IMAGE_URL,
+      </if>
+      <if test="detailImageUrl != null">
+        DETAIL_IMAGE_URL,
+      </if>
+      <if test="originalImageUrl != null">
+        ORIGINAL_IMAGE_URL,
+      </if>
+      <if test="detailScreen != null">
+        DETAIL_SCREEN,
+      </if>
+      <if test="inventoryMessage != null">
+        INVENTORY_MESSAGE,
+      </if>
+      <if test="inventoryItemTypeId != null">
+        INVENTORY_ITEM_TYPE_ID,
+      </if>
+      <if test="requireInventory != null">
+        REQUIRE_INVENTORY,
+      </if>
+      <if test="quantityUomId != null">
+        QUANTITY_UOM_ID,
+      </if>
+      <if test="quantityIncluded != null">
+        QUANTITY_INCLUDED,
+      </if>
+      <if test="piecesIncluded != null">
+        PIECES_INCLUDED,
+      </if>
+      <if test="requireAmount != null">
+        REQUIRE_AMOUNT,
+      </if>
+      <if test="fixedAmount != null">
+        FIXED_AMOUNT,
+      </if>
+      <if test="amountUomTypeId != null">
+        AMOUNT_UOM_TYPE_ID,
+      </if>
+      <if test="weightUomId != null">
+        WEIGHT_UOM_ID,
+      </if>
+      <if test="shippingWeight != null">
+        SHIPPING_WEIGHT,
+      </if>
+      <if test="productWeight != null">
+        PRODUCT_WEIGHT,
+      </if>
+      <if test="heightUomId != null">
+        HEIGHT_UOM_ID,
+      </if>
+      <if test="productHeight != null">
+        PRODUCT_HEIGHT,
+      </if>
+      <if test="shippingHeight != null">
+        SHIPPING_HEIGHT,
+      </if>
+      <if test="widthUomId != null">
+        WIDTH_UOM_ID,
+      </if>
+      <if test="productWidth != null">
+        PRODUCT_WIDTH,
+      </if>
+      <if test="shippingWidth != null">
+        SHIPPING_WIDTH,
+      </if>
+      <if test="depthUomId != null">
+        DEPTH_UOM_ID,
+      </if>
+      <if test="productDepth != null">
+        PRODUCT_DEPTH,
+      </if>
+      <if test="shippingDepth != null">
+        SHIPPING_DEPTH,
+      </if>
+      <if test="diameterUomId != null">
+        DIAMETER_UOM_ID,
+      </if>
+      <if test="productDiameter != null">
+        PRODUCT_DIAMETER,
+      </if>
+      <if test="productRating != null">
+        PRODUCT_RATING,
+      </if>
+      <if test="ratingTypeEnum != null">
+        RATING_TYPE_ENUM,
+      </if>
+      <if test="returnable != null">
+        RETURNABLE,
+      </if>
+      <if test="taxable != null">
+        TAXABLE,
+      </if>
+      <if test="chargeShipping != null">
+        CHARGE_SHIPPING,
+      </if>
+      <if test="autoCreateKeywords != null">
+        AUTO_CREATE_KEYWORDS,
+      </if>
+      <if test="includeInPromotions != null">
+        INCLUDE_IN_PROMOTIONS,
+      </if>
+      <if test="isVirtual != null">
+        IS_VIRTUAL,
+      </if>
+      <if test="isVariant != null">
+        IS_VARIANT,
+      </if>
+      <if test="virtualVariantMethodEnum != null">
+        VIRTUAL_VARIANT_METHOD_ENUM,
+      </if>
+      <if test="originGeoId != null">
+        ORIGIN_GEO_ID,
+      </if>
+      <if test="requirementMethodEnumId != null">
+        REQUIREMENT_METHOD_ENUM_ID,
+      </if>
+      <if test="billOfMaterialLevel != null">
+        BILL_OF_MATERIAL_LEVEL,
+      </if>
+      <if test="reservMaxPersons != null">
+        RESERV_MAX_PERSONS,
+      </if>
+      <if test="reserv2ndPPPerc != null">
+        RESERV2ND_P_P_PERC,
+      </if>
+      <if test="reservNthPPPerc != null">
+        RESERV_NTH_P_P_PERC,
+      </if>
+      <if test="configId != null">
+        CONFIG_ID,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN,
+      </if>
+      <if test="lastModifiedDate != null">
+        LAST_MODIFIED_DATE,
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN,
+      </if>
+      <if test="inShippingBox != null">
+        IN_SHIPPING_BOX,
+      </if>
+      <if test="defaultShipmentBoxTypeId != null">
+        DEFAULT_SHIPMENT_BOX_TYPE_ID,
+      </if>
+      <if test="lotIdFilledIn != null">
+        LOT_ID_FILLED_IN,
+      </if>
+      <if test="orderDecimalQuantity != null">
+        ORDER_DECIMAL_QUANTITY,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+      <if test="longDescription != null">
+        LONG_DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productTypeId != null">
+        #{productTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryProductCategoryId != null">
+        #{primaryProductCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturerPartyId != null">
+        #{manufacturerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityId != null">
+        #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="introductionDate != null">
+        #{introductionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseDate != null">
+        #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supportDiscontinuationDate != null">
+        #{supportDiscontinuationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesDiscontinuationDate != null">
+        #{salesDiscontinuationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesDiscWhenNotAvail != null">
+        #{salesDiscWhenNotAvail,jdbcType=CHAR},
+      </if>
+      <if test="internalName != null">
+        #{internalName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDetailText != null">
+        #{priceDetailText,jdbcType=VARCHAR},
+      </if>
+      <if test="smallImageUrl != null">
+        #{smallImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumImageUrl != null">
+        #{mediumImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="largeImageUrl != null">
+        #{largeImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailImageUrl != null">
+        #{detailImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="originalImageUrl != null">
+        #{originalImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailScreen != null">
+        #{detailScreen,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryMessage != null">
+        #{inventoryMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryItemTypeId != null">
+        #{inventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="requireInventory != null">
+        #{requireInventory,jdbcType=CHAR},
+      </if>
+      <if test="quantityUomId != null">
+        #{quantityUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="quantityIncluded != null">
+        #{quantityIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="piecesIncluded != null">
+        #{piecesIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="requireAmount != null">
+        #{requireAmount,jdbcType=CHAR},
+      </if>
+      <if test="fixedAmount != null">
+        #{fixedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="amountUomTypeId != null">
+        #{amountUomTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="weightUomId != null">
+        #{weightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingWeight != null">
+        #{shippingWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="productWeight != null">
+        #{productWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="heightUomId != null">
+        #{heightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productHeight != null">
+        #{productHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingHeight != null">
+        #{shippingHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="widthUomId != null">
+        #{widthUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productWidth != null">
+        #{productWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingWidth != null">
+        #{shippingWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="depthUomId != null">
+        #{depthUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productDepth != null">
+        #{productDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingDepth != null">
+        #{shippingDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="diameterUomId != null">
+        #{diameterUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productDiameter != null">
+        #{productDiameter,jdbcType=DECIMAL},
+      </if>
+      <if test="productRating != null">
+        #{productRating,jdbcType=DECIMAL},
+      </if>
+      <if test="ratingTypeEnum != null">
+        #{ratingTypeEnum,jdbcType=VARCHAR},
+      </if>
+      <if test="returnable != null">
+        #{returnable,jdbcType=CHAR},
+      </if>
+      <if test="taxable != null">
+        #{taxable,jdbcType=CHAR},
+      </if>
+      <if test="chargeShipping != null">
+        #{chargeShipping,jdbcType=CHAR},
+      </if>
+      <if test="autoCreateKeywords != null">
+        #{autoCreateKeywords,jdbcType=CHAR},
+      </if>
+      <if test="includeInPromotions != null">
+        #{includeInPromotions,jdbcType=CHAR},
+      </if>
+      <if test="isVirtual != null">
+        #{isVirtual,jdbcType=CHAR},
+      </if>
+      <if test="isVariant != null">
+        #{isVariant,jdbcType=CHAR},
+      </if>
+      <if test="virtualVariantMethodEnum != null">
+        #{virtualVariantMethodEnum,jdbcType=VARCHAR},
+      </if>
+      <if test="originGeoId != null">
+        #{originGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="requirementMethodEnumId != null">
+        #{requirementMethodEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="billOfMaterialLevel != null">
+        #{billOfMaterialLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="reservMaxPersons != null">
+        #{reservMaxPersons,jdbcType=DECIMAL},
+      </if>
+      <if test="reserv2ndPPPerc != null">
+        #{reserv2ndPPPerc,jdbcType=DECIMAL},
+      </if>
+      <if test="reservNthPPPerc != null">
+        #{reservNthPPPerc,jdbcType=DECIMAL},
+      </if>
+      <if test="configId != null">
+        #{configId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdByUserLogin != null">
+        #{createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedDate != null">
+        #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="inShippingBox != null">
+        #{inShippingBox,jdbcType=CHAR},
+      </if>
+      <if test="defaultShipmentBoxTypeId != null">
+        #{defaultShipmentBoxTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="lotIdFilledIn != null">
+        #{lotIdFilledIn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDecimalQuantity != null">
+        #{orderDecimalQuantity,jdbcType=CHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+      <if test="longDescription != null">
+        #{longDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.product.model.ProductExample" resultType="java.lang.Long">
+    select count(*) from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productTypeId != null">
+        PRODUCT_TYPE_ID = #{record.productTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.primaryProductCategoryId != null">
+        PRIMARY_PRODUCT_CATEGORY_ID = #{record.primaryProductCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manufacturerPartyId != null">
+        MANUFACTURER_PARTY_ID = #{record.manufacturerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facilityId != null">
+        FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introductionDate != null">
+        INTRODUCTION_DATE = #{record.introductionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.releaseDate != null">
+        RELEASE_DATE = #{record.releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.supportDiscontinuationDate != null">
+        SUPPORT_DISCONTINUATION_DATE = #{record.supportDiscontinuationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.salesDiscontinuationDate != null">
+        SALES_DISCONTINUATION_DATE = #{record.salesDiscontinuationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.salesDiscWhenNotAvail != null">
+        SALES_DISC_WHEN_NOT_AVAIL = #{record.salesDiscWhenNotAvail,jdbcType=CHAR},
+      </if>
+      <if test="record.internalName != null">
+        INTERNAL_NAME = #{record.internalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        BRAND_NAME = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comments != null">
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceDetailText != null">
+        PRICE_DETAIL_TEXT = #{record.priceDetailText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallImageUrl != null">
+        SMALL_IMAGE_URL = #{record.smallImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediumImageUrl != null">
+        MEDIUM_IMAGE_URL = #{record.mediumImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.largeImageUrl != null">
+        LARGE_IMAGE_URL = #{record.largeImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailImageUrl != null">
+        DETAIL_IMAGE_URL = #{record.detailImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalImageUrl != null">
+        ORIGINAL_IMAGE_URL = #{record.originalImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailScreen != null">
+        DETAIL_SCREEN = #{record.detailScreen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryMessage != null">
+        INVENTORY_MESSAGE = #{record.inventoryMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryItemTypeId != null">
+        INVENTORY_ITEM_TYPE_ID = #{record.inventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requireInventory != null">
+        REQUIRE_INVENTORY = #{record.requireInventory,jdbcType=CHAR},
+      </if>
+      <if test="record.quantityUomId != null">
+        QUANTITY_UOM_ID = #{record.quantityUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantityIncluded != null">
+        QUANTITY_INCLUDED = #{record.quantityIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="record.piecesIncluded != null">
+        PIECES_INCLUDED = #{record.piecesIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="record.requireAmount != null">
+        REQUIRE_AMOUNT = #{record.requireAmount,jdbcType=CHAR},
+      </if>
+      <if test="record.fixedAmount != null">
+        FIXED_AMOUNT = #{record.fixedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.amountUomTypeId != null">
+        AMOUNT_UOM_TYPE_ID = #{record.amountUomTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weightUomId != null">
+        WEIGHT_UOM_ID = #{record.weightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingWeight != null">
+        SHIPPING_WEIGHT = #{record.shippingWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.productWeight != null">
+        PRODUCT_WEIGHT = #{record.productWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.heightUomId != null">
+        HEIGHT_UOM_ID = #{record.heightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productHeight != null">
+        PRODUCT_HEIGHT = #{record.productHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shippingHeight != null">
+        SHIPPING_HEIGHT = #{record.shippingHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.widthUomId != null">
+        WIDTH_UOM_ID = #{record.widthUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productWidth != null">
+        PRODUCT_WIDTH = #{record.productWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shippingWidth != null">
+        SHIPPING_WIDTH = #{record.shippingWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="record.depthUomId != null">
+        DEPTH_UOM_ID = #{record.depthUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDepth != null">
+        PRODUCT_DEPTH = #{record.productDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shippingDepth != null">
+        SHIPPING_DEPTH = #{record.shippingDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="record.diameterUomId != null">
+        DIAMETER_UOM_ID = #{record.diameterUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDiameter != null">
+        PRODUCT_DIAMETER = #{record.productDiameter,jdbcType=DECIMAL},
+      </if>
+      <if test="record.productRating != null">
+        PRODUCT_RATING = #{record.productRating,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ratingTypeEnum != null">
+        RATING_TYPE_ENUM = #{record.ratingTypeEnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnable != null">
+        RETURNABLE = #{record.returnable,jdbcType=CHAR},
+      </if>
+      <if test="record.taxable != null">
+        TAXABLE = #{record.taxable,jdbcType=CHAR},
+      </if>
+      <if test="record.chargeShipping != null">
+        CHARGE_SHIPPING = #{record.chargeShipping,jdbcType=CHAR},
+      </if>
+      <if test="record.autoCreateKeywords != null">
+        AUTO_CREATE_KEYWORDS = #{record.autoCreateKeywords,jdbcType=CHAR},
+      </if>
+      <if test="record.includeInPromotions != null">
+        INCLUDE_IN_PROMOTIONS = #{record.includeInPromotions,jdbcType=CHAR},
+      </if>
+      <if test="record.isVirtual != null">
+        IS_VIRTUAL = #{record.isVirtual,jdbcType=CHAR},
+      </if>
+      <if test="record.isVariant != null">
+        IS_VARIANT = #{record.isVariant,jdbcType=CHAR},
+      </if>
+      <if test="record.virtualVariantMethodEnum != null">
+        VIRTUAL_VARIANT_METHOD_ENUM = #{record.virtualVariantMethodEnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originGeoId != null">
+        ORIGIN_GEO_ID = #{record.originGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requirementMethodEnumId != null">
+        REQUIREMENT_METHOD_ENUM_ID = #{record.requirementMethodEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billOfMaterialLevel != null">
+        BILL_OF_MATERIAL_LEVEL = #{record.billOfMaterialLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reservMaxPersons != null">
+        RESERV_MAX_PERSONS = #{record.reservMaxPersons,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reserv2ndPPPerc != null">
+        RESERV2ND_P_P_PERC = #{record.reserv2ndPPPerc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reservNthPPPerc != null">
+        RESERV_NTH_P_P_PERC = #{record.reservNthPPPerc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.configId != null">
+        CONFIG_ID = #{record.configId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDate != null">
+        CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN = #{record.createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastModifiedDate != null">
+        LAST_MODIFIED_DATE = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN = #{record.lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inShippingBox != null">
+        IN_SHIPPING_BOX = #{record.inShippingBox,jdbcType=CHAR},
+      </if>
+      <if test="record.defaultShipmentBoxTypeId != null">
+        DEFAULT_SHIPMENT_BOX_TYPE_ID = #{record.defaultShipmentBoxTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lotIdFilledIn != null">
+        LOT_ID_FILLED_IN = #{record.lotIdFilledIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderDecimalQuantity != null">
+        ORDER_DECIMAL_QUANTITY = #{record.orderDecimalQuantity,jdbcType=CHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      <if test="record.longDescription != null">
+        LONG_DESCRIPTION = #{record.longDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update product
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PRODUCT_TYPE_ID = #{record.productTypeId,jdbcType=VARCHAR},
+      PRIMARY_PRODUCT_CATEGORY_ID = #{record.primaryProductCategoryId,jdbcType=VARCHAR},
+      MANUFACTURER_PARTY_ID = #{record.manufacturerPartyId,jdbcType=VARCHAR},
+      FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      INTRODUCTION_DATE = #{record.introductionDate,jdbcType=TIMESTAMP},
+      RELEASE_DATE = #{record.releaseDate,jdbcType=TIMESTAMP},
+      SUPPORT_DISCONTINUATION_DATE = #{record.supportDiscontinuationDate,jdbcType=TIMESTAMP},
+      SALES_DISCONTINUATION_DATE = #{record.salesDiscontinuationDate,jdbcType=TIMESTAMP},
+      SALES_DISC_WHEN_NOT_AVAIL = #{record.salesDiscWhenNotAvail,jdbcType=CHAR},
+      INTERNAL_NAME = #{record.internalName,jdbcType=VARCHAR},
+      BRAND_NAME = #{record.brandName,jdbcType=VARCHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      PRICE_DETAIL_TEXT = #{record.priceDetailText,jdbcType=VARCHAR},
+      SMALL_IMAGE_URL = #{record.smallImageUrl,jdbcType=VARCHAR},
+      MEDIUM_IMAGE_URL = #{record.mediumImageUrl,jdbcType=VARCHAR},
+      LARGE_IMAGE_URL = #{record.largeImageUrl,jdbcType=VARCHAR},
+      DETAIL_IMAGE_URL = #{record.detailImageUrl,jdbcType=VARCHAR},
+      ORIGINAL_IMAGE_URL = #{record.originalImageUrl,jdbcType=VARCHAR},
+      DETAIL_SCREEN = #{record.detailScreen,jdbcType=VARCHAR},
+      INVENTORY_MESSAGE = #{record.inventoryMessage,jdbcType=VARCHAR},
+      INVENTORY_ITEM_TYPE_ID = #{record.inventoryItemTypeId,jdbcType=VARCHAR},
+      REQUIRE_INVENTORY = #{record.requireInventory,jdbcType=CHAR},
+      QUANTITY_UOM_ID = #{record.quantityUomId,jdbcType=VARCHAR},
+      QUANTITY_INCLUDED = #{record.quantityIncluded,jdbcType=DECIMAL},
+      PIECES_INCLUDED = #{record.piecesIncluded,jdbcType=DECIMAL},
+      REQUIRE_AMOUNT = #{record.requireAmount,jdbcType=CHAR},
+      FIXED_AMOUNT = #{record.fixedAmount,jdbcType=DECIMAL},
+      AMOUNT_UOM_TYPE_ID = #{record.amountUomTypeId,jdbcType=VARCHAR},
+      WEIGHT_UOM_ID = #{record.weightUomId,jdbcType=VARCHAR},
+      SHIPPING_WEIGHT = #{record.shippingWeight,jdbcType=DECIMAL},
+      PRODUCT_WEIGHT = #{record.productWeight,jdbcType=DECIMAL},
+      HEIGHT_UOM_ID = #{record.heightUomId,jdbcType=VARCHAR},
+      PRODUCT_HEIGHT = #{record.productHeight,jdbcType=DECIMAL},
+      SHIPPING_HEIGHT = #{record.shippingHeight,jdbcType=DECIMAL},
+      WIDTH_UOM_ID = #{record.widthUomId,jdbcType=VARCHAR},
+      PRODUCT_WIDTH = #{record.productWidth,jdbcType=DECIMAL},
+      SHIPPING_WIDTH = #{record.shippingWidth,jdbcType=DECIMAL},
+      DEPTH_UOM_ID = #{record.depthUomId,jdbcType=VARCHAR},
+      PRODUCT_DEPTH = #{record.productDepth,jdbcType=DECIMAL},
+      SHIPPING_DEPTH = #{record.shippingDepth,jdbcType=DECIMAL},
+      DIAMETER_UOM_ID = #{record.diameterUomId,jdbcType=VARCHAR},
+      PRODUCT_DIAMETER = #{record.productDiameter,jdbcType=DECIMAL},
+      PRODUCT_RATING = #{record.productRating,jdbcType=DECIMAL},
+      RATING_TYPE_ENUM = #{record.ratingTypeEnum,jdbcType=VARCHAR},
+      RETURNABLE = #{record.returnable,jdbcType=CHAR},
+      TAXABLE = #{record.taxable,jdbcType=CHAR},
+      CHARGE_SHIPPING = #{record.chargeShipping,jdbcType=CHAR},
+      AUTO_CREATE_KEYWORDS = #{record.autoCreateKeywords,jdbcType=CHAR},
+      INCLUDE_IN_PROMOTIONS = #{record.includeInPromotions,jdbcType=CHAR},
+      IS_VIRTUAL = #{record.isVirtual,jdbcType=CHAR},
+      IS_VARIANT = #{record.isVariant,jdbcType=CHAR},
+      VIRTUAL_VARIANT_METHOD_ENUM = #{record.virtualVariantMethodEnum,jdbcType=VARCHAR},
+      ORIGIN_GEO_ID = #{record.originGeoId,jdbcType=VARCHAR},
+      REQUIREMENT_METHOD_ENUM_ID = #{record.requirementMethodEnumId,jdbcType=VARCHAR},
+      BILL_OF_MATERIAL_LEVEL = #{record.billOfMaterialLevel,jdbcType=DECIMAL},
+      RESERV_MAX_PERSONS = #{record.reservMaxPersons,jdbcType=DECIMAL},
+      RESERV2ND_P_P_PERC = #{record.reserv2ndPPPerc,jdbcType=DECIMAL},
+      RESERV_NTH_P_P_PERC = #{record.reservNthPPPerc,jdbcType=DECIMAL},
+      CONFIG_ID = #{record.configId,jdbcType=VARCHAR},
+      CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      CREATED_BY_USER_LOGIN = #{record.createdByUserLogin,jdbcType=VARCHAR},
+      LAST_MODIFIED_DATE = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
+      LAST_MODIFIED_BY_USER_LOGIN = #{record.lastModifiedByUserLogin,jdbcType=VARCHAR},
+      IN_SHIPPING_BOX = #{record.inShippingBox,jdbcType=CHAR},
+      DEFAULT_SHIPMENT_BOX_TYPE_ID = #{record.defaultShipmentBoxTypeId,jdbcType=VARCHAR},
+      LOT_ID_FILLED_IN = #{record.lotIdFilledIn,jdbcType=VARCHAR},
+      ORDER_DECIMAL_QUANTITY = #{record.orderDecimalQuantity,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      LONG_DESCRIPTION = #{record.longDescription,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PRODUCT_TYPE_ID = #{record.productTypeId,jdbcType=VARCHAR},
+      PRIMARY_PRODUCT_CATEGORY_ID = #{record.primaryProductCategoryId,jdbcType=VARCHAR},
+      MANUFACTURER_PARTY_ID = #{record.manufacturerPartyId,jdbcType=VARCHAR},
+      FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      INTRODUCTION_DATE = #{record.introductionDate,jdbcType=TIMESTAMP},
+      RELEASE_DATE = #{record.releaseDate,jdbcType=TIMESTAMP},
+      SUPPORT_DISCONTINUATION_DATE = #{record.supportDiscontinuationDate,jdbcType=TIMESTAMP},
+      SALES_DISCONTINUATION_DATE = #{record.salesDiscontinuationDate,jdbcType=TIMESTAMP},
+      SALES_DISC_WHEN_NOT_AVAIL = #{record.salesDiscWhenNotAvail,jdbcType=CHAR},
+      INTERNAL_NAME = #{record.internalName,jdbcType=VARCHAR},
+      BRAND_NAME = #{record.brandName,jdbcType=VARCHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      PRICE_DETAIL_TEXT = #{record.priceDetailText,jdbcType=VARCHAR},
+      SMALL_IMAGE_URL = #{record.smallImageUrl,jdbcType=VARCHAR},
+      MEDIUM_IMAGE_URL = #{record.mediumImageUrl,jdbcType=VARCHAR},
+      LARGE_IMAGE_URL = #{record.largeImageUrl,jdbcType=VARCHAR},
+      DETAIL_IMAGE_URL = #{record.detailImageUrl,jdbcType=VARCHAR},
+      ORIGINAL_IMAGE_URL = #{record.originalImageUrl,jdbcType=VARCHAR},
+      DETAIL_SCREEN = #{record.detailScreen,jdbcType=VARCHAR},
+      INVENTORY_MESSAGE = #{record.inventoryMessage,jdbcType=VARCHAR},
+      INVENTORY_ITEM_TYPE_ID = #{record.inventoryItemTypeId,jdbcType=VARCHAR},
+      REQUIRE_INVENTORY = #{record.requireInventory,jdbcType=CHAR},
+      QUANTITY_UOM_ID = #{record.quantityUomId,jdbcType=VARCHAR},
+      QUANTITY_INCLUDED = #{record.quantityIncluded,jdbcType=DECIMAL},
+      PIECES_INCLUDED = #{record.piecesIncluded,jdbcType=DECIMAL},
+      REQUIRE_AMOUNT = #{record.requireAmount,jdbcType=CHAR},
+      FIXED_AMOUNT = #{record.fixedAmount,jdbcType=DECIMAL},
+      AMOUNT_UOM_TYPE_ID = #{record.amountUomTypeId,jdbcType=VARCHAR},
+      WEIGHT_UOM_ID = #{record.weightUomId,jdbcType=VARCHAR},
+      SHIPPING_WEIGHT = #{record.shippingWeight,jdbcType=DECIMAL},
+      PRODUCT_WEIGHT = #{record.productWeight,jdbcType=DECIMAL},
+      HEIGHT_UOM_ID = #{record.heightUomId,jdbcType=VARCHAR},
+      PRODUCT_HEIGHT = #{record.productHeight,jdbcType=DECIMAL},
+      SHIPPING_HEIGHT = #{record.shippingHeight,jdbcType=DECIMAL},
+      WIDTH_UOM_ID = #{record.widthUomId,jdbcType=VARCHAR},
+      PRODUCT_WIDTH = #{record.productWidth,jdbcType=DECIMAL},
+      SHIPPING_WIDTH = #{record.shippingWidth,jdbcType=DECIMAL},
+      DEPTH_UOM_ID = #{record.depthUomId,jdbcType=VARCHAR},
+      PRODUCT_DEPTH = #{record.productDepth,jdbcType=DECIMAL},
+      SHIPPING_DEPTH = #{record.shippingDepth,jdbcType=DECIMAL},
+      DIAMETER_UOM_ID = #{record.diameterUomId,jdbcType=VARCHAR},
+      PRODUCT_DIAMETER = #{record.productDiameter,jdbcType=DECIMAL},
+      PRODUCT_RATING = #{record.productRating,jdbcType=DECIMAL},
+      RATING_TYPE_ENUM = #{record.ratingTypeEnum,jdbcType=VARCHAR},
+      RETURNABLE = #{record.returnable,jdbcType=CHAR},
+      TAXABLE = #{record.taxable,jdbcType=CHAR},
+      CHARGE_SHIPPING = #{record.chargeShipping,jdbcType=CHAR},
+      AUTO_CREATE_KEYWORDS = #{record.autoCreateKeywords,jdbcType=CHAR},
+      INCLUDE_IN_PROMOTIONS = #{record.includeInPromotions,jdbcType=CHAR},
+      IS_VIRTUAL = #{record.isVirtual,jdbcType=CHAR},
+      IS_VARIANT = #{record.isVariant,jdbcType=CHAR},
+      VIRTUAL_VARIANT_METHOD_ENUM = #{record.virtualVariantMethodEnum,jdbcType=VARCHAR},
+      ORIGIN_GEO_ID = #{record.originGeoId,jdbcType=VARCHAR},
+      REQUIREMENT_METHOD_ENUM_ID = #{record.requirementMethodEnumId,jdbcType=VARCHAR},
+      BILL_OF_MATERIAL_LEVEL = #{record.billOfMaterialLevel,jdbcType=DECIMAL},
+      RESERV_MAX_PERSONS = #{record.reservMaxPersons,jdbcType=DECIMAL},
+      RESERV2ND_P_P_PERC = #{record.reserv2ndPPPerc,jdbcType=DECIMAL},
+      RESERV_NTH_P_P_PERC = #{record.reservNthPPPerc,jdbcType=DECIMAL},
+      CONFIG_ID = #{record.configId,jdbcType=VARCHAR},
+      CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      CREATED_BY_USER_LOGIN = #{record.createdByUserLogin,jdbcType=VARCHAR},
+      LAST_MODIFIED_DATE = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
+      LAST_MODIFIED_BY_USER_LOGIN = #{record.lastModifiedByUserLogin,jdbcType=VARCHAR},
+      IN_SHIPPING_BOX = #{record.inShippingBox,jdbcType=CHAR},
+      DEFAULT_SHIPMENT_BOX_TYPE_ID = #{record.defaultShipmentBoxTypeId,jdbcType=VARCHAR},
+      LOT_ID_FILLED_IN = #{record.lotIdFilledIn,jdbcType=VARCHAR},
+      ORDER_DECIMAL_QUANTITY = #{record.orderDecimalQuantity,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.product.model.Product">
+    update product
+    <set>
+      <if test="productTypeId != null">
+        PRODUCT_TYPE_ID = #{productTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryProductCategoryId != null">
+        PRIMARY_PRODUCT_CATEGORY_ID = #{primaryProductCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturerPartyId != null">
+        MANUFACTURER_PARTY_ID = #{manufacturerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityId != null">
+        FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="introductionDate != null">
+        INTRODUCTION_DATE = #{introductionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseDate != null">
+        RELEASE_DATE = #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supportDiscontinuationDate != null">
+        SUPPORT_DISCONTINUATION_DATE = #{supportDiscontinuationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesDiscontinuationDate != null">
+        SALES_DISCONTINUATION_DATE = #{salesDiscontinuationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesDiscWhenNotAvail != null">
+        SALES_DISC_WHEN_NOT_AVAIL = #{salesDiscWhenNotAvail,jdbcType=CHAR},
+      </if>
+      <if test="internalName != null">
+        INTERNAL_NAME = #{internalName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDetailText != null">
+        PRICE_DETAIL_TEXT = #{priceDetailText,jdbcType=VARCHAR},
+      </if>
+      <if test="smallImageUrl != null">
+        SMALL_IMAGE_URL = #{smallImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumImageUrl != null">
+        MEDIUM_IMAGE_URL = #{mediumImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="largeImageUrl != null">
+        LARGE_IMAGE_URL = #{largeImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailImageUrl != null">
+        DETAIL_IMAGE_URL = #{detailImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="originalImageUrl != null">
+        ORIGINAL_IMAGE_URL = #{originalImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailScreen != null">
+        DETAIL_SCREEN = #{detailScreen,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryMessage != null">
+        INVENTORY_MESSAGE = #{inventoryMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryItemTypeId != null">
+        INVENTORY_ITEM_TYPE_ID = #{inventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="requireInventory != null">
+        REQUIRE_INVENTORY = #{requireInventory,jdbcType=CHAR},
+      </if>
+      <if test="quantityUomId != null">
+        QUANTITY_UOM_ID = #{quantityUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="quantityIncluded != null">
+        QUANTITY_INCLUDED = #{quantityIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="piecesIncluded != null">
+        PIECES_INCLUDED = #{piecesIncluded,jdbcType=DECIMAL},
+      </if>
+      <if test="requireAmount != null">
+        REQUIRE_AMOUNT = #{requireAmount,jdbcType=CHAR},
+      </if>
+      <if test="fixedAmount != null">
+        FIXED_AMOUNT = #{fixedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="amountUomTypeId != null">
+        AMOUNT_UOM_TYPE_ID = #{amountUomTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="weightUomId != null">
+        WEIGHT_UOM_ID = #{weightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingWeight != null">
+        SHIPPING_WEIGHT = #{shippingWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="productWeight != null">
+        PRODUCT_WEIGHT = #{productWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="heightUomId != null">
+        HEIGHT_UOM_ID = #{heightUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productHeight != null">
+        PRODUCT_HEIGHT = #{productHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingHeight != null">
+        SHIPPING_HEIGHT = #{shippingHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="widthUomId != null">
+        WIDTH_UOM_ID = #{widthUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productWidth != null">
+        PRODUCT_WIDTH = #{productWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingWidth != null">
+        SHIPPING_WIDTH = #{shippingWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="depthUomId != null">
+        DEPTH_UOM_ID = #{depthUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productDepth != null">
+        PRODUCT_DEPTH = #{productDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingDepth != null">
+        SHIPPING_DEPTH = #{shippingDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="diameterUomId != null">
+        DIAMETER_UOM_ID = #{diameterUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="productDiameter != null">
+        PRODUCT_DIAMETER = #{productDiameter,jdbcType=DECIMAL},
+      </if>
+      <if test="productRating != null">
+        PRODUCT_RATING = #{productRating,jdbcType=DECIMAL},
+      </if>
+      <if test="ratingTypeEnum != null">
+        RATING_TYPE_ENUM = #{ratingTypeEnum,jdbcType=VARCHAR},
+      </if>
+      <if test="returnable != null">
+        RETURNABLE = #{returnable,jdbcType=CHAR},
+      </if>
+      <if test="taxable != null">
+        TAXABLE = #{taxable,jdbcType=CHAR},
+      </if>
+      <if test="chargeShipping != null">
+        CHARGE_SHIPPING = #{chargeShipping,jdbcType=CHAR},
+      </if>
+      <if test="autoCreateKeywords != null">
+        AUTO_CREATE_KEYWORDS = #{autoCreateKeywords,jdbcType=CHAR},
+      </if>
+      <if test="includeInPromotions != null">
+        INCLUDE_IN_PROMOTIONS = #{includeInPromotions,jdbcType=CHAR},
+      </if>
+      <if test="isVirtual != null">
+        IS_VIRTUAL = #{isVirtual,jdbcType=CHAR},
+      </if>
+      <if test="isVariant != null">
+        IS_VARIANT = #{isVariant,jdbcType=CHAR},
+      </if>
+      <if test="virtualVariantMethodEnum != null">
+        VIRTUAL_VARIANT_METHOD_ENUM = #{virtualVariantMethodEnum,jdbcType=VARCHAR},
+      </if>
+      <if test="originGeoId != null">
+        ORIGIN_GEO_ID = #{originGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="requirementMethodEnumId != null">
+        REQUIREMENT_METHOD_ENUM_ID = #{requirementMethodEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="billOfMaterialLevel != null">
+        BILL_OF_MATERIAL_LEVEL = #{billOfMaterialLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="reservMaxPersons != null">
+        RESERV_MAX_PERSONS = #{reservMaxPersons,jdbcType=DECIMAL},
+      </if>
+      <if test="reserv2ndPPPerc != null">
+        RESERV2ND_P_P_PERC = #{reserv2ndPPPerc,jdbcType=DECIMAL},
+      </if>
+      <if test="reservNthPPPerc != null">
+        RESERV_NTH_P_P_PERC = #{reservNthPPPerc,jdbcType=DECIMAL},
+      </if>
+      <if test="configId != null">
+        CONFIG_ID = #{configId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN = #{createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedDate != null">
+        LAST_MODIFIED_DATE = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN = #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="inShippingBox != null">
+        IN_SHIPPING_BOX = #{inShippingBox,jdbcType=CHAR},
+      </if>
+      <if test="defaultShipmentBoxTypeId != null">
+        DEFAULT_SHIPMENT_BOX_TYPE_ID = #{defaultShipmentBoxTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="lotIdFilledIn != null">
+        LOT_ID_FILLED_IN = #{lotIdFilledIn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDecimalQuantity != null">
+        ORDER_DECIMAL_QUANTITY = #{orderDecimalQuantity,jdbcType=CHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      <if test="longDescription != null">
+        LONG_DESCRIPTION = #{longDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.efbiz.product.product.model.Product">
+    update product
+    set PRODUCT_TYPE_ID = #{productTypeId,jdbcType=VARCHAR},
+      PRIMARY_PRODUCT_CATEGORY_ID = #{primaryProductCategoryId,jdbcType=VARCHAR},
+      MANUFACTURER_PARTY_ID = #{manufacturerPartyId,jdbcType=VARCHAR},
+      FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      INTRODUCTION_DATE = #{introductionDate,jdbcType=TIMESTAMP},
+      RELEASE_DATE = #{releaseDate,jdbcType=TIMESTAMP},
+      SUPPORT_DISCONTINUATION_DATE = #{supportDiscontinuationDate,jdbcType=TIMESTAMP},
+      SALES_DISCONTINUATION_DATE = #{salesDiscontinuationDate,jdbcType=TIMESTAMP},
+      SALES_DISC_WHEN_NOT_AVAIL = #{salesDiscWhenNotAvail,jdbcType=CHAR},
+      INTERNAL_NAME = #{internalName,jdbcType=VARCHAR},
+      BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      PRICE_DETAIL_TEXT = #{priceDetailText,jdbcType=VARCHAR},
+      SMALL_IMAGE_URL = #{smallImageUrl,jdbcType=VARCHAR},
+      MEDIUM_IMAGE_URL = #{mediumImageUrl,jdbcType=VARCHAR},
+      LARGE_IMAGE_URL = #{largeImageUrl,jdbcType=VARCHAR},
+      DETAIL_IMAGE_URL = #{detailImageUrl,jdbcType=VARCHAR},
+      ORIGINAL_IMAGE_URL = #{originalImageUrl,jdbcType=VARCHAR},
+      DETAIL_SCREEN = #{detailScreen,jdbcType=VARCHAR},
+      INVENTORY_MESSAGE = #{inventoryMessage,jdbcType=VARCHAR},
+      INVENTORY_ITEM_TYPE_ID = #{inventoryItemTypeId,jdbcType=VARCHAR},
+      REQUIRE_INVENTORY = #{requireInventory,jdbcType=CHAR},
+      QUANTITY_UOM_ID = #{quantityUomId,jdbcType=VARCHAR},
+      QUANTITY_INCLUDED = #{quantityIncluded,jdbcType=DECIMAL},
+      PIECES_INCLUDED = #{piecesIncluded,jdbcType=DECIMAL},
+      REQUIRE_AMOUNT = #{requireAmount,jdbcType=CHAR},
+      FIXED_AMOUNT = #{fixedAmount,jdbcType=DECIMAL},
+      AMOUNT_UOM_TYPE_ID = #{amountUomTypeId,jdbcType=VARCHAR},
+      WEIGHT_UOM_ID = #{weightUomId,jdbcType=VARCHAR},
+      SHIPPING_WEIGHT = #{shippingWeight,jdbcType=DECIMAL},
+      PRODUCT_WEIGHT = #{productWeight,jdbcType=DECIMAL},
+      HEIGHT_UOM_ID = #{heightUomId,jdbcType=VARCHAR},
+      PRODUCT_HEIGHT = #{productHeight,jdbcType=DECIMAL},
+      SHIPPING_HEIGHT = #{shippingHeight,jdbcType=DECIMAL},
+      WIDTH_UOM_ID = #{widthUomId,jdbcType=VARCHAR},
+      PRODUCT_WIDTH = #{productWidth,jdbcType=DECIMAL},
+      SHIPPING_WIDTH = #{shippingWidth,jdbcType=DECIMAL},
+      DEPTH_UOM_ID = #{depthUomId,jdbcType=VARCHAR},
+      PRODUCT_DEPTH = #{productDepth,jdbcType=DECIMAL},
+      SHIPPING_DEPTH = #{shippingDepth,jdbcType=DECIMAL},
+      DIAMETER_UOM_ID = #{diameterUomId,jdbcType=VARCHAR},
+      PRODUCT_DIAMETER = #{productDiameter,jdbcType=DECIMAL},
+      PRODUCT_RATING = #{productRating,jdbcType=DECIMAL},
+      RATING_TYPE_ENUM = #{ratingTypeEnum,jdbcType=VARCHAR},
+      RETURNABLE = #{returnable,jdbcType=CHAR},
+      TAXABLE = #{taxable,jdbcType=CHAR},
+      CHARGE_SHIPPING = #{chargeShipping,jdbcType=CHAR},
+      AUTO_CREATE_KEYWORDS = #{autoCreateKeywords,jdbcType=CHAR},
+      INCLUDE_IN_PROMOTIONS = #{includeInPromotions,jdbcType=CHAR},
+      IS_VIRTUAL = #{isVirtual,jdbcType=CHAR},
+      IS_VARIANT = #{isVariant,jdbcType=CHAR},
+      VIRTUAL_VARIANT_METHOD_ENUM = #{virtualVariantMethodEnum,jdbcType=VARCHAR},
+      ORIGIN_GEO_ID = #{originGeoId,jdbcType=VARCHAR},
+      REQUIREMENT_METHOD_ENUM_ID = #{requirementMethodEnumId,jdbcType=VARCHAR},
+      BILL_OF_MATERIAL_LEVEL = #{billOfMaterialLevel,jdbcType=DECIMAL},
+      RESERV_MAX_PERSONS = #{reservMaxPersons,jdbcType=DECIMAL},
+      RESERV2ND_P_P_PERC = #{reserv2ndPPPerc,jdbcType=DECIMAL},
+      RESERV_NTH_P_P_PERC = #{reservNthPPPerc,jdbcType=DECIMAL},
+      CONFIG_ID = #{configId,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      CREATED_BY_USER_LOGIN = #{createdByUserLogin,jdbcType=VARCHAR},
+      LAST_MODIFIED_DATE = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      LAST_MODIFIED_BY_USER_LOGIN = #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      IN_SHIPPING_BOX = #{inShippingBox,jdbcType=CHAR},
+      DEFAULT_SHIPMENT_BOX_TYPE_ID = #{defaultShipmentBoxTypeId,jdbcType=VARCHAR},
+      LOT_ID_FILLED_IN = #{lotIdFilledIn,jdbcType=VARCHAR},
+      ORDER_DECIMAL_QUANTITY = #{orderDecimalQuantity,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      LONG_DESCRIPTION = #{longDescription,jdbcType=LONGVARCHAR}
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.product.model.Product">
+    update product
+    set PRODUCT_TYPE_ID = #{productTypeId,jdbcType=VARCHAR},
+      PRIMARY_PRODUCT_CATEGORY_ID = #{primaryProductCategoryId,jdbcType=VARCHAR},
+      MANUFACTURER_PARTY_ID = #{manufacturerPartyId,jdbcType=VARCHAR},
+      FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      INTRODUCTION_DATE = #{introductionDate,jdbcType=TIMESTAMP},
+      RELEASE_DATE = #{releaseDate,jdbcType=TIMESTAMP},
+      SUPPORT_DISCONTINUATION_DATE = #{supportDiscontinuationDate,jdbcType=TIMESTAMP},
+      SALES_DISCONTINUATION_DATE = #{salesDiscontinuationDate,jdbcType=TIMESTAMP},
+      SALES_DISC_WHEN_NOT_AVAIL = #{salesDiscWhenNotAvail,jdbcType=CHAR},
+      INTERNAL_NAME = #{internalName,jdbcType=VARCHAR},
+      BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      PRICE_DETAIL_TEXT = #{priceDetailText,jdbcType=VARCHAR},
+      SMALL_IMAGE_URL = #{smallImageUrl,jdbcType=VARCHAR},
+      MEDIUM_IMAGE_URL = #{mediumImageUrl,jdbcType=VARCHAR},
+      LARGE_IMAGE_URL = #{largeImageUrl,jdbcType=VARCHAR},
+      DETAIL_IMAGE_URL = #{detailImageUrl,jdbcType=VARCHAR},
+      ORIGINAL_IMAGE_URL = #{originalImageUrl,jdbcType=VARCHAR},
+      DETAIL_SCREEN = #{detailScreen,jdbcType=VARCHAR},
+      INVENTORY_MESSAGE = #{inventoryMessage,jdbcType=VARCHAR},
+      INVENTORY_ITEM_TYPE_ID = #{inventoryItemTypeId,jdbcType=VARCHAR},
+      REQUIRE_INVENTORY = #{requireInventory,jdbcType=CHAR},
+      QUANTITY_UOM_ID = #{quantityUomId,jdbcType=VARCHAR},
+      QUANTITY_INCLUDED = #{quantityIncluded,jdbcType=DECIMAL},
+      PIECES_INCLUDED = #{piecesIncluded,jdbcType=DECIMAL},
+      REQUIRE_AMOUNT = #{requireAmount,jdbcType=CHAR},
+      FIXED_AMOUNT = #{fixedAmount,jdbcType=DECIMAL},
+      AMOUNT_UOM_TYPE_ID = #{amountUomTypeId,jdbcType=VARCHAR},
+      WEIGHT_UOM_ID = #{weightUomId,jdbcType=VARCHAR},
+      SHIPPING_WEIGHT = #{shippingWeight,jdbcType=DECIMAL},
+      PRODUCT_WEIGHT = #{productWeight,jdbcType=DECIMAL},
+      HEIGHT_UOM_ID = #{heightUomId,jdbcType=VARCHAR},
+      PRODUCT_HEIGHT = #{productHeight,jdbcType=DECIMAL},
+      SHIPPING_HEIGHT = #{shippingHeight,jdbcType=DECIMAL},
+      WIDTH_UOM_ID = #{widthUomId,jdbcType=VARCHAR},
+      PRODUCT_WIDTH = #{productWidth,jdbcType=DECIMAL},
+      SHIPPING_WIDTH = #{shippingWidth,jdbcType=DECIMAL},
+      DEPTH_UOM_ID = #{depthUomId,jdbcType=VARCHAR},
+      PRODUCT_DEPTH = #{productDepth,jdbcType=DECIMAL},
+      SHIPPING_DEPTH = #{shippingDepth,jdbcType=DECIMAL},
+      DIAMETER_UOM_ID = #{diameterUomId,jdbcType=VARCHAR},
+      PRODUCT_DIAMETER = #{productDiameter,jdbcType=DECIMAL},
+      PRODUCT_RATING = #{productRating,jdbcType=DECIMAL},
+      RATING_TYPE_ENUM = #{ratingTypeEnum,jdbcType=VARCHAR},
+      RETURNABLE = #{returnable,jdbcType=CHAR},
+      TAXABLE = #{taxable,jdbcType=CHAR},
+      CHARGE_SHIPPING = #{chargeShipping,jdbcType=CHAR},
+      AUTO_CREATE_KEYWORDS = #{autoCreateKeywords,jdbcType=CHAR},
+      INCLUDE_IN_PROMOTIONS = #{includeInPromotions,jdbcType=CHAR},
+      IS_VIRTUAL = #{isVirtual,jdbcType=CHAR},
+      IS_VARIANT = #{isVariant,jdbcType=CHAR},
+      VIRTUAL_VARIANT_METHOD_ENUM = #{virtualVariantMethodEnum,jdbcType=VARCHAR},
+      ORIGIN_GEO_ID = #{originGeoId,jdbcType=VARCHAR},
+      REQUIREMENT_METHOD_ENUM_ID = #{requirementMethodEnumId,jdbcType=VARCHAR},
+      BILL_OF_MATERIAL_LEVEL = #{billOfMaterialLevel,jdbcType=DECIMAL},
+      RESERV_MAX_PERSONS = #{reservMaxPersons,jdbcType=DECIMAL},
+      RESERV2ND_P_P_PERC = #{reserv2ndPPPerc,jdbcType=DECIMAL},
+      RESERV_NTH_P_P_PERC = #{reservNthPPPerc,jdbcType=DECIMAL},
+      CONFIG_ID = #{configId,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      CREATED_BY_USER_LOGIN = #{createdByUserLogin,jdbcType=VARCHAR},
+      LAST_MODIFIED_DATE = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      LAST_MODIFIED_BY_USER_LOGIN = #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      IN_SHIPPING_BOX = #{inShippingBox,jdbcType=CHAR},
+      DEFAULT_SHIPMENT_BOX_TYPE_ID = #{defaultShipmentBoxTypeId,jdbcType=VARCHAR},
+      LOT_ID_FILLED_IN = #{lotIdFilledIn,jdbcType=VARCHAR},
+      ORDER_DECIMAL_QUANTITY = #{orderDecimalQuantity,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </update>
+</mapper>

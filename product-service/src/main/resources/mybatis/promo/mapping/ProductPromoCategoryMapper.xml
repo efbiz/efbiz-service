@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.promo.dao.ProductPromoCategoryMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.promo.model.ProductPromoCategory">
+    <id column="PRODUCT_PROMO_ID" jdbcType="VARCHAR" property="productPromoId" />
+    <id column="PRODUCT_PROMO_RULE_ID" jdbcType="VARCHAR" property="productPromoRuleId" />
+    <id column="PRODUCT_PROMO_ACTION_SEQ_ID" jdbcType="VARCHAR" property="productPromoActionSeqId" />
+    <id column="PRODUCT_PROMO_COND_SEQ_ID" jdbcType="VARCHAR" property="productPromoCondSeqId" />
+    <id column="PRODUCT_CATEGORY_ID" jdbcType="VARCHAR" property="productCategoryId" />
+    <id column="AND_GROUP_ID" jdbcType="VARCHAR" property="andGroupId" />
+    <result column="PRODUCT_PROMO_APPL_ENUM_ID" jdbcType="VARCHAR" property="productPromoApplEnumId" />
+    <result column="INCLUDE_SUB_CATEGORIES" jdbcType="CHAR" property="includeSubCategories" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_PROMO_ID, PRODUCT_PROMO_RULE_ID, PRODUCT_PROMO_ACTION_SEQ_ID, PRODUCT_PROMO_COND_SEQ_ID, 
+    PRODUCT_CATEGORY_ID, AND_GROUP_ID, PRODUCT_PROMO_APPL_ENUM_ID, INCLUDE_SUB_CATEGORIES, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.promo.model.ProductPromoCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_promo_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.promo.model.ProductPromoCategoryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_promo_category
+    where PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_RULE_ID = #{productPromoRuleId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_ACTION_SEQ_ID = #{productPromoActionSeqId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_COND_SEQ_ID = #{productPromoCondSeqId,jdbcType=VARCHAR}
+      and PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and AND_GROUP_ID = #{andGroupId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.promo.model.ProductPromoCategoryKey">
+    delete from product_promo_category
+    where PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_RULE_ID = #{productPromoRuleId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_ACTION_SEQ_ID = #{productPromoActionSeqId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_COND_SEQ_ID = #{productPromoCondSeqId,jdbcType=VARCHAR}
+      and PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and AND_GROUP_ID = #{andGroupId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.promo.model.ProductPromoCategoryExample">
+    delete from product_promo_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.promo.model.ProductPromoCategory">
+    insert into product_promo_category (PRODUCT_PROMO_ID, PRODUCT_PROMO_RULE_ID, 
+      PRODUCT_PROMO_ACTION_SEQ_ID, PRODUCT_PROMO_COND_SEQ_ID, 
+      PRODUCT_CATEGORY_ID, AND_GROUP_ID, PRODUCT_PROMO_APPL_ENUM_ID, 
+      INCLUDE_SUB_CATEGORIES, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productPromoId,jdbcType=VARCHAR}, #{productPromoRuleId,jdbcType=VARCHAR}, 
+      #{productPromoActionSeqId,jdbcType=VARCHAR}, #{productPromoCondSeqId,jdbcType=VARCHAR}, 
+      #{productCategoryId,jdbcType=VARCHAR}, #{andGroupId,jdbcType=VARCHAR}, #{productPromoApplEnumId,jdbcType=VARCHAR}, 
+      #{includeSubCategories,jdbcType=CHAR}, NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.promo.model.ProductPromoCategory">
+    insert into product_promo_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productPromoId != null">
+        PRODUCT_PROMO_ID,
+      </if>
+      <if test="productPromoRuleId != null">
+        PRODUCT_PROMO_RULE_ID,
+      </if>
+      <if test="productPromoActionSeqId != null">
+        PRODUCT_PROMO_ACTION_SEQ_ID,
+      </if>
+      <if test="productPromoCondSeqId != null">
+        PRODUCT_PROMO_COND_SEQ_ID,
+      </if>
+      <if test="productCategoryId != null">
+        PRODUCT_CATEGORY_ID,
+      </if>
+      <if test="andGroupId != null">
+        AND_GROUP_ID,
+      </if>
+      <if test="productPromoApplEnumId != null">
+        PRODUCT_PROMO_APPL_ENUM_ID,
+      </if>
+      <if test="includeSubCategories != null">
+        INCLUDE_SUB_CATEGORIES,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productPromoId != null">
+        #{productPromoId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPromoRuleId != null">
+        #{productPromoRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPromoActionSeqId != null">
+        #{productPromoActionSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPromoCondSeqId != null">
+        #{productPromoCondSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="productCategoryId != null">
+        #{productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="andGroupId != null">
+        #{andGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPromoApplEnumId != null">
+        #{productPromoApplEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="includeSubCategories != null">
+        #{includeSubCategories,jdbcType=CHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.promo.model.ProductPromoCategoryExample" resultType="java.lang.Long">
+    select count(*) from product_promo_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_promo_category
+    <set>
+      <if test="record.productPromoId != null">
+        PRODUCT_PROMO_ID = #{record.productPromoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPromoRuleId != null">
+        PRODUCT_PROMO_RULE_ID = #{record.productPromoRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPromoActionSeqId != null">
+        PRODUCT_PROMO_ACTION_SEQ_ID = #{record.productPromoActionSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPromoCondSeqId != null">
+        PRODUCT_PROMO_COND_SEQ_ID = #{record.productPromoCondSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productCategoryId != null">
+        PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.andGroupId != null">
+        AND_GROUP_ID = #{record.andGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPromoApplEnumId != null">
+        PRODUCT_PROMO_APPL_ENUM_ID = #{record.productPromoApplEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.includeSubCategories != null">
+        INCLUDE_SUB_CATEGORIES = #{record.includeSubCategories,jdbcType=CHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_promo_category
+    set PRODUCT_PROMO_ID = #{record.productPromoId,jdbcType=VARCHAR},
+      PRODUCT_PROMO_RULE_ID = #{record.productPromoRuleId,jdbcType=VARCHAR},
+      PRODUCT_PROMO_ACTION_SEQ_ID = #{record.productPromoActionSeqId,jdbcType=VARCHAR},
+      PRODUCT_PROMO_COND_SEQ_ID = #{record.productPromoCondSeqId,jdbcType=VARCHAR},
+      PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      AND_GROUP_ID = #{record.andGroupId,jdbcType=VARCHAR},
+      PRODUCT_PROMO_APPL_ENUM_ID = #{record.productPromoApplEnumId,jdbcType=VARCHAR},
+      INCLUDE_SUB_CATEGORIES = #{record.includeSubCategories,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.promo.model.ProductPromoCategory">
+    update product_promo_category
+    <set>
+      <if test="productPromoApplEnumId != null">
+        PRODUCT_PROMO_APPL_ENUM_ID = #{productPromoApplEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="includeSubCategories != null">
+        INCLUDE_SUB_CATEGORIES = #{includeSubCategories,jdbcType=CHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_RULE_ID = #{productPromoRuleId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_ACTION_SEQ_ID = #{productPromoActionSeqId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_COND_SEQ_ID = #{productPromoCondSeqId,jdbcType=VARCHAR}
+      and PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and AND_GROUP_ID = #{andGroupId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.promo.model.ProductPromoCategory">
+    update product_promo_category
+    set PRODUCT_PROMO_APPL_ENUM_ID = #{productPromoApplEnumId,jdbcType=VARCHAR},
+      INCLUDE_SUB_CATEGORIES = #{includeSubCategories,jdbcType=CHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_RULE_ID = #{productPromoRuleId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_ACTION_SEQ_ID = #{productPromoActionSeqId,jdbcType=VARCHAR}
+      and PRODUCT_PROMO_COND_SEQ_ID = #{productPromoCondSeqId,jdbcType=VARCHAR}
+      and PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and AND_GROUP_ID = #{andGroupId,jdbcType=VARCHAR}
+  </update>
+</mapper>

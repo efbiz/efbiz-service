@@ -1,0 +1,1459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.store.dao.ProductStoreMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.store.model.ProductStore">
+    <id column="PRODUCT_STORE_ID" jdbcType="VARCHAR" property="productStoreId" />
+    <result column="PRIMARY_STORE_GROUP_ID" jdbcType="VARCHAR" property="primaryStoreGroupId" />
+    <result column="STORE_NAME" jdbcType="VARCHAR" property="storeName" />
+    <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="SUBTITLE" jdbcType="VARCHAR" property="subtitle" />
+    <result column="PAY_TO_PARTY_ID" jdbcType="VARCHAR" property="payToPartyId" />
+    <result column="DAYS_TO_CANCEL_NON_PAY" jdbcType="DECIMAL" property="daysToCancelNonPay" />
+    <result column="MANUAL_AUTH_IS_CAPTURE" jdbcType="CHAR" property="manualAuthIsCapture" />
+    <result column="PRORATE_SHIPPING" jdbcType="CHAR" property="prorateShipping" />
+    <result column="PRORATE_TAXES" jdbcType="CHAR" property="prorateTaxes" />
+    <result column="VIEW_CART_ON_ADD" jdbcType="CHAR" property="viewCartOnAdd" />
+    <result column="AUTO_SAVE_CART" jdbcType="CHAR" property="autoSaveCart" />
+    <result column="AUTO_APPROVE_REVIEWS" jdbcType="CHAR" property="autoApproveReviews" />
+    <result column="IS_DEMO_STORE" jdbcType="CHAR" property="isDemoStore" />
+    <result column="IS_IMMEDIATELY_FULFILLED" jdbcType="CHAR" property="isImmediatelyFulfilled" />
+    <result column="INVENTORY_FACILITY_ID" jdbcType="VARCHAR" property="inventoryFacilityId" />
+    <result column="ONE_INVENTORY_FACILITY" jdbcType="CHAR" property="oneInventoryFacility" />
+    <result column="CHECK_INVENTORY" jdbcType="CHAR" property="checkInventory" />
+    <result column="RESERVE_INVENTORY" jdbcType="CHAR" property="reserveInventory" />
+    <result column="RESERVE_ORDER_ENUM_ID" jdbcType="VARCHAR" property="reserveOrderEnumId" />
+    <result column="REQUIRE_INVENTORY" jdbcType="CHAR" property="requireInventory" />
+    <result column="BALANCE_RES_ON_ORDER_CREATION" jdbcType="CHAR" property="balanceResOnOrderCreation" />
+    <result column="REQUIREMENT_METHOD_ENUM_ID" jdbcType="VARCHAR" property="requirementMethodEnumId" />
+    <result column="ORDER_NUMBER_PREFIX" jdbcType="VARCHAR" property="orderNumberPrefix" />
+    <result column="DEFAULT_LOCALE_STRING" jdbcType="VARCHAR" property="defaultLocaleString" />
+    <result column="DEFAULT_CURRENCY_UOM_ID" jdbcType="VARCHAR" property="defaultCurrencyUomId" />
+    <result column="DEFAULT_TIME_ZONE_STRING" jdbcType="VARCHAR" property="defaultTimeZoneString" />
+    <result column="DEFAULT_SALES_CHANNEL_ENUM_ID" jdbcType="VARCHAR" property="defaultSalesChannelEnumId" />
+    <result column="ALLOW_PASSWORD" jdbcType="CHAR" property="allowPassword" />
+    <result column="DEFAULT_PASSWORD" jdbcType="VARCHAR" property="defaultPassword" />
+    <result column="EXPLODE_ORDER_ITEMS" jdbcType="CHAR" property="explodeOrderItems" />
+    <result column="CHECK_GC_BALANCE" jdbcType="CHAR" property="checkGcBalance" />
+    <result column="RETRY_FAILED_AUTHS" jdbcType="CHAR" property="retryFailedAuths" />
+    <result column="HEADER_APPROVED_STATUS" jdbcType="VARCHAR" property="headerApprovedStatus" />
+    <result column="ITEM_APPROVED_STATUS" jdbcType="VARCHAR" property="itemApprovedStatus" />
+    <result column="DIGITAL_ITEM_APPROVED_STATUS" jdbcType="VARCHAR" property="digitalItemApprovedStatus" />
+    <result column="HEADER_DECLINED_STATUS" jdbcType="VARCHAR" property="headerDeclinedStatus" />
+    <result column="ITEM_DECLINED_STATUS" jdbcType="VARCHAR" property="itemDeclinedStatus" />
+    <result column="HEADER_CANCEL_STATUS" jdbcType="VARCHAR" property="headerCancelStatus" />
+    <result column="ITEM_CANCEL_STATUS" jdbcType="VARCHAR" property="itemCancelStatus" />
+    <result column="AUTH_DECLINED_MESSAGE" jdbcType="VARCHAR" property="authDeclinedMessage" />
+    <result column="AUTH_FRAUD_MESSAGE" jdbcType="VARCHAR" property="authFraudMessage" />
+    <result column="AUTH_ERROR_MESSAGE" jdbcType="VARCHAR" property="authErrorMessage" />
+    <result column="VISUAL_THEME_ID" jdbcType="VARCHAR" property="visualThemeId" />
+    <result column="STORE_CREDIT_ACCOUNT_ENUM_ID" jdbcType="VARCHAR" property="storeCreditAccountEnumId" />
+    <result column="USE_PRIMARY_EMAIL_USERNAME" jdbcType="CHAR" property="usePrimaryEmailUsername" />
+    <result column="REQUIRE_CUSTOMER_ROLE" jdbcType="CHAR" property="requireCustomerRole" />
+    <result column="AUTO_INVOICE_DIGITAL_ITEMS" jdbcType="CHAR" property="autoInvoiceDigitalItems" />
+    <result column="REQ_SHIP_ADDR_FOR_DIG_ITEMS" jdbcType="CHAR" property="reqShipAddrForDigItems" />
+    <result column="SHOW_CHECKOUT_GIFT_OPTIONS" jdbcType="CHAR" property="showCheckoutGiftOptions" />
+    <result column="SELECT_PAYMENT_TYPE_PER_ITEM" jdbcType="CHAR" property="selectPaymentTypePerItem" />
+    <result column="SHOW_PRICES_WITH_VAT_TAX" jdbcType="CHAR" property="showPricesWithVatTax" />
+    <result column="SHOW_TAX_IS_EXEMPT" jdbcType="CHAR" property="showTaxIsExempt" />
+    <result column="VAT_TAX_AUTH_GEO_ID" jdbcType="VARCHAR" property="vatTaxAuthGeoId" />
+    <result column="VAT_TAX_AUTH_PARTY_ID" jdbcType="VARCHAR" property="vatTaxAuthPartyId" />
+    <result column="ENABLE_AUTO_SUGGESTION_LIST" jdbcType="CHAR" property="enableAutoSuggestionList" />
+    <result column="ENABLE_DIG_PROD_UPLOAD" jdbcType="CHAR" property="enableDigProdUpload" />
+    <result column="PROD_SEARCH_EXCLUDE_VARIANTS" jdbcType="CHAR" property="prodSearchExcludeVariants" />
+    <result column="DIG_PROD_UPLOAD_CATEGORY_ID" jdbcType="VARCHAR" property="digProdUploadCategoryId" />
+    <result column="AUTO_ORDER_CC_TRY_EXP" jdbcType="CHAR" property="autoOrderCcTryExp" />
+    <result column="AUTO_ORDER_CC_TRY_OTHER_CARDS" jdbcType="CHAR" property="autoOrderCcTryOtherCards" />
+    <result column="AUTO_ORDER_CC_TRY_LATER_NSF" jdbcType="CHAR" property="autoOrderCcTryLaterNsf" />
+    <result column="AUTO_ORDER_CC_TRY_LATER_MAX" jdbcType="DECIMAL" property="autoOrderCcTryLaterMax" />
+    <result column="STORE_CREDIT_VALID_DAYS" jdbcType="DECIMAL" property="storeCreditValidDays" />
+    <result column="AUTO_APPROVE_INVOICE" jdbcType="CHAR" property="autoApproveInvoice" />
+    <result column="AUTO_APPROVE_ORDER" jdbcType="CHAR" property="autoApproveOrder" />
+    <result column="SHIP_IF_CAPTURE_FAILS" jdbcType="CHAR" property="shipIfCaptureFails" />
+    <result column="SET_OWNER_UPON_ISSUANCE" jdbcType="CHAR" property="setOwnerUponIssuance" />
+    <result column="REQ_RETURN_INVENTORY_RECEIVE" jdbcType="CHAR" property="reqReturnInventoryReceive" />
+    <result column="ADD_TO_CART_REMOVE_INCOMPAT" jdbcType="CHAR" property="addToCartRemoveIncompat" />
+    <result column="ADD_TO_CART_REPLACE_UPSELL" jdbcType="CHAR" property="addToCartReplaceUpsell" />
+    <result column="SPLIT_PAY_PREF_PER_SHP_GRP" jdbcType="CHAR" property="splitPayPrefPerShpGrp" />
+    <result column="MANAGED_BY_LOT" jdbcType="CHAR" property="managedByLot" />
+    <result column="SHOW_OUT_OF_STOCK_PRODUCTS" jdbcType="CHAR" property="showOutOfStockProducts" />
+    <result column="ORDER_DECIMAL_QUANTITY" jdbcType="CHAR" property="orderDecimalQuantity" />
+    <result column="ALLOW_COMMENT" jdbcType="CHAR" property="allowComment" />
+    <result column="STYLE_SHEET" jdbcType="VARCHAR" property="styleSheet" />
+    <result column="HEADER_LOGO" jdbcType="VARCHAR" property="headerLogo" />
+    <result column="HEADER_MIDDLE_BACKGROUND" jdbcType="VARCHAR" property="headerMiddleBackground" />
+    <result column="HEADER_RIGHT_BACKGROUND" jdbcType="VARCHAR" property="headerRightBackground" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_STORE_ID, PRIMARY_STORE_GROUP_ID, STORE_NAME, COMPANY_NAME, TITLE, SUBTITLE, 
+    PAY_TO_PARTY_ID, DAYS_TO_CANCEL_NON_PAY, MANUAL_AUTH_IS_CAPTURE, PRORATE_SHIPPING, 
+    PRORATE_TAXES, VIEW_CART_ON_ADD, AUTO_SAVE_CART, AUTO_APPROVE_REVIEWS, IS_DEMO_STORE, 
+    IS_IMMEDIATELY_FULFILLED, INVENTORY_FACILITY_ID, ONE_INVENTORY_FACILITY, CHECK_INVENTORY, 
+    RESERVE_INVENTORY, RESERVE_ORDER_ENUM_ID, REQUIRE_INVENTORY, BALANCE_RES_ON_ORDER_CREATION, 
+    REQUIREMENT_METHOD_ENUM_ID, ORDER_NUMBER_PREFIX, DEFAULT_LOCALE_STRING, DEFAULT_CURRENCY_UOM_ID, 
+    DEFAULT_TIME_ZONE_STRING, DEFAULT_SALES_CHANNEL_ENUM_ID, ALLOW_PASSWORD, DEFAULT_PASSWORD, 
+    EXPLODE_ORDER_ITEMS, CHECK_GC_BALANCE, RETRY_FAILED_AUTHS, HEADER_APPROVED_STATUS, 
+    ITEM_APPROVED_STATUS, DIGITAL_ITEM_APPROVED_STATUS, HEADER_DECLINED_STATUS, ITEM_DECLINED_STATUS, 
+    HEADER_CANCEL_STATUS, ITEM_CANCEL_STATUS, AUTH_DECLINED_MESSAGE, AUTH_FRAUD_MESSAGE, 
+    AUTH_ERROR_MESSAGE, VISUAL_THEME_ID, STORE_CREDIT_ACCOUNT_ENUM_ID, USE_PRIMARY_EMAIL_USERNAME, 
+    REQUIRE_CUSTOMER_ROLE, AUTO_INVOICE_DIGITAL_ITEMS, REQ_SHIP_ADDR_FOR_DIG_ITEMS, SHOW_CHECKOUT_GIFT_OPTIONS, 
+    SELECT_PAYMENT_TYPE_PER_ITEM, SHOW_PRICES_WITH_VAT_TAX, SHOW_TAX_IS_EXEMPT, VAT_TAX_AUTH_GEO_ID, 
+    VAT_TAX_AUTH_PARTY_ID, ENABLE_AUTO_SUGGESTION_LIST, ENABLE_DIG_PROD_UPLOAD, PROD_SEARCH_EXCLUDE_VARIANTS, 
+    DIG_PROD_UPLOAD_CATEGORY_ID, AUTO_ORDER_CC_TRY_EXP, AUTO_ORDER_CC_TRY_OTHER_CARDS, 
+    AUTO_ORDER_CC_TRY_LATER_NSF, AUTO_ORDER_CC_TRY_LATER_MAX, STORE_CREDIT_VALID_DAYS, 
+    AUTO_APPROVE_INVOICE, AUTO_APPROVE_ORDER, SHIP_IF_CAPTURE_FAILS, SET_OWNER_UPON_ISSUANCE, 
+    REQ_RETURN_INVENTORY_RECEIVE, ADD_TO_CART_REMOVE_INCOMPAT, ADD_TO_CART_REPLACE_UPSELL, 
+    SPLIT_PAY_PREF_PER_SHP_GRP, MANAGED_BY_LOT, SHOW_OUT_OF_STOCK_PRODUCTS, ORDER_DECIMAL_QUANTITY, 
+    ALLOW_COMMENT, STYLE_SHEET, HEADER_LOGO, HEADER_MIDDLE_BACKGROUND, HEADER_RIGHT_BACKGROUND, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.store.model.ProductStoreExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_store
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_store
+    where PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_store
+    where PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.store.model.ProductStoreExample">
+    delete from product_store
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.store.model.ProductStore">
+    insert into product_store (PRODUCT_STORE_ID, PRIMARY_STORE_GROUP_ID, 
+      STORE_NAME, COMPANY_NAME, TITLE, 
+      SUBTITLE, PAY_TO_PARTY_ID, DAYS_TO_CANCEL_NON_PAY, 
+      MANUAL_AUTH_IS_CAPTURE, PRORATE_SHIPPING, PRORATE_TAXES, 
+      VIEW_CART_ON_ADD, AUTO_SAVE_CART, AUTO_APPROVE_REVIEWS, 
+      IS_DEMO_STORE, IS_IMMEDIATELY_FULFILLED, INVENTORY_FACILITY_ID, 
+      ONE_INVENTORY_FACILITY, CHECK_INVENTORY, RESERVE_INVENTORY, 
+      RESERVE_ORDER_ENUM_ID, REQUIRE_INVENTORY, BALANCE_RES_ON_ORDER_CREATION, 
+      REQUIREMENT_METHOD_ENUM_ID, ORDER_NUMBER_PREFIX, 
+      DEFAULT_LOCALE_STRING, DEFAULT_CURRENCY_UOM_ID, 
+      DEFAULT_TIME_ZONE_STRING, DEFAULT_SALES_CHANNEL_ENUM_ID, 
+      ALLOW_PASSWORD, DEFAULT_PASSWORD, EXPLODE_ORDER_ITEMS, 
+      CHECK_GC_BALANCE, RETRY_FAILED_AUTHS, HEADER_APPROVED_STATUS, 
+      ITEM_APPROVED_STATUS, DIGITAL_ITEM_APPROVED_STATUS, 
+      HEADER_DECLINED_STATUS, ITEM_DECLINED_STATUS, 
+      HEADER_CANCEL_STATUS, ITEM_CANCEL_STATUS, AUTH_DECLINED_MESSAGE, 
+      AUTH_FRAUD_MESSAGE, AUTH_ERROR_MESSAGE, VISUAL_THEME_ID, 
+      STORE_CREDIT_ACCOUNT_ENUM_ID, USE_PRIMARY_EMAIL_USERNAME, 
+      REQUIRE_CUSTOMER_ROLE, AUTO_INVOICE_DIGITAL_ITEMS, 
+      REQ_SHIP_ADDR_FOR_DIG_ITEMS, SHOW_CHECKOUT_GIFT_OPTIONS, 
+      SELECT_PAYMENT_TYPE_PER_ITEM, SHOW_PRICES_WITH_VAT_TAX, 
+      SHOW_TAX_IS_EXEMPT, VAT_TAX_AUTH_GEO_ID, VAT_TAX_AUTH_PARTY_ID, 
+      ENABLE_AUTO_SUGGESTION_LIST, ENABLE_DIG_PROD_UPLOAD, 
+      PROD_SEARCH_EXCLUDE_VARIANTS, DIG_PROD_UPLOAD_CATEGORY_ID, 
+      AUTO_ORDER_CC_TRY_EXP, AUTO_ORDER_CC_TRY_OTHER_CARDS, 
+      AUTO_ORDER_CC_TRY_LATER_NSF, AUTO_ORDER_CC_TRY_LATER_MAX, 
+      STORE_CREDIT_VALID_DAYS, AUTO_APPROVE_INVOICE, 
+      AUTO_APPROVE_ORDER, SHIP_IF_CAPTURE_FAILS, SET_OWNER_UPON_ISSUANCE, 
+      REQ_RETURN_INVENTORY_RECEIVE, ADD_TO_CART_REMOVE_INCOMPAT, 
+      ADD_TO_CART_REPLACE_UPSELL, SPLIT_PAY_PREF_PER_SHP_GRP, 
+      MANAGED_BY_LOT, SHOW_OUT_OF_STOCK_PRODUCTS, ORDER_DECIMAL_QUANTITY, 
+      ALLOW_COMMENT, STYLE_SHEET, HEADER_LOGO, 
+      HEADER_MIDDLE_BACKGROUND, HEADER_RIGHT_BACKGROUND, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productStoreId,jdbcType=VARCHAR}, #{primaryStoreGroupId,jdbcType=VARCHAR}, 
+      #{storeName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{payToPartyId,jdbcType=VARCHAR}, #{daysToCancelNonPay,jdbcType=DECIMAL}, 
+      #{manualAuthIsCapture,jdbcType=CHAR}, #{prorateShipping,jdbcType=CHAR}, #{prorateTaxes,jdbcType=CHAR}, 
+      #{viewCartOnAdd,jdbcType=CHAR}, #{autoSaveCart,jdbcType=CHAR}, #{autoApproveReviews,jdbcType=CHAR}, 
+      #{isDemoStore,jdbcType=CHAR}, #{isImmediatelyFulfilled,jdbcType=CHAR}, #{inventoryFacilityId,jdbcType=VARCHAR}, 
+      #{oneInventoryFacility,jdbcType=CHAR}, #{checkInventory,jdbcType=CHAR}, #{reserveInventory,jdbcType=CHAR}, 
+      #{reserveOrderEnumId,jdbcType=VARCHAR}, #{requireInventory,jdbcType=CHAR}, #{balanceResOnOrderCreation,jdbcType=CHAR}, 
+      #{requirementMethodEnumId,jdbcType=VARCHAR}, #{orderNumberPrefix,jdbcType=VARCHAR}, 
+      #{defaultLocaleString,jdbcType=VARCHAR}, #{defaultCurrencyUomId,jdbcType=VARCHAR}, 
+      #{defaultTimeZoneString,jdbcType=VARCHAR}, #{defaultSalesChannelEnumId,jdbcType=VARCHAR}, 
+      #{allowPassword,jdbcType=CHAR}, #{defaultPassword,jdbcType=VARCHAR}, #{explodeOrderItems,jdbcType=CHAR}, 
+      #{checkGcBalance,jdbcType=CHAR}, #{retryFailedAuths,jdbcType=CHAR}, #{headerApprovedStatus,jdbcType=VARCHAR}, 
+      #{itemApprovedStatus,jdbcType=VARCHAR}, #{digitalItemApprovedStatus,jdbcType=VARCHAR}, 
+      #{headerDeclinedStatus,jdbcType=VARCHAR}, #{itemDeclinedStatus,jdbcType=VARCHAR}, 
+      #{headerCancelStatus,jdbcType=VARCHAR}, #{itemCancelStatus,jdbcType=VARCHAR}, #{authDeclinedMessage,jdbcType=VARCHAR}, 
+      #{authFraudMessage,jdbcType=VARCHAR}, #{authErrorMessage,jdbcType=VARCHAR}, #{visualThemeId,jdbcType=VARCHAR}, 
+      #{storeCreditAccountEnumId,jdbcType=VARCHAR}, #{usePrimaryEmailUsername,jdbcType=CHAR}, 
+      #{requireCustomerRole,jdbcType=CHAR}, #{autoInvoiceDigitalItems,jdbcType=CHAR}, 
+      #{reqShipAddrForDigItems,jdbcType=CHAR}, #{showCheckoutGiftOptions,jdbcType=CHAR}, 
+      #{selectPaymentTypePerItem,jdbcType=CHAR}, #{showPricesWithVatTax,jdbcType=CHAR}, 
+      #{showTaxIsExempt,jdbcType=CHAR}, #{vatTaxAuthGeoId,jdbcType=VARCHAR}, #{vatTaxAuthPartyId,jdbcType=VARCHAR}, 
+      #{enableAutoSuggestionList,jdbcType=CHAR}, #{enableDigProdUpload,jdbcType=CHAR}, 
+      #{prodSearchExcludeVariants,jdbcType=CHAR}, #{digProdUploadCategoryId,jdbcType=VARCHAR}, 
+      #{autoOrderCcTryExp,jdbcType=CHAR}, #{autoOrderCcTryOtherCards,jdbcType=CHAR}, 
+      #{autoOrderCcTryLaterNsf,jdbcType=CHAR}, #{autoOrderCcTryLaterMax,jdbcType=DECIMAL}, 
+      #{storeCreditValidDays,jdbcType=DECIMAL}, #{autoApproveInvoice,jdbcType=CHAR}, 
+      #{autoApproveOrder,jdbcType=CHAR}, #{shipIfCaptureFails,jdbcType=CHAR}, #{setOwnerUponIssuance,jdbcType=CHAR}, 
+      #{reqReturnInventoryReceive,jdbcType=CHAR}, #{addToCartRemoveIncompat,jdbcType=CHAR}, 
+      #{addToCartReplaceUpsell,jdbcType=CHAR}, #{splitPayPrefPerShpGrp,jdbcType=CHAR}, 
+      #{managedByLot,jdbcType=CHAR}, #{showOutOfStockProducts,jdbcType=CHAR}, #{orderDecimalQuantity,jdbcType=CHAR}, 
+      #{allowComment,jdbcType=CHAR}, #{styleSheet,jdbcType=VARCHAR}, #{headerLogo,jdbcType=VARCHAR}, 
+      #{headerMiddleBackground,jdbcType=VARCHAR}, #{headerRightBackground,jdbcType=VARCHAR}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.store.model.ProductStore">
+    insert into product_store
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productStoreId != null">
+        PRODUCT_STORE_ID,
+      </if>
+      <if test="primaryStoreGroupId != null">
+        PRIMARY_STORE_GROUP_ID,
+      </if>
+      <if test="storeName != null">
+        STORE_NAME,
+      </if>
+      <if test="companyName != null">
+        COMPANY_NAME,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="subtitle != null">
+        SUBTITLE,
+      </if>
+      <if test="payToPartyId != null">
+        PAY_TO_PARTY_ID,
+      </if>
+      <if test="daysToCancelNonPay != null">
+        DAYS_TO_CANCEL_NON_PAY,
+      </if>
+      <if test="manualAuthIsCapture != null">
+        MANUAL_AUTH_IS_CAPTURE,
+      </if>
+      <if test="prorateShipping != null">
+        PRORATE_SHIPPING,
+      </if>
+      <if test="prorateTaxes != null">
+        PRORATE_TAXES,
+      </if>
+      <if test="viewCartOnAdd != null">
+        VIEW_CART_ON_ADD,
+      </if>
+      <if test="autoSaveCart != null">
+        AUTO_SAVE_CART,
+      </if>
+      <if test="autoApproveReviews != null">
+        AUTO_APPROVE_REVIEWS,
+      </if>
+      <if test="isDemoStore != null">
+        IS_DEMO_STORE,
+      </if>
+      <if test="isImmediatelyFulfilled != null">
+        IS_IMMEDIATELY_FULFILLED,
+      </if>
+      <if test="inventoryFacilityId != null">
+        INVENTORY_FACILITY_ID,
+      </if>
+      <if test="oneInventoryFacility != null">
+        ONE_INVENTORY_FACILITY,
+      </if>
+      <if test="checkInventory != null">
+        CHECK_INVENTORY,
+      </if>
+      <if test="reserveInventory != null">
+        RESERVE_INVENTORY,
+      </if>
+      <if test="reserveOrderEnumId != null">
+        RESERVE_ORDER_ENUM_ID,
+      </if>
+      <if test="requireInventory != null">
+        REQUIRE_INVENTORY,
+      </if>
+      <if test="balanceResOnOrderCreation != null">
+        BALANCE_RES_ON_ORDER_CREATION,
+      </if>
+      <if test="requirementMethodEnumId != null">
+        REQUIREMENT_METHOD_ENUM_ID,
+      </if>
+      <if test="orderNumberPrefix != null">
+        ORDER_NUMBER_PREFIX,
+      </if>
+      <if test="defaultLocaleString != null">
+        DEFAULT_LOCALE_STRING,
+      </if>
+      <if test="defaultCurrencyUomId != null">
+        DEFAULT_CURRENCY_UOM_ID,
+      </if>
+      <if test="defaultTimeZoneString != null">
+        DEFAULT_TIME_ZONE_STRING,
+      </if>
+      <if test="defaultSalesChannelEnumId != null">
+        DEFAULT_SALES_CHANNEL_ENUM_ID,
+      </if>
+      <if test="allowPassword != null">
+        ALLOW_PASSWORD,
+      </if>
+      <if test="defaultPassword != null">
+        DEFAULT_PASSWORD,
+      </if>
+      <if test="explodeOrderItems != null">
+        EXPLODE_ORDER_ITEMS,
+      </if>
+      <if test="checkGcBalance != null">
+        CHECK_GC_BALANCE,
+      </if>
+      <if test="retryFailedAuths != null">
+        RETRY_FAILED_AUTHS,
+      </if>
+      <if test="headerApprovedStatus != null">
+        HEADER_APPROVED_STATUS,
+      </if>
+      <if test="itemApprovedStatus != null">
+        ITEM_APPROVED_STATUS,
+      </if>
+      <if test="digitalItemApprovedStatus != null">
+        DIGITAL_ITEM_APPROVED_STATUS,
+      </if>
+      <if test="headerDeclinedStatus != null">
+        HEADER_DECLINED_STATUS,
+      </if>
+      <if test="itemDeclinedStatus != null">
+        ITEM_DECLINED_STATUS,
+      </if>
+      <if test="headerCancelStatus != null">
+        HEADER_CANCEL_STATUS,
+      </if>
+      <if test="itemCancelStatus != null">
+        ITEM_CANCEL_STATUS,
+      </if>
+      <if test="authDeclinedMessage != null">
+        AUTH_DECLINED_MESSAGE,
+      </if>
+      <if test="authFraudMessage != null">
+        AUTH_FRAUD_MESSAGE,
+      </if>
+      <if test="authErrorMessage != null">
+        AUTH_ERROR_MESSAGE,
+      </if>
+      <if test="visualThemeId != null">
+        VISUAL_THEME_ID,
+      </if>
+      <if test="storeCreditAccountEnumId != null">
+        STORE_CREDIT_ACCOUNT_ENUM_ID,
+      </if>
+      <if test="usePrimaryEmailUsername != null">
+        USE_PRIMARY_EMAIL_USERNAME,
+      </if>
+      <if test="requireCustomerRole != null">
+        REQUIRE_CUSTOMER_ROLE,
+      </if>
+      <if test="autoInvoiceDigitalItems != null">
+        AUTO_INVOICE_DIGITAL_ITEMS,
+      </if>
+      <if test="reqShipAddrForDigItems != null">
+        REQ_SHIP_ADDR_FOR_DIG_ITEMS,
+      </if>
+      <if test="showCheckoutGiftOptions != null">
+        SHOW_CHECKOUT_GIFT_OPTIONS,
+      </if>
+      <if test="selectPaymentTypePerItem != null">
+        SELECT_PAYMENT_TYPE_PER_ITEM,
+      </if>
+      <if test="showPricesWithVatTax != null">
+        SHOW_PRICES_WITH_VAT_TAX,
+      </if>
+      <if test="showTaxIsExempt != null">
+        SHOW_TAX_IS_EXEMPT,
+      </if>
+      <if test="vatTaxAuthGeoId != null">
+        VAT_TAX_AUTH_GEO_ID,
+      </if>
+      <if test="vatTaxAuthPartyId != null">
+        VAT_TAX_AUTH_PARTY_ID,
+      </if>
+      <if test="enableAutoSuggestionList != null">
+        ENABLE_AUTO_SUGGESTION_LIST,
+      </if>
+      <if test="enableDigProdUpload != null">
+        ENABLE_DIG_PROD_UPLOAD,
+      </if>
+      <if test="prodSearchExcludeVariants != null">
+        PROD_SEARCH_EXCLUDE_VARIANTS,
+      </if>
+      <if test="digProdUploadCategoryId != null">
+        DIG_PROD_UPLOAD_CATEGORY_ID,
+      </if>
+      <if test="autoOrderCcTryExp != null">
+        AUTO_ORDER_CC_TRY_EXP,
+      </if>
+      <if test="autoOrderCcTryOtherCards != null">
+        AUTO_ORDER_CC_TRY_OTHER_CARDS,
+      </if>
+      <if test="autoOrderCcTryLaterNsf != null">
+        AUTO_ORDER_CC_TRY_LATER_NSF,
+      </if>
+      <if test="autoOrderCcTryLaterMax != null">
+        AUTO_ORDER_CC_TRY_LATER_MAX,
+      </if>
+      <if test="storeCreditValidDays != null">
+        STORE_CREDIT_VALID_DAYS,
+      </if>
+      <if test="autoApproveInvoice != null">
+        AUTO_APPROVE_INVOICE,
+      </if>
+      <if test="autoApproveOrder != null">
+        AUTO_APPROVE_ORDER,
+      </if>
+      <if test="shipIfCaptureFails != null">
+        SHIP_IF_CAPTURE_FAILS,
+      </if>
+      <if test="setOwnerUponIssuance != null">
+        SET_OWNER_UPON_ISSUANCE,
+      </if>
+      <if test="reqReturnInventoryReceive != null">
+        REQ_RETURN_INVENTORY_RECEIVE,
+      </if>
+      <if test="addToCartRemoveIncompat != null">
+        ADD_TO_CART_REMOVE_INCOMPAT,
+      </if>
+      <if test="addToCartReplaceUpsell != null">
+        ADD_TO_CART_REPLACE_UPSELL,
+      </if>
+      <if test="splitPayPrefPerShpGrp != null">
+        SPLIT_PAY_PREF_PER_SHP_GRP,
+      </if>
+      <if test="managedByLot != null">
+        MANAGED_BY_LOT,
+      </if>
+      <if test="showOutOfStockProducts != null">
+        SHOW_OUT_OF_STOCK_PRODUCTS,
+      </if>
+      <if test="orderDecimalQuantity != null">
+        ORDER_DECIMAL_QUANTITY,
+      </if>
+      <if test="allowComment != null">
+        ALLOW_COMMENT,
+      </if>
+      <if test="styleSheet != null">
+        STYLE_SHEET,
+      </if>
+      <if test="headerLogo != null">
+        HEADER_LOGO,
+      </if>
+      <if test="headerMiddleBackground != null">
+        HEADER_MIDDLE_BACKGROUND,
+      </if>
+      <if test="headerRightBackground != null">
+        HEADER_RIGHT_BACKGROUND,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productStoreId != null">
+        #{productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryStoreGroupId != null">
+        #{primaryStoreGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="payToPartyId != null">
+        #{payToPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="daysToCancelNonPay != null">
+        #{daysToCancelNonPay,jdbcType=DECIMAL},
+      </if>
+      <if test="manualAuthIsCapture != null">
+        #{manualAuthIsCapture,jdbcType=CHAR},
+      </if>
+      <if test="prorateShipping != null">
+        #{prorateShipping,jdbcType=CHAR},
+      </if>
+      <if test="prorateTaxes != null">
+        #{prorateTaxes,jdbcType=CHAR},
+      </if>
+      <if test="viewCartOnAdd != null">
+        #{viewCartOnAdd,jdbcType=CHAR},
+      </if>
+      <if test="autoSaveCart != null">
+        #{autoSaveCart,jdbcType=CHAR},
+      </if>
+      <if test="autoApproveReviews != null">
+        #{autoApproveReviews,jdbcType=CHAR},
+      </if>
+      <if test="isDemoStore != null">
+        #{isDemoStore,jdbcType=CHAR},
+      </if>
+      <if test="isImmediatelyFulfilled != null">
+        #{isImmediatelyFulfilled,jdbcType=CHAR},
+      </if>
+      <if test="inventoryFacilityId != null">
+        #{inventoryFacilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="oneInventoryFacility != null">
+        #{oneInventoryFacility,jdbcType=CHAR},
+      </if>
+      <if test="checkInventory != null">
+        #{checkInventory,jdbcType=CHAR},
+      </if>
+      <if test="reserveInventory != null">
+        #{reserveInventory,jdbcType=CHAR},
+      </if>
+      <if test="reserveOrderEnumId != null">
+        #{reserveOrderEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="requireInventory != null">
+        #{requireInventory,jdbcType=CHAR},
+      </if>
+      <if test="balanceResOnOrderCreation != null">
+        #{balanceResOnOrderCreation,jdbcType=CHAR},
+      </if>
+      <if test="requirementMethodEnumId != null">
+        #{requirementMethodEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumberPrefix != null">
+        #{orderNumberPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultLocaleString != null">
+        #{defaultLocaleString,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultCurrencyUomId != null">
+        #{defaultCurrencyUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultTimeZoneString != null">
+        #{defaultTimeZoneString,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultSalesChannelEnumId != null">
+        #{defaultSalesChannelEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="allowPassword != null">
+        #{allowPassword,jdbcType=CHAR},
+      </if>
+      <if test="defaultPassword != null">
+        #{defaultPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="explodeOrderItems != null">
+        #{explodeOrderItems,jdbcType=CHAR},
+      </if>
+      <if test="checkGcBalance != null">
+        #{checkGcBalance,jdbcType=CHAR},
+      </if>
+      <if test="retryFailedAuths != null">
+        #{retryFailedAuths,jdbcType=CHAR},
+      </if>
+      <if test="headerApprovedStatus != null">
+        #{headerApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="itemApprovedStatus != null">
+        #{itemApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="digitalItemApprovedStatus != null">
+        #{digitalItemApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="headerDeclinedStatus != null">
+        #{headerDeclinedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="itemDeclinedStatus != null">
+        #{itemDeclinedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="headerCancelStatus != null">
+        #{headerCancelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCancelStatus != null">
+        #{itemCancelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="authDeclinedMessage != null">
+        #{authDeclinedMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="authFraudMessage != null">
+        #{authFraudMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="authErrorMessage != null">
+        #{authErrorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="visualThemeId != null">
+        #{visualThemeId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCreditAccountEnumId != null">
+        #{storeCreditAccountEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="usePrimaryEmailUsername != null">
+        #{usePrimaryEmailUsername,jdbcType=CHAR},
+      </if>
+      <if test="requireCustomerRole != null">
+        #{requireCustomerRole,jdbcType=CHAR},
+      </if>
+      <if test="autoInvoiceDigitalItems != null">
+        #{autoInvoiceDigitalItems,jdbcType=CHAR},
+      </if>
+      <if test="reqShipAddrForDigItems != null">
+        #{reqShipAddrForDigItems,jdbcType=CHAR},
+      </if>
+      <if test="showCheckoutGiftOptions != null">
+        #{showCheckoutGiftOptions,jdbcType=CHAR},
+      </if>
+      <if test="selectPaymentTypePerItem != null">
+        #{selectPaymentTypePerItem,jdbcType=CHAR},
+      </if>
+      <if test="showPricesWithVatTax != null">
+        #{showPricesWithVatTax,jdbcType=CHAR},
+      </if>
+      <if test="showTaxIsExempt != null">
+        #{showTaxIsExempt,jdbcType=CHAR},
+      </if>
+      <if test="vatTaxAuthGeoId != null">
+        #{vatTaxAuthGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="vatTaxAuthPartyId != null">
+        #{vatTaxAuthPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="enableAutoSuggestionList != null">
+        #{enableAutoSuggestionList,jdbcType=CHAR},
+      </if>
+      <if test="enableDigProdUpload != null">
+        #{enableDigProdUpload,jdbcType=CHAR},
+      </if>
+      <if test="prodSearchExcludeVariants != null">
+        #{prodSearchExcludeVariants,jdbcType=CHAR},
+      </if>
+      <if test="digProdUploadCategoryId != null">
+        #{digProdUploadCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="autoOrderCcTryExp != null">
+        #{autoOrderCcTryExp,jdbcType=CHAR},
+      </if>
+      <if test="autoOrderCcTryOtherCards != null">
+        #{autoOrderCcTryOtherCards,jdbcType=CHAR},
+      </if>
+      <if test="autoOrderCcTryLaterNsf != null">
+        #{autoOrderCcTryLaterNsf,jdbcType=CHAR},
+      </if>
+      <if test="autoOrderCcTryLaterMax != null">
+        #{autoOrderCcTryLaterMax,jdbcType=DECIMAL},
+      </if>
+      <if test="storeCreditValidDays != null">
+        #{storeCreditValidDays,jdbcType=DECIMAL},
+      </if>
+      <if test="autoApproveInvoice != null">
+        #{autoApproveInvoice,jdbcType=CHAR},
+      </if>
+      <if test="autoApproveOrder != null">
+        #{autoApproveOrder,jdbcType=CHAR},
+      </if>
+      <if test="shipIfCaptureFails != null">
+        #{shipIfCaptureFails,jdbcType=CHAR},
+      </if>
+      <if test="setOwnerUponIssuance != null">
+        #{setOwnerUponIssuance,jdbcType=CHAR},
+      </if>
+      <if test="reqReturnInventoryReceive != null">
+        #{reqReturnInventoryReceive,jdbcType=CHAR},
+      </if>
+      <if test="addToCartRemoveIncompat != null">
+        #{addToCartRemoveIncompat,jdbcType=CHAR},
+      </if>
+      <if test="addToCartReplaceUpsell != null">
+        #{addToCartReplaceUpsell,jdbcType=CHAR},
+      </if>
+      <if test="splitPayPrefPerShpGrp != null">
+        #{splitPayPrefPerShpGrp,jdbcType=CHAR},
+      </if>
+      <if test="managedByLot != null">
+        #{managedByLot,jdbcType=CHAR},
+      </if>
+      <if test="showOutOfStockProducts != null">
+        #{showOutOfStockProducts,jdbcType=CHAR},
+      </if>
+      <if test="orderDecimalQuantity != null">
+        #{orderDecimalQuantity,jdbcType=CHAR},
+      </if>
+      <if test="allowComment != null">
+        #{allowComment,jdbcType=CHAR},
+      </if>
+      <if test="styleSheet != null">
+        #{styleSheet,jdbcType=VARCHAR},
+      </if>
+      <if test="headerLogo != null">
+        #{headerLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="headerMiddleBackground != null">
+        #{headerMiddleBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="headerRightBackground != null">
+        #{headerRightBackground,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.store.model.ProductStoreExample" resultType="java.lang.Long">
+    select count(*) from product_store
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_store
+    <set>
+      <if test="record.productStoreId != null">
+        PRODUCT_STORE_ID = #{record.productStoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.primaryStoreGroupId != null">
+        PRIMARY_STORE_GROUP_ID = #{record.primaryStoreGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeName != null">
+        STORE_NAME = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null">
+        COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtitle != null">
+        SUBTITLE = #{record.subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payToPartyId != null">
+        PAY_TO_PARTY_ID = #{record.payToPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.daysToCancelNonPay != null">
+        DAYS_TO_CANCEL_NON_PAY = #{record.daysToCancelNonPay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.manualAuthIsCapture != null">
+        MANUAL_AUTH_IS_CAPTURE = #{record.manualAuthIsCapture,jdbcType=CHAR},
+      </if>
+      <if test="record.prorateShipping != null">
+        PRORATE_SHIPPING = #{record.prorateShipping,jdbcType=CHAR},
+      </if>
+      <if test="record.prorateTaxes != null">
+        PRORATE_TAXES = #{record.prorateTaxes,jdbcType=CHAR},
+      </if>
+      <if test="record.viewCartOnAdd != null">
+        VIEW_CART_ON_ADD = #{record.viewCartOnAdd,jdbcType=CHAR},
+      </if>
+      <if test="record.autoSaveCart != null">
+        AUTO_SAVE_CART = #{record.autoSaveCart,jdbcType=CHAR},
+      </if>
+      <if test="record.autoApproveReviews != null">
+        AUTO_APPROVE_REVIEWS = #{record.autoApproveReviews,jdbcType=CHAR},
+      </if>
+      <if test="record.isDemoStore != null">
+        IS_DEMO_STORE = #{record.isDemoStore,jdbcType=CHAR},
+      </if>
+      <if test="record.isImmediatelyFulfilled != null">
+        IS_IMMEDIATELY_FULFILLED = #{record.isImmediatelyFulfilled,jdbcType=CHAR},
+      </if>
+      <if test="record.inventoryFacilityId != null">
+        INVENTORY_FACILITY_ID = #{record.inventoryFacilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oneInventoryFacility != null">
+        ONE_INVENTORY_FACILITY = #{record.oneInventoryFacility,jdbcType=CHAR},
+      </if>
+      <if test="record.checkInventory != null">
+        CHECK_INVENTORY = #{record.checkInventory,jdbcType=CHAR},
+      </if>
+      <if test="record.reserveInventory != null">
+        RESERVE_INVENTORY = #{record.reserveInventory,jdbcType=CHAR},
+      </if>
+      <if test="record.reserveOrderEnumId != null">
+        RESERVE_ORDER_ENUM_ID = #{record.reserveOrderEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requireInventory != null">
+        REQUIRE_INVENTORY = #{record.requireInventory,jdbcType=CHAR},
+      </if>
+      <if test="record.balanceResOnOrderCreation != null">
+        BALANCE_RES_ON_ORDER_CREATION = #{record.balanceResOnOrderCreation,jdbcType=CHAR},
+      </if>
+      <if test="record.requirementMethodEnumId != null">
+        REQUIREMENT_METHOD_ENUM_ID = #{record.requirementMethodEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNumberPrefix != null">
+        ORDER_NUMBER_PREFIX = #{record.orderNumberPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultLocaleString != null">
+        DEFAULT_LOCALE_STRING = #{record.defaultLocaleString,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultCurrencyUomId != null">
+        DEFAULT_CURRENCY_UOM_ID = #{record.defaultCurrencyUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultTimeZoneString != null">
+        DEFAULT_TIME_ZONE_STRING = #{record.defaultTimeZoneString,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultSalesChannelEnumId != null">
+        DEFAULT_SALES_CHANNEL_ENUM_ID = #{record.defaultSalesChannelEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allowPassword != null">
+        ALLOW_PASSWORD = #{record.allowPassword,jdbcType=CHAR},
+      </if>
+      <if test="record.defaultPassword != null">
+        DEFAULT_PASSWORD = #{record.defaultPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explodeOrderItems != null">
+        EXPLODE_ORDER_ITEMS = #{record.explodeOrderItems,jdbcType=CHAR},
+      </if>
+      <if test="record.checkGcBalance != null">
+        CHECK_GC_BALANCE = #{record.checkGcBalance,jdbcType=CHAR},
+      </if>
+      <if test="record.retryFailedAuths != null">
+        RETRY_FAILED_AUTHS = #{record.retryFailedAuths,jdbcType=CHAR},
+      </if>
+      <if test="record.headerApprovedStatus != null">
+        HEADER_APPROVED_STATUS = #{record.headerApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemApprovedStatus != null">
+        ITEM_APPROVED_STATUS = #{record.itemApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.digitalItemApprovedStatus != null">
+        DIGITAL_ITEM_APPROVED_STATUS = #{record.digitalItemApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerDeclinedStatus != null">
+        HEADER_DECLINED_STATUS = #{record.headerDeclinedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemDeclinedStatus != null">
+        ITEM_DECLINED_STATUS = #{record.itemDeclinedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerCancelStatus != null">
+        HEADER_CANCEL_STATUS = #{record.headerCancelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemCancelStatus != null">
+        ITEM_CANCEL_STATUS = #{record.itemCancelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authDeclinedMessage != null">
+        AUTH_DECLINED_MESSAGE = #{record.authDeclinedMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authFraudMessage != null">
+        AUTH_FRAUD_MESSAGE = #{record.authFraudMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authErrorMessage != null">
+        AUTH_ERROR_MESSAGE = #{record.authErrorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visualThemeId != null">
+        VISUAL_THEME_ID = #{record.visualThemeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeCreditAccountEnumId != null">
+        STORE_CREDIT_ACCOUNT_ENUM_ID = #{record.storeCreditAccountEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usePrimaryEmailUsername != null">
+        USE_PRIMARY_EMAIL_USERNAME = #{record.usePrimaryEmailUsername,jdbcType=CHAR},
+      </if>
+      <if test="record.requireCustomerRole != null">
+        REQUIRE_CUSTOMER_ROLE = #{record.requireCustomerRole,jdbcType=CHAR},
+      </if>
+      <if test="record.autoInvoiceDigitalItems != null">
+        AUTO_INVOICE_DIGITAL_ITEMS = #{record.autoInvoiceDigitalItems,jdbcType=CHAR},
+      </if>
+      <if test="record.reqShipAddrForDigItems != null">
+        REQ_SHIP_ADDR_FOR_DIG_ITEMS = #{record.reqShipAddrForDigItems,jdbcType=CHAR},
+      </if>
+      <if test="record.showCheckoutGiftOptions != null">
+        SHOW_CHECKOUT_GIFT_OPTIONS = #{record.showCheckoutGiftOptions,jdbcType=CHAR},
+      </if>
+      <if test="record.selectPaymentTypePerItem != null">
+        SELECT_PAYMENT_TYPE_PER_ITEM = #{record.selectPaymentTypePerItem,jdbcType=CHAR},
+      </if>
+      <if test="record.showPricesWithVatTax != null">
+        SHOW_PRICES_WITH_VAT_TAX = #{record.showPricesWithVatTax,jdbcType=CHAR},
+      </if>
+      <if test="record.showTaxIsExempt != null">
+        SHOW_TAX_IS_EXEMPT = #{record.showTaxIsExempt,jdbcType=CHAR},
+      </if>
+      <if test="record.vatTaxAuthGeoId != null">
+        VAT_TAX_AUTH_GEO_ID = #{record.vatTaxAuthGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vatTaxAuthPartyId != null">
+        VAT_TAX_AUTH_PARTY_ID = #{record.vatTaxAuthPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enableAutoSuggestionList != null">
+        ENABLE_AUTO_SUGGESTION_LIST = #{record.enableAutoSuggestionList,jdbcType=CHAR},
+      </if>
+      <if test="record.enableDigProdUpload != null">
+        ENABLE_DIG_PROD_UPLOAD = #{record.enableDigProdUpload,jdbcType=CHAR},
+      </if>
+      <if test="record.prodSearchExcludeVariants != null">
+        PROD_SEARCH_EXCLUDE_VARIANTS = #{record.prodSearchExcludeVariants,jdbcType=CHAR},
+      </if>
+      <if test="record.digProdUploadCategoryId != null">
+        DIG_PROD_UPLOAD_CATEGORY_ID = #{record.digProdUploadCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autoOrderCcTryExp != null">
+        AUTO_ORDER_CC_TRY_EXP = #{record.autoOrderCcTryExp,jdbcType=CHAR},
+      </if>
+      <if test="record.autoOrderCcTryOtherCards != null">
+        AUTO_ORDER_CC_TRY_OTHER_CARDS = #{record.autoOrderCcTryOtherCards,jdbcType=CHAR},
+      </if>
+      <if test="record.autoOrderCcTryLaterNsf != null">
+        AUTO_ORDER_CC_TRY_LATER_NSF = #{record.autoOrderCcTryLaterNsf,jdbcType=CHAR},
+      </if>
+      <if test="record.autoOrderCcTryLaterMax != null">
+        AUTO_ORDER_CC_TRY_LATER_MAX = #{record.autoOrderCcTryLaterMax,jdbcType=DECIMAL},
+      </if>
+      <if test="record.storeCreditValidDays != null">
+        STORE_CREDIT_VALID_DAYS = #{record.storeCreditValidDays,jdbcType=DECIMAL},
+      </if>
+      <if test="record.autoApproveInvoice != null">
+        AUTO_APPROVE_INVOICE = #{record.autoApproveInvoice,jdbcType=CHAR},
+      </if>
+      <if test="record.autoApproveOrder != null">
+        AUTO_APPROVE_ORDER = #{record.autoApproveOrder,jdbcType=CHAR},
+      </if>
+      <if test="record.shipIfCaptureFails != null">
+        SHIP_IF_CAPTURE_FAILS = #{record.shipIfCaptureFails,jdbcType=CHAR},
+      </if>
+      <if test="record.setOwnerUponIssuance != null">
+        SET_OWNER_UPON_ISSUANCE = #{record.setOwnerUponIssuance,jdbcType=CHAR},
+      </if>
+      <if test="record.reqReturnInventoryReceive != null">
+        REQ_RETURN_INVENTORY_RECEIVE = #{record.reqReturnInventoryReceive,jdbcType=CHAR},
+      </if>
+      <if test="record.addToCartRemoveIncompat != null">
+        ADD_TO_CART_REMOVE_INCOMPAT = #{record.addToCartRemoveIncompat,jdbcType=CHAR},
+      </if>
+      <if test="record.addToCartReplaceUpsell != null">
+        ADD_TO_CART_REPLACE_UPSELL = #{record.addToCartReplaceUpsell,jdbcType=CHAR},
+      </if>
+      <if test="record.splitPayPrefPerShpGrp != null">
+        SPLIT_PAY_PREF_PER_SHP_GRP = #{record.splitPayPrefPerShpGrp,jdbcType=CHAR},
+      </if>
+      <if test="record.managedByLot != null">
+        MANAGED_BY_LOT = #{record.managedByLot,jdbcType=CHAR},
+      </if>
+      <if test="record.showOutOfStockProducts != null">
+        SHOW_OUT_OF_STOCK_PRODUCTS = #{record.showOutOfStockProducts,jdbcType=CHAR},
+      </if>
+      <if test="record.orderDecimalQuantity != null">
+        ORDER_DECIMAL_QUANTITY = #{record.orderDecimalQuantity,jdbcType=CHAR},
+      </if>
+      <if test="record.allowComment != null">
+        ALLOW_COMMENT = #{record.allowComment,jdbcType=CHAR},
+      </if>
+      <if test="record.styleSheet != null">
+        STYLE_SHEET = #{record.styleSheet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerLogo != null">
+        HEADER_LOGO = #{record.headerLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerMiddleBackground != null">
+        HEADER_MIDDLE_BACKGROUND = #{record.headerMiddleBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerRightBackground != null">
+        HEADER_RIGHT_BACKGROUND = #{record.headerRightBackground,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_store
+    set PRODUCT_STORE_ID = #{record.productStoreId,jdbcType=VARCHAR},
+      PRIMARY_STORE_GROUP_ID = #{record.primaryStoreGroupId,jdbcType=VARCHAR},
+      STORE_NAME = #{record.storeName,jdbcType=VARCHAR},
+      COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      SUBTITLE = #{record.subtitle,jdbcType=VARCHAR},
+      PAY_TO_PARTY_ID = #{record.payToPartyId,jdbcType=VARCHAR},
+      DAYS_TO_CANCEL_NON_PAY = #{record.daysToCancelNonPay,jdbcType=DECIMAL},
+      MANUAL_AUTH_IS_CAPTURE = #{record.manualAuthIsCapture,jdbcType=CHAR},
+      PRORATE_SHIPPING = #{record.prorateShipping,jdbcType=CHAR},
+      PRORATE_TAXES = #{record.prorateTaxes,jdbcType=CHAR},
+      VIEW_CART_ON_ADD = #{record.viewCartOnAdd,jdbcType=CHAR},
+      AUTO_SAVE_CART = #{record.autoSaveCart,jdbcType=CHAR},
+      AUTO_APPROVE_REVIEWS = #{record.autoApproveReviews,jdbcType=CHAR},
+      IS_DEMO_STORE = #{record.isDemoStore,jdbcType=CHAR},
+      IS_IMMEDIATELY_FULFILLED = #{record.isImmediatelyFulfilled,jdbcType=CHAR},
+      INVENTORY_FACILITY_ID = #{record.inventoryFacilityId,jdbcType=VARCHAR},
+      ONE_INVENTORY_FACILITY = #{record.oneInventoryFacility,jdbcType=CHAR},
+      CHECK_INVENTORY = #{record.checkInventory,jdbcType=CHAR},
+      RESERVE_INVENTORY = #{record.reserveInventory,jdbcType=CHAR},
+      RESERVE_ORDER_ENUM_ID = #{record.reserveOrderEnumId,jdbcType=VARCHAR},
+      REQUIRE_INVENTORY = #{record.requireInventory,jdbcType=CHAR},
+      BALANCE_RES_ON_ORDER_CREATION = #{record.balanceResOnOrderCreation,jdbcType=CHAR},
+      REQUIREMENT_METHOD_ENUM_ID = #{record.requirementMethodEnumId,jdbcType=VARCHAR},
+      ORDER_NUMBER_PREFIX = #{record.orderNumberPrefix,jdbcType=VARCHAR},
+      DEFAULT_LOCALE_STRING = #{record.defaultLocaleString,jdbcType=VARCHAR},
+      DEFAULT_CURRENCY_UOM_ID = #{record.defaultCurrencyUomId,jdbcType=VARCHAR},
+      DEFAULT_TIME_ZONE_STRING = #{record.defaultTimeZoneString,jdbcType=VARCHAR},
+      DEFAULT_SALES_CHANNEL_ENUM_ID = #{record.defaultSalesChannelEnumId,jdbcType=VARCHAR},
+      ALLOW_PASSWORD = #{record.allowPassword,jdbcType=CHAR},
+      DEFAULT_PASSWORD = #{record.defaultPassword,jdbcType=VARCHAR},
+      EXPLODE_ORDER_ITEMS = #{record.explodeOrderItems,jdbcType=CHAR},
+      CHECK_GC_BALANCE = #{record.checkGcBalance,jdbcType=CHAR},
+      RETRY_FAILED_AUTHS = #{record.retryFailedAuths,jdbcType=CHAR},
+      HEADER_APPROVED_STATUS = #{record.headerApprovedStatus,jdbcType=VARCHAR},
+      ITEM_APPROVED_STATUS = #{record.itemApprovedStatus,jdbcType=VARCHAR},
+      DIGITAL_ITEM_APPROVED_STATUS = #{record.digitalItemApprovedStatus,jdbcType=VARCHAR},
+      HEADER_DECLINED_STATUS = #{record.headerDeclinedStatus,jdbcType=VARCHAR},
+      ITEM_DECLINED_STATUS = #{record.itemDeclinedStatus,jdbcType=VARCHAR},
+      HEADER_CANCEL_STATUS = #{record.headerCancelStatus,jdbcType=VARCHAR},
+      ITEM_CANCEL_STATUS = #{record.itemCancelStatus,jdbcType=VARCHAR},
+      AUTH_DECLINED_MESSAGE = #{record.authDeclinedMessage,jdbcType=VARCHAR},
+      AUTH_FRAUD_MESSAGE = #{record.authFraudMessage,jdbcType=VARCHAR},
+      AUTH_ERROR_MESSAGE = #{record.authErrorMessage,jdbcType=VARCHAR},
+      VISUAL_THEME_ID = #{record.visualThemeId,jdbcType=VARCHAR},
+      STORE_CREDIT_ACCOUNT_ENUM_ID = #{record.storeCreditAccountEnumId,jdbcType=VARCHAR},
+      USE_PRIMARY_EMAIL_USERNAME = #{record.usePrimaryEmailUsername,jdbcType=CHAR},
+      REQUIRE_CUSTOMER_ROLE = #{record.requireCustomerRole,jdbcType=CHAR},
+      AUTO_INVOICE_DIGITAL_ITEMS = #{record.autoInvoiceDigitalItems,jdbcType=CHAR},
+      REQ_SHIP_ADDR_FOR_DIG_ITEMS = #{record.reqShipAddrForDigItems,jdbcType=CHAR},
+      SHOW_CHECKOUT_GIFT_OPTIONS = #{record.showCheckoutGiftOptions,jdbcType=CHAR},
+      SELECT_PAYMENT_TYPE_PER_ITEM = #{record.selectPaymentTypePerItem,jdbcType=CHAR},
+      SHOW_PRICES_WITH_VAT_TAX = #{record.showPricesWithVatTax,jdbcType=CHAR},
+      SHOW_TAX_IS_EXEMPT = #{record.showTaxIsExempt,jdbcType=CHAR},
+      VAT_TAX_AUTH_GEO_ID = #{record.vatTaxAuthGeoId,jdbcType=VARCHAR},
+      VAT_TAX_AUTH_PARTY_ID = #{record.vatTaxAuthPartyId,jdbcType=VARCHAR},
+      ENABLE_AUTO_SUGGESTION_LIST = #{record.enableAutoSuggestionList,jdbcType=CHAR},
+      ENABLE_DIG_PROD_UPLOAD = #{record.enableDigProdUpload,jdbcType=CHAR},
+      PROD_SEARCH_EXCLUDE_VARIANTS = #{record.prodSearchExcludeVariants,jdbcType=CHAR},
+      DIG_PROD_UPLOAD_CATEGORY_ID = #{record.digProdUploadCategoryId,jdbcType=VARCHAR},
+      AUTO_ORDER_CC_TRY_EXP = #{record.autoOrderCcTryExp,jdbcType=CHAR},
+      AUTO_ORDER_CC_TRY_OTHER_CARDS = #{record.autoOrderCcTryOtherCards,jdbcType=CHAR},
+      AUTO_ORDER_CC_TRY_LATER_NSF = #{record.autoOrderCcTryLaterNsf,jdbcType=CHAR},
+      AUTO_ORDER_CC_TRY_LATER_MAX = #{record.autoOrderCcTryLaterMax,jdbcType=DECIMAL},
+      STORE_CREDIT_VALID_DAYS = #{record.storeCreditValidDays,jdbcType=DECIMAL},
+      AUTO_APPROVE_INVOICE = #{record.autoApproveInvoice,jdbcType=CHAR},
+      AUTO_APPROVE_ORDER = #{record.autoApproveOrder,jdbcType=CHAR},
+      SHIP_IF_CAPTURE_FAILS = #{record.shipIfCaptureFails,jdbcType=CHAR},
+      SET_OWNER_UPON_ISSUANCE = #{record.setOwnerUponIssuance,jdbcType=CHAR},
+      REQ_RETURN_INVENTORY_RECEIVE = #{record.reqReturnInventoryReceive,jdbcType=CHAR},
+      ADD_TO_CART_REMOVE_INCOMPAT = #{record.addToCartRemoveIncompat,jdbcType=CHAR},
+      ADD_TO_CART_REPLACE_UPSELL = #{record.addToCartReplaceUpsell,jdbcType=CHAR},
+      SPLIT_PAY_PREF_PER_SHP_GRP = #{record.splitPayPrefPerShpGrp,jdbcType=CHAR},
+      MANAGED_BY_LOT = #{record.managedByLot,jdbcType=CHAR},
+      SHOW_OUT_OF_STOCK_PRODUCTS = #{record.showOutOfStockProducts,jdbcType=CHAR},
+      ORDER_DECIMAL_QUANTITY = #{record.orderDecimalQuantity,jdbcType=CHAR},
+      ALLOW_COMMENT = #{record.allowComment,jdbcType=CHAR},
+      STYLE_SHEET = #{record.styleSheet,jdbcType=VARCHAR},
+      HEADER_LOGO = #{record.headerLogo,jdbcType=VARCHAR},
+      HEADER_MIDDLE_BACKGROUND = #{record.headerMiddleBackground,jdbcType=VARCHAR},
+      HEADER_RIGHT_BACKGROUND = #{record.headerRightBackground,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.store.model.ProductStore">
+    update product_store
+    <set>
+      <if test="primaryStoreGroupId != null">
+        PRIMARY_STORE_GROUP_ID = #{primaryStoreGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        STORE_NAME = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        SUBTITLE = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="payToPartyId != null">
+        PAY_TO_PARTY_ID = #{payToPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="daysToCancelNonPay != null">
+        DAYS_TO_CANCEL_NON_PAY = #{daysToCancelNonPay,jdbcType=DECIMAL},
+      </if>
+      <if test="manualAuthIsCapture != null">
+        MANUAL_AUTH_IS_CAPTURE = #{manualAuthIsCapture,jdbcType=CHAR},
+      </if>
+      <if test="prorateShipping != null">
+        PRORATE_SHIPPING = #{prorateShipping,jdbcType=CHAR},
+      </if>
+      <if test="prorateTaxes != null">
+        PRORATE_TAXES = #{prorateTaxes,jdbcType=CHAR},
+      </if>
+      <if test="viewCartOnAdd != null">
+        VIEW_CART_ON_ADD = #{viewCartOnAdd,jdbcType=CHAR},
+      </if>
+      <if test="autoSaveCart != null">
+        AUTO_SAVE_CART = #{autoSaveCart,jdbcType=CHAR},
+      </if>
+      <if test="autoApproveReviews != null">
+        AUTO_APPROVE_REVIEWS = #{autoApproveReviews,jdbcType=CHAR},
+      </if>
+      <if test="isDemoStore != null">
+        IS_DEMO_STORE = #{isDemoStore,jdbcType=CHAR},
+      </if>
+      <if test="isImmediatelyFulfilled != null">
+        IS_IMMEDIATELY_FULFILLED = #{isImmediatelyFulfilled,jdbcType=CHAR},
+      </if>
+      <if test="inventoryFacilityId != null">
+        INVENTORY_FACILITY_ID = #{inventoryFacilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="oneInventoryFacility != null">
+        ONE_INVENTORY_FACILITY = #{oneInventoryFacility,jdbcType=CHAR},
+      </if>
+      <if test="checkInventory != null">
+        CHECK_INVENTORY = #{checkInventory,jdbcType=CHAR},
+      </if>
+      <if test="reserveInventory != null">
+        RESERVE_INVENTORY = #{reserveInventory,jdbcType=CHAR},
+      </if>
+      <if test="reserveOrderEnumId != null">
+        RESERVE_ORDER_ENUM_ID = #{reserveOrderEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="requireInventory != null">
+        REQUIRE_INVENTORY = #{requireInventory,jdbcType=CHAR},
+      </if>
+      <if test="balanceResOnOrderCreation != null">
+        BALANCE_RES_ON_ORDER_CREATION = #{balanceResOnOrderCreation,jdbcType=CHAR},
+      </if>
+      <if test="requirementMethodEnumId != null">
+        REQUIREMENT_METHOD_ENUM_ID = #{requirementMethodEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumberPrefix != null">
+        ORDER_NUMBER_PREFIX = #{orderNumberPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultLocaleString != null">
+        DEFAULT_LOCALE_STRING = #{defaultLocaleString,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultCurrencyUomId != null">
+        DEFAULT_CURRENCY_UOM_ID = #{defaultCurrencyUomId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultTimeZoneString != null">
+        DEFAULT_TIME_ZONE_STRING = #{defaultTimeZoneString,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultSalesChannelEnumId != null">
+        DEFAULT_SALES_CHANNEL_ENUM_ID = #{defaultSalesChannelEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="allowPassword != null">
+        ALLOW_PASSWORD = #{allowPassword,jdbcType=CHAR},
+      </if>
+      <if test="defaultPassword != null">
+        DEFAULT_PASSWORD = #{defaultPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="explodeOrderItems != null">
+        EXPLODE_ORDER_ITEMS = #{explodeOrderItems,jdbcType=CHAR},
+      </if>
+      <if test="checkGcBalance != null">
+        CHECK_GC_BALANCE = #{checkGcBalance,jdbcType=CHAR},
+      </if>
+      <if test="retryFailedAuths != null">
+        RETRY_FAILED_AUTHS = #{retryFailedAuths,jdbcType=CHAR},
+      </if>
+      <if test="headerApprovedStatus != null">
+        HEADER_APPROVED_STATUS = #{headerApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="itemApprovedStatus != null">
+        ITEM_APPROVED_STATUS = #{itemApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="digitalItemApprovedStatus != null">
+        DIGITAL_ITEM_APPROVED_STATUS = #{digitalItemApprovedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="headerDeclinedStatus != null">
+        HEADER_DECLINED_STATUS = #{headerDeclinedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="itemDeclinedStatus != null">
+        ITEM_DECLINED_STATUS = #{itemDeclinedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="headerCancelStatus != null">
+        HEADER_CANCEL_STATUS = #{headerCancelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCancelStatus != null">
+        ITEM_CANCEL_STATUS = #{itemCancelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="authDeclinedMessage != null">
+        AUTH_DECLINED_MESSAGE = #{authDeclinedMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="authFraudMessage != null">
+        AUTH_FRAUD_MESSAGE = #{authFraudMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="authErrorMessage != null">
+        AUTH_ERROR_MESSAGE = #{authErrorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="visualThemeId != null">
+        VISUAL_THEME_ID = #{visualThemeId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCreditAccountEnumId != null">
+        STORE_CREDIT_ACCOUNT_ENUM_ID = #{storeCreditAccountEnumId,jdbcType=VARCHAR},
+      </if>
+      <if test="usePrimaryEmailUsername != null">
+        USE_PRIMARY_EMAIL_USERNAME = #{usePrimaryEmailUsername,jdbcType=CHAR},
+      </if>
+      <if test="requireCustomerRole != null">
+        REQUIRE_CUSTOMER_ROLE = #{requireCustomerRole,jdbcType=CHAR},
+      </if>
+      <if test="autoInvoiceDigitalItems != null">
+        AUTO_INVOICE_DIGITAL_ITEMS = #{autoInvoiceDigitalItems,jdbcType=CHAR},
+      </if>
+      <if test="reqShipAddrForDigItems != null">
+        REQ_SHIP_ADDR_FOR_DIG_ITEMS = #{reqShipAddrForDigItems,jdbcType=CHAR},
+      </if>
+      <if test="showCheckoutGiftOptions != null">
+        SHOW_CHECKOUT_GIFT_OPTIONS = #{showCheckoutGiftOptions,jdbcType=CHAR},
+      </if>
+      <if test="selectPaymentTypePerItem != null">
+        SELECT_PAYMENT_TYPE_PER_ITEM = #{selectPaymentTypePerItem,jdbcType=CHAR},
+      </if>
+      <if test="showPricesWithVatTax != null">
+        SHOW_PRICES_WITH_VAT_TAX = #{showPricesWithVatTax,jdbcType=CHAR},
+      </if>
+      <if test="showTaxIsExempt != null">
+        SHOW_TAX_IS_EXEMPT = #{showTaxIsExempt,jdbcType=CHAR},
+      </if>
+      <if test="vatTaxAuthGeoId != null">
+        VAT_TAX_AUTH_GEO_ID = #{vatTaxAuthGeoId,jdbcType=VARCHAR},
+      </if>
+      <if test="vatTaxAuthPartyId != null">
+        VAT_TAX_AUTH_PARTY_ID = #{vatTaxAuthPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="enableAutoSuggestionList != null">
+        ENABLE_AUTO_SUGGESTION_LIST = #{enableAutoSuggestionList,jdbcType=CHAR},
+      </if>
+      <if test="enableDigProdUpload != null">
+        ENABLE_DIG_PROD_UPLOAD = #{enableDigProdUpload,jdbcType=CHAR},
+      </if>
+      <if test="prodSearchExcludeVariants != null">
+        PROD_SEARCH_EXCLUDE_VARIANTS = #{prodSearchExcludeVariants,jdbcType=CHAR},
+      </if>
+      <if test="digProdUploadCategoryId != null">
+        DIG_PROD_UPLOAD_CATEGORY_ID = #{digProdUploadCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="autoOrderCcTryExp != null">
+        AUTO_ORDER_CC_TRY_EXP = #{autoOrderCcTryExp,jdbcType=CHAR},
+      </if>
+      <if test="autoOrderCcTryOtherCards != null">
+        AUTO_ORDER_CC_TRY_OTHER_CARDS = #{autoOrderCcTryOtherCards,jdbcType=CHAR},
+      </if>
+      <if test="autoOrderCcTryLaterNsf != null">
+        AUTO_ORDER_CC_TRY_LATER_NSF = #{autoOrderCcTryLaterNsf,jdbcType=CHAR},
+      </if>
+      <if test="autoOrderCcTryLaterMax != null">
+        AUTO_ORDER_CC_TRY_LATER_MAX = #{autoOrderCcTryLaterMax,jdbcType=DECIMAL},
+      </if>
+      <if test="storeCreditValidDays != null">
+        STORE_CREDIT_VALID_DAYS = #{storeCreditValidDays,jdbcType=DECIMAL},
+      </if>
+      <if test="autoApproveInvoice != null">
+        AUTO_APPROVE_INVOICE = #{autoApproveInvoice,jdbcType=CHAR},
+      </if>
+      <if test="autoApproveOrder != null">
+        AUTO_APPROVE_ORDER = #{autoApproveOrder,jdbcType=CHAR},
+      </if>
+      <if test="shipIfCaptureFails != null">
+        SHIP_IF_CAPTURE_FAILS = #{shipIfCaptureFails,jdbcType=CHAR},
+      </if>
+      <if test="setOwnerUponIssuance != null">
+        SET_OWNER_UPON_ISSUANCE = #{setOwnerUponIssuance,jdbcType=CHAR},
+      </if>
+      <if test="reqReturnInventoryReceive != null">
+        REQ_RETURN_INVENTORY_RECEIVE = #{reqReturnInventoryReceive,jdbcType=CHAR},
+      </if>
+      <if test="addToCartRemoveIncompat != null">
+        ADD_TO_CART_REMOVE_INCOMPAT = #{addToCartRemoveIncompat,jdbcType=CHAR},
+      </if>
+      <if test="addToCartReplaceUpsell != null">
+        ADD_TO_CART_REPLACE_UPSELL = #{addToCartReplaceUpsell,jdbcType=CHAR},
+      </if>
+      <if test="splitPayPrefPerShpGrp != null">
+        SPLIT_PAY_PREF_PER_SHP_GRP = #{splitPayPrefPerShpGrp,jdbcType=CHAR},
+      </if>
+      <if test="managedByLot != null">
+        MANAGED_BY_LOT = #{managedByLot,jdbcType=CHAR},
+      </if>
+      <if test="showOutOfStockProducts != null">
+        SHOW_OUT_OF_STOCK_PRODUCTS = #{showOutOfStockProducts,jdbcType=CHAR},
+      </if>
+      <if test="orderDecimalQuantity != null">
+        ORDER_DECIMAL_QUANTITY = #{orderDecimalQuantity,jdbcType=CHAR},
+      </if>
+      <if test="allowComment != null">
+        ALLOW_COMMENT = #{allowComment,jdbcType=CHAR},
+      </if>
+      <if test="styleSheet != null">
+        STYLE_SHEET = #{styleSheet,jdbcType=VARCHAR},
+      </if>
+      <if test="headerLogo != null">
+        HEADER_LOGO = #{headerLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="headerMiddleBackground != null">
+        HEADER_MIDDLE_BACKGROUND = #{headerMiddleBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="headerRightBackground != null">
+        HEADER_RIGHT_BACKGROUND = #{headerRightBackground,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.store.model.ProductStore">
+    update product_store
+    set PRIMARY_STORE_GROUP_ID = #{primaryStoreGroupId,jdbcType=VARCHAR},
+      STORE_NAME = #{storeName,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SUBTITLE = #{subtitle,jdbcType=VARCHAR},
+      PAY_TO_PARTY_ID = #{payToPartyId,jdbcType=VARCHAR},
+      DAYS_TO_CANCEL_NON_PAY = #{daysToCancelNonPay,jdbcType=DECIMAL},
+      MANUAL_AUTH_IS_CAPTURE = #{manualAuthIsCapture,jdbcType=CHAR},
+      PRORATE_SHIPPING = #{prorateShipping,jdbcType=CHAR},
+      PRORATE_TAXES = #{prorateTaxes,jdbcType=CHAR},
+      VIEW_CART_ON_ADD = #{viewCartOnAdd,jdbcType=CHAR},
+      AUTO_SAVE_CART = #{autoSaveCart,jdbcType=CHAR},
+      AUTO_APPROVE_REVIEWS = #{autoApproveReviews,jdbcType=CHAR},
+      IS_DEMO_STORE = #{isDemoStore,jdbcType=CHAR},
+      IS_IMMEDIATELY_FULFILLED = #{isImmediatelyFulfilled,jdbcType=CHAR},
+      INVENTORY_FACILITY_ID = #{inventoryFacilityId,jdbcType=VARCHAR},
+      ONE_INVENTORY_FACILITY = #{oneInventoryFacility,jdbcType=CHAR},
+      CHECK_INVENTORY = #{checkInventory,jdbcType=CHAR},
+      RESERVE_INVENTORY = #{reserveInventory,jdbcType=CHAR},
+      RESERVE_ORDER_ENUM_ID = #{reserveOrderEnumId,jdbcType=VARCHAR},
+      REQUIRE_INVENTORY = #{requireInventory,jdbcType=CHAR},
+      BALANCE_RES_ON_ORDER_CREATION = #{balanceResOnOrderCreation,jdbcType=CHAR},
+      REQUIREMENT_METHOD_ENUM_ID = #{requirementMethodEnumId,jdbcType=VARCHAR},
+      ORDER_NUMBER_PREFIX = #{orderNumberPrefix,jdbcType=VARCHAR},
+      DEFAULT_LOCALE_STRING = #{defaultLocaleString,jdbcType=VARCHAR},
+      DEFAULT_CURRENCY_UOM_ID = #{defaultCurrencyUomId,jdbcType=VARCHAR},
+      DEFAULT_TIME_ZONE_STRING = #{defaultTimeZoneString,jdbcType=VARCHAR},
+      DEFAULT_SALES_CHANNEL_ENUM_ID = #{defaultSalesChannelEnumId,jdbcType=VARCHAR},
+      ALLOW_PASSWORD = #{allowPassword,jdbcType=CHAR},
+      DEFAULT_PASSWORD = #{defaultPassword,jdbcType=VARCHAR},
+      EXPLODE_ORDER_ITEMS = #{explodeOrderItems,jdbcType=CHAR},
+      CHECK_GC_BALANCE = #{checkGcBalance,jdbcType=CHAR},
+      RETRY_FAILED_AUTHS = #{retryFailedAuths,jdbcType=CHAR},
+      HEADER_APPROVED_STATUS = #{headerApprovedStatus,jdbcType=VARCHAR},
+      ITEM_APPROVED_STATUS = #{itemApprovedStatus,jdbcType=VARCHAR},
+      DIGITAL_ITEM_APPROVED_STATUS = #{digitalItemApprovedStatus,jdbcType=VARCHAR},
+      HEADER_DECLINED_STATUS = #{headerDeclinedStatus,jdbcType=VARCHAR},
+      ITEM_DECLINED_STATUS = #{itemDeclinedStatus,jdbcType=VARCHAR},
+      HEADER_CANCEL_STATUS = #{headerCancelStatus,jdbcType=VARCHAR},
+      ITEM_CANCEL_STATUS = #{itemCancelStatus,jdbcType=VARCHAR},
+      AUTH_DECLINED_MESSAGE = #{authDeclinedMessage,jdbcType=VARCHAR},
+      AUTH_FRAUD_MESSAGE = #{authFraudMessage,jdbcType=VARCHAR},
+      AUTH_ERROR_MESSAGE = #{authErrorMessage,jdbcType=VARCHAR},
+      VISUAL_THEME_ID = #{visualThemeId,jdbcType=VARCHAR},
+      STORE_CREDIT_ACCOUNT_ENUM_ID = #{storeCreditAccountEnumId,jdbcType=VARCHAR},
+      USE_PRIMARY_EMAIL_USERNAME = #{usePrimaryEmailUsername,jdbcType=CHAR},
+      REQUIRE_CUSTOMER_ROLE = #{requireCustomerRole,jdbcType=CHAR},
+      AUTO_INVOICE_DIGITAL_ITEMS = #{autoInvoiceDigitalItems,jdbcType=CHAR},
+      REQ_SHIP_ADDR_FOR_DIG_ITEMS = #{reqShipAddrForDigItems,jdbcType=CHAR},
+      SHOW_CHECKOUT_GIFT_OPTIONS = #{showCheckoutGiftOptions,jdbcType=CHAR},
+      SELECT_PAYMENT_TYPE_PER_ITEM = #{selectPaymentTypePerItem,jdbcType=CHAR},
+      SHOW_PRICES_WITH_VAT_TAX = #{showPricesWithVatTax,jdbcType=CHAR},
+      SHOW_TAX_IS_EXEMPT = #{showTaxIsExempt,jdbcType=CHAR},
+      VAT_TAX_AUTH_GEO_ID = #{vatTaxAuthGeoId,jdbcType=VARCHAR},
+      VAT_TAX_AUTH_PARTY_ID = #{vatTaxAuthPartyId,jdbcType=VARCHAR},
+      ENABLE_AUTO_SUGGESTION_LIST = #{enableAutoSuggestionList,jdbcType=CHAR},
+      ENABLE_DIG_PROD_UPLOAD = #{enableDigProdUpload,jdbcType=CHAR},
+      PROD_SEARCH_EXCLUDE_VARIANTS = #{prodSearchExcludeVariants,jdbcType=CHAR},
+      DIG_PROD_UPLOAD_CATEGORY_ID = #{digProdUploadCategoryId,jdbcType=VARCHAR},
+      AUTO_ORDER_CC_TRY_EXP = #{autoOrderCcTryExp,jdbcType=CHAR},
+      AUTO_ORDER_CC_TRY_OTHER_CARDS = #{autoOrderCcTryOtherCards,jdbcType=CHAR},
+      AUTO_ORDER_CC_TRY_LATER_NSF = #{autoOrderCcTryLaterNsf,jdbcType=CHAR},
+      AUTO_ORDER_CC_TRY_LATER_MAX = #{autoOrderCcTryLaterMax,jdbcType=DECIMAL},
+      STORE_CREDIT_VALID_DAYS = #{storeCreditValidDays,jdbcType=DECIMAL},
+      AUTO_APPROVE_INVOICE = #{autoApproveInvoice,jdbcType=CHAR},
+      AUTO_APPROVE_ORDER = #{autoApproveOrder,jdbcType=CHAR},
+      SHIP_IF_CAPTURE_FAILS = #{shipIfCaptureFails,jdbcType=CHAR},
+      SET_OWNER_UPON_ISSUANCE = #{setOwnerUponIssuance,jdbcType=CHAR},
+      REQ_RETURN_INVENTORY_RECEIVE = #{reqReturnInventoryReceive,jdbcType=CHAR},
+      ADD_TO_CART_REMOVE_INCOMPAT = #{addToCartRemoveIncompat,jdbcType=CHAR},
+      ADD_TO_CART_REPLACE_UPSELL = #{addToCartReplaceUpsell,jdbcType=CHAR},
+      SPLIT_PAY_PREF_PER_SHP_GRP = #{splitPayPrefPerShpGrp,jdbcType=CHAR},
+      MANAGED_BY_LOT = #{managedByLot,jdbcType=CHAR},
+      SHOW_OUT_OF_STOCK_PRODUCTS = #{showOutOfStockProducts,jdbcType=CHAR},
+      ORDER_DECIMAL_QUANTITY = #{orderDecimalQuantity,jdbcType=CHAR},
+      ALLOW_COMMENT = #{allowComment,jdbcType=CHAR},
+      STYLE_SHEET = #{styleSheet,jdbcType=VARCHAR},
+      HEADER_LOGO = #{headerLogo,jdbcType=VARCHAR},
+      HEADER_MIDDLE_BACKGROUND = #{headerMiddleBackground,jdbcType=VARCHAR},
+      HEADER_RIGHT_BACKGROUND = #{headerRightBackground,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_STORE_ID = #{productStoreId,jdbcType=VARCHAR}
+  </update>
+</mapper>

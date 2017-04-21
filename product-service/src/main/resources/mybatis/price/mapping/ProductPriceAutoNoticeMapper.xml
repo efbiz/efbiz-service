@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.price.dao.ProductPriceAutoNoticeMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.price.model.ProductPriceAutoNotice">
+    <id column="PRODUCT_PRICE_NOTICE_ID" jdbcType="VARCHAR" property="productPriceNoticeId" />
+    <result column="FACILITY_ID" jdbcType="VARCHAR" property="facilityId" />
+    <result column="RUN_DATE" jdbcType="TIMESTAMP" property="runDate" />
+    <result column="FROM_DATE" jdbcType="TIMESTAMP" property="fromDate" />
+    <result column="THRU_DATE" jdbcType="TIMESTAMP" property="thruDate" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_PRICE_NOTICE_ID, FACILITY_ID, RUN_DATE, FROM_DATE, THRU_DATE, LAST_UPDATED_STAMP, 
+    LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.price.model.ProductPriceAutoNoticeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_price_auto_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_price_auto_notice
+    where PRODUCT_PRICE_NOTICE_ID = #{productPriceNoticeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_price_auto_notice
+    where PRODUCT_PRICE_NOTICE_ID = #{productPriceNoticeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.price.model.ProductPriceAutoNoticeExample">
+    delete from product_price_auto_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.price.model.ProductPriceAutoNotice">
+    insert into product_price_auto_notice (PRODUCT_PRICE_NOTICE_ID, FACILITY_ID, 
+      RUN_DATE, FROM_DATE, THRU_DATE, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productPriceNoticeId,jdbcType=VARCHAR}, #{facilityId,jdbcType=VARCHAR}, 
+      #{runDate,jdbcType=TIMESTAMP}, #{fromDate,jdbcType=TIMESTAMP}, #{thruDate,jdbcType=TIMESTAMP}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.price.model.ProductPriceAutoNotice">
+    insert into product_price_auto_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productPriceNoticeId != null">
+        PRODUCT_PRICE_NOTICE_ID,
+      </if>
+      <if test="facilityId != null">
+        FACILITY_ID,
+      </if>
+      <if test="runDate != null">
+        RUN_DATE,
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE,
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productPriceNoticeId != null">
+        #{productPriceNoticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityId != null">
+        #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="runDate != null">
+        #{runDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.price.model.ProductPriceAutoNoticeExample" resultType="java.lang.Long">
+    select count(*) from product_price_auto_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_price_auto_notice
+    <set>
+      <if test="record.productPriceNoticeId != null">
+        PRODUCT_PRICE_NOTICE_ID = #{record.productPriceNoticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facilityId != null">
+        FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runDate != null">
+        RUN_DATE = #{record.runDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fromDate != null">
+        FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thruDate != null">
+        THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_price_auto_notice
+    set PRODUCT_PRICE_NOTICE_ID = #{record.productPriceNoticeId,jdbcType=VARCHAR},
+      FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      RUN_DATE = #{record.runDate,jdbcType=TIMESTAMP},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.price.model.ProductPriceAutoNotice">
+    update product_price_auto_notice
+    <set>
+      <if test="facilityId != null">
+        FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="runDate != null">
+        RUN_DATE = #{runDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE = #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_PRICE_NOTICE_ID = #{productPriceNoticeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.price.model.ProductPriceAutoNotice">
+    update product_price_auto_notice
+    set FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      RUN_DATE = #{runDate,jdbcType=TIMESTAMP},
+      FROM_DATE = #{fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_PRICE_NOTICE_ID = #{productPriceNoticeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

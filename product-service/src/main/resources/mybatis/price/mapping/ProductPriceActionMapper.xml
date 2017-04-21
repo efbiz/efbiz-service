@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.price.dao.ProductPriceActionMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.price.model.ProductPriceAction">
+    <id column="PRODUCT_PRICE_RULE_ID" jdbcType="VARCHAR" property="productPriceRuleId" />
+    <id column="PRODUCT_PRICE_ACTION_SEQ_ID" jdbcType="VARCHAR" property="productPriceActionSeqId" />
+    <result column="PRODUCT_PRICE_ACTION_TYPE_ID" jdbcType="VARCHAR" property="productPriceActionTypeId" />
+    <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+    <result column="RATE_CODE" jdbcType="VARCHAR" property="rateCode" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_PRICE_RULE_ID, PRODUCT_PRICE_ACTION_SEQ_ID, PRODUCT_PRICE_ACTION_TYPE_ID, 
+    AMOUNT, RATE_CODE, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.price.model.ProductPriceActionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_price_action
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.price.model.ProductPriceActionKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_price_action
+    where PRODUCT_PRICE_RULE_ID = #{productPriceRuleId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_ACTION_SEQ_ID = #{productPriceActionSeqId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.price.model.ProductPriceActionKey">
+    delete from product_price_action
+    where PRODUCT_PRICE_RULE_ID = #{productPriceRuleId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_ACTION_SEQ_ID = #{productPriceActionSeqId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.price.model.ProductPriceActionExample">
+    delete from product_price_action
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.price.model.ProductPriceAction">
+    insert into product_price_action (PRODUCT_PRICE_RULE_ID, PRODUCT_PRICE_ACTION_SEQ_ID, 
+      PRODUCT_PRICE_ACTION_TYPE_ID, AMOUNT, RATE_CODE, 
+      LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productPriceRuleId,jdbcType=VARCHAR}, #{productPriceActionSeqId,jdbcType=VARCHAR}, 
+      #{productPriceActionTypeId,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{rateCode,jdbcType=VARCHAR}, 
+      NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.price.model.ProductPriceAction">
+    insert into product_price_action
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productPriceRuleId != null">
+        PRODUCT_PRICE_RULE_ID,
+      </if>
+      <if test="productPriceActionSeqId != null">
+        PRODUCT_PRICE_ACTION_SEQ_ID,
+      </if>
+      <if test="productPriceActionTypeId != null">
+        PRODUCT_PRICE_ACTION_TYPE_ID,
+      </if>
+      <if test="amount != null">
+        AMOUNT,
+      </if>
+      <if test="rateCode != null">
+        RATE_CODE,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productPriceRuleId != null">
+        #{productPriceRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPriceActionSeqId != null">
+        #{productPriceActionSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="productPriceActionTypeId != null">
+        #{productPriceActionTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rateCode != null">
+        #{rateCode,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.price.model.ProductPriceActionExample" resultType="java.lang.Long">
+    select count(*) from product_price_action
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_price_action
+    <set>
+      <if test="record.productPriceRuleId != null">
+        PRODUCT_PRICE_RULE_ID = #{record.productPriceRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPriceActionSeqId != null">
+        PRODUCT_PRICE_ACTION_SEQ_ID = #{record.productPriceActionSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPriceActionTypeId != null">
+        PRODUCT_PRICE_ACTION_TYPE_ID = #{record.productPriceActionTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        AMOUNT = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rateCode != null">
+        RATE_CODE = #{record.rateCode,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_price_action
+    set PRODUCT_PRICE_RULE_ID = #{record.productPriceRuleId,jdbcType=VARCHAR},
+      PRODUCT_PRICE_ACTION_SEQ_ID = #{record.productPriceActionSeqId,jdbcType=VARCHAR},
+      PRODUCT_PRICE_ACTION_TYPE_ID = #{record.productPriceActionTypeId,jdbcType=VARCHAR},
+      AMOUNT = #{record.amount,jdbcType=DECIMAL},
+      RATE_CODE = #{record.rateCode,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.price.model.ProductPriceAction">
+    update product_price_action
+    <set>
+      <if test="productPriceActionTypeId != null">
+        PRODUCT_PRICE_ACTION_TYPE_ID = #{productPriceActionTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rateCode != null">
+        RATE_CODE = #{rateCode,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_PRICE_RULE_ID = #{productPriceRuleId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_ACTION_SEQ_ID = #{productPriceActionSeqId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.price.model.ProductPriceAction">
+    update product_price_action
+    set PRODUCT_PRICE_ACTION_TYPE_ID = #{productPriceActionTypeId,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      RATE_CODE = #{rateCode,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_PRICE_RULE_ID = #{productPriceRuleId,jdbcType=VARCHAR}
+      and PRODUCT_PRICE_ACTION_SEQ_ID = #{productPriceActionSeqId,jdbcType=VARCHAR}
+  </update>
+</mapper>

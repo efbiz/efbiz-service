@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.catalog.dao.ProdCatalogCategoryMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.catalog.model.ProdCatalogCategory">
+    <id column="PROD_CATALOG_ID" jdbcType="VARCHAR" property="prodCatalogId" />
+    <id column="PRODUCT_CATEGORY_ID" jdbcType="VARCHAR" property="productCategoryId" />
+    <id column="PROD_CATALOG_CATEGORY_TYPE_ID" jdbcType="VARCHAR" property="prodCatalogCategoryTypeId" />
+    <id column="FROM_DATE" jdbcType="TIMESTAMP" property="fromDate" />
+    <result column="THRU_DATE" jdbcType="TIMESTAMP" property="thruDate" />
+    <result column="SEQUENCE_NUM" jdbcType="DECIMAL" property="sequenceNum" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PROD_CATALOG_ID, PRODUCT_CATEGORY_ID, PROD_CATALOG_CATEGORY_TYPE_ID, FROM_DATE, THRU_DATE, 
+    SEQUENCE_NUM, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from prod_catalog_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategoryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_catalog_category
+    where PROD_CATALOG_ID = #{prodCatalogId,jdbcType=VARCHAR}
+      and PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and PROD_CATALOG_CATEGORY_TYPE_ID = #{prodCatalogCategoryTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategoryKey">
+    delete from prod_catalog_category
+    where PROD_CATALOG_ID = #{prodCatalogId,jdbcType=VARCHAR}
+      and PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and PROD_CATALOG_CATEGORY_TYPE_ID = #{prodCatalogCategoryTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategoryExample">
+    delete from prod_catalog_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategory">
+    insert into prod_catalog_category (PROD_CATALOG_ID, PRODUCT_CATEGORY_ID, 
+      PROD_CATALOG_CATEGORY_TYPE_ID, FROM_DATE, 
+      THRU_DATE, SEQUENCE_NUM, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, 
+      CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{prodCatalogId,jdbcType=VARCHAR}, #{productCategoryId,jdbcType=VARCHAR}, 
+      #{prodCatalogCategoryTypeId,jdbcType=VARCHAR}, #{fromDate,jdbcType=TIMESTAMP}, 
+      #{thruDate,jdbcType=TIMESTAMP}, #{sequenceNum,jdbcType=DECIMAL}, NOW(), NOW(), 
+      NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategory">
+    insert into prod_catalog_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodCatalogId != null">
+        PROD_CATALOG_ID,
+      </if>
+      <if test="productCategoryId != null">
+        PRODUCT_CATEGORY_ID,
+      </if>
+      <if test="prodCatalogCategoryTypeId != null">
+        PROD_CATALOG_CATEGORY_TYPE_ID,
+      </if>
+      <if test="fromDate != null">
+        FROM_DATE,
+      </if>
+      <if test="thruDate != null">
+        THRU_DATE,
+      </if>
+      <if test="sequenceNum != null">
+        SEQUENCE_NUM,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodCatalogId != null">
+        #{prodCatalogId,jdbcType=VARCHAR},
+      </if>
+      <if test="productCategoryId != null">
+        #{productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCatalogCategoryTypeId != null">
+        #{prodCatalogCategoryTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thruDate != null">
+        #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sequenceNum != null">
+        #{sequenceNum,jdbcType=DECIMAL},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategoryExample" resultType="java.lang.Long">
+    select count(*) from prod_catalog_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_catalog_category
+    <set>
+      <if test="record.prodCatalogId != null">
+        PROD_CATALOG_ID = #{record.prodCatalogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productCategoryId != null">
+        PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCatalogCategoryTypeId != null">
+        PROD_CATALOG_CATEGORY_TYPE_ID = #{record.prodCatalogCategoryTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromDate != null">
+        FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thruDate != null">
+        THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sequenceNum != null">
+        SEQUENCE_NUM = #{record.sequenceNum,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_catalog_category
+    set PROD_CATALOG_ID = #{record.prodCatalogId,jdbcType=VARCHAR},
+      PRODUCT_CATEGORY_ID = #{record.productCategoryId,jdbcType=VARCHAR},
+      PROD_CATALOG_CATEGORY_TYPE_ID = #{record.prodCatalogCategoryTypeId,jdbcType=VARCHAR},
+      FROM_DATE = #{record.fromDate,jdbcType=TIMESTAMP},
+      THRU_DATE = #{record.thruDate,jdbcType=TIMESTAMP},
+      SEQUENCE_NUM = #{record.sequenceNum,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategory">
+    update prod_catalog_category
+    <set>
+      <if test="thruDate != null">
+        THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sequenceNum != null">
+        SEQUENCE_NUM = #{sequenceNum,jdbcType=DECIMAL},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PROD_CATALOG_ID = #{prodCatalogId,jdbcType=VARCHAR}
+      and PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and PROD_CATALOG_CATEGORY_TYPE_ID = #{prodCatalogCategoryTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.catalog.model.ProdCatalogCategory">
+    update prod_catalog_category
+    set THRU_DATE = #{thruDate,jdbcType=TIMESTAMP},
+      SEQUENCE_NUM = #{sequenceNum,jdbcType=DECIMAL},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PROD_CATALOG_ID = #{prodCatalogId,jdbcType=VARCHAR}
+      and PRODUCT_CATEGORY_ID = #{productCategoryId,jdbcType=VARCHAR}
+      and PROD_CATALOG_CATEGORY_TYPE_ID = #{prodCatalogCategoryTypeId,jdbcType=VARCHAR}
+      and FROM_DATE = #{fromDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

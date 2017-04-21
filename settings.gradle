@@ -1,0 +1,5 @@
+rootProject.name = 'efbiz-service'
+
+include "service-parent"
+include "product-service"
+include "cart-service"

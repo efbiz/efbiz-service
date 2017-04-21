@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.promo.dao.ProductPromoMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.promo.model.ProductPromo">
+    <id column="PRODUCT_PROMO_ID" jdbcType="VARCHAR" property="productPromoId" />
+    <result column="PROMO_NAME" jdbcType="VARCHAR" property="promoName" />
+    <result column="PROMO_TEXT" jdbcType="VARCHAR" property="promoText" />
+    <result column="USER_ENTERED" jdbcType="CHAR" property="userEntered" />
+    <result column="SHOW_TO_CUSTOMER" jdbcType="CHAR" property="showToCustomer" />
+    <result column="REQUIRE_CODE" jdbcType="CHAR" property="requireCode" />
+    <result column="USE_LIMIT_PER_ORDER" jdbcType="DECIMAL" property="useLimitPerOrder" />
+    <result column="USE_LIMIT_PER_CUSTOMER" jdbcType="DECIMAL" property="useLimitPerCustomer" />
+    <result column="USE_LIMIT_PER_PROMOTION" jdbcType="DECIMAL" property="useLimitPerPromotion" />
+    <result column="BILLBACK_FACTOR" jdbcType="DECIMAL" property="billbackFactor" />
+    <result column="OVERRIDE_ORG_PARTY_ID" jdbcType="VARCHAR" property="overrideOrgPartyId" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="CREATED_BY_USER_LOGIN" jdbcType="VARCHAR" property="createdByUserLogin" />
+    <result column="LAST_MODIFIED_DATE" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    <result column="LAST_MODIFIED_BY_USER_LOGIN" jdbcType="VARCHAR" property="lastModifiedByUserLogin" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_PROMO_ID, PROMO_NAME, PROMO_TEXT, USER_ENTERED, SHOW_TO_CUSTOMER, REQUIRE_CODE, 
+    USE_LIMIT_PER_ORDER, USE_LIMIT_PER_CUSTOMER, USE_LIMIT_PER_PROMOTION, BILLBACK_FACTOR, 
+    OVERRIDE_ORG_PARTY_ID, CREATED_DATE, CREATED_BY_USER_LOGIN, LAST_MODIFIED_DATE, LAST_MODIFIED_BY_USER_LOGIN, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.promo.model.ProductPromoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product_promo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_promo
+    where PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_promo
+    where PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.promo.model.ProductPromoExample">
+    delete from product_promo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.promo.model.ProductPromo">
+    insert into product_promo (PRODUCT_PROMO_ID, PROMO_NAME, PROMO_TEXT, 
+      USER_ENTERED, SHOW_TO_CUSTOMER, REQUIRE_CODE, 
+      USE_LIMIT_PER_ORDER, USE_LIMIT_PER_CUSTOMER, 
+      USE_LIMIT_PER_PROMOTION, BILLBACK_FACTOR, OVERRIDE_ORG_PARTY_ID, 
+      CREATED_DATE, CREATED_BY_USER_LOGIN, LAST_MODIFIED_DATE, 
+      LAST_MODIFIED_BY_USER_LOGIN, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP)
+    values (#{productPromoId,jdbcType=VARCHAR}, #{promoName,jdbcType=VARCHAR}, #{promoText,jdbcType=VARCHAR}, 
+      #{userEntered,jdbcType=CHAR}, #{showToCustomer,jdbcType=CHAR}, #{requireCode,jdbcType=CHAR}, 
+      #{useLimitPerOrder,jdbcType=DECIMAL}, #{useLimitPerCustomer,jdbcType=DECIMAL}, 
+      #{useLimitPerPromotion,jdbcType=DECIMAL}, #{billbackFactor,jdbcType=DECIMAL}, #{overrideOrgPartyId,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{createdByUserLogin,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP}, 
+      #{lastModifiedByUserLogin,jdbcType=VARCHAR}, NOW(), NOW(), NOW(), NOW())
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.promo.model.ProductPromo">
+    insert into product_promo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productPromoId != null">
+        PRODUCT_PROMO_ID,
+      </if>
+      <if test="promoName != null">
+        PROMO_NAME,
+      </if>
+      <if test="promoText != null">
+        PROMO_TEXT,
+      </if>
+      <if test="userEntered != null">
+        USER_ENTERED,
+      </if>
+      <if test="showToCustomer != null">
+        SHOW_TO_CUSTOMER,
+      </if>
+      <if test="requireCode != null">
+        REQUIRE_CODE,
+      </if>
+      <if test="useLimitPerOrder != null">
+        USE_LIMIT_PER_ORDER,
+      </if>
+      <if test="useLimitPerCustomer != null">
+        USE_LIMIT_PER_CUSTOMER,
+      </if>
+      <if test="useLimitPerPromotion != null">
+        USE_LIMIT_PER_PROMOTION,
+      </if>
+      <if test="billbackFactor != null">
+        BILLBACK_FACTOR,
+      </if>
+      <if test="overrideOrgPartyId != null">
+        OVERRIDE_ORG_PARTY_ID,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN,
+      </if>
+      <if test="lastModifiedDate != null">
+        LAST_MODIFIED_DATE,
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productPromoId != null">
+        #{productPromoId,jdbcType=VARCHAR},
+      </if>
+      <if test="promoName != null">
+        #{promoName,jdbcType=VARCHAR},
+      </if>
+      <if test="promoText != null">
+        #{promoText,jdbcType=VARCHAR},
+      </if>
+      <if test="userEntered != null">
+        #{userEntered,jdbcType=CHAR},
+      </if>
+      <if test="showToCustomer != null">
+        #{showToCustomer,jdbcType=CHAR},
+      </if>
+      <if test="requireCode != null">
+        #{requireCode,jdbcType=CHAR},
+      </if>
+      <if test="useLimitPerOrder != null">
+        #{useLimitPerOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="useLimitPerCustomer != null">
+        #{useLimitPerCustomer,jdbcType=DECIMAL},
+      </if>
+      <if test="useLimitPerPromotion != null">
+        #{useLimitPerPromotion,jdbcType=DECIMAL},
+      </if>
+      <if test="billbackFactor != null">
+        #{billbackFactor,jdbcType=DECIMAL},
+      </if>
+      <if test="overrideOrgPartyId != null">
+        #{overrideOrgPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdByUserLogin != null">
+        #{createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedDate != null">
+        #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.promo.model.ProductPromoExample" resultType="java.lang.Long">
+    select count(*) from product_promo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_promo
+    <set>
+      <if test="record.productPromoId != null">
+        PRODUCT_PROMO_ID = #{record.productPromoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promoName != null">
+        PROMO_NAME = #{record.promoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promoText != null">
+        PROMO_TEXT = #{record.promoText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEntered != null">
+        USER_ENTERED = #{record.userEntered,jdbcType=CHAR},
+      </if>
+      <if test="record.showToCustomer != null">
+        SHOW_TO_CUSTOMER = #{record.showToCustomer,jdbcType=CHAR},
+      </if>
+      <if test="record.requireCode != null">
+        REQUIRE_CODE = #{record.requireCode,jdbcType=CHAR},
+      </if>
+      <if test="record.useLimitPerOrder != null">
+        USE_LIMIT_PER_ORDER = #{record.useLimitPerOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="record.useLimitPerCustomer != null">
+        USE_LIMIT_PER_CUSTOMER = #{record.useLimitPerCustomer,jdbcType=DECIMAL},
+      </if>
+      <if test="record.useLimitPerPromotion != null">
+        USE_LIMIT_PER_PROMOTION = #{record.useLimitPerPromotion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.billbackFactor != null">
+        BILLBACK_FACTOR = #{record.billbackFactor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.overrideOrgPartyId != null">
+        OVERRIDE_ORG_PARTY_ID = #{record.overrideOrgPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDate != null">
+        CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN = #{record.createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastModifiedDate != null">
+        LAST_MODIFIED_DATE = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN = #{record.lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_promo
+    set PRODUCT_PROMO_ID = #{record.productPromoId,jdbcType=VARCHAR},
+      PROMO_NAME = #{record.promoName,jdbcType=VARCHAR},
+      PROMO_TEXT = #{record.promoText,jdbcType=VARCHAR},
+      USER_ENTERED = #{record.userEntered,jdbcType=CHAR},
+      SHOW_TO_CUSTOMER = #{record.showToCustomer,jdbcType=CHAR},
+      REQUIRE_CODE = #{record.requireCode,jdbcType=CHAR},
+      USE_LIMIT_PER_ORDER = #{record.useLimitPerOrder,jdbcType=DECIMAL},
+      USE_LIMIT_PER_CUSTOMER = #{record.useLimitPerCustomer,jdbcType=DECIMAL},
+      USE_LIMIT_PER_PROMOTION = #{record.useLimitPerPromotion,jdbcType=DECIMAL},
+      BILLBACK_FACTOR = #{record.billbackFactor,jdbcType=DECIMAL},
+      OVERRIDE_ORG_PARTY_ID = #{record.overrideOrgPartyId,jdbcType=VARCHAR},
+      CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      CREATED_BY_USER_LOGIN = #{record.createdByUserLogin,jdbcType=VARCHAR},
+      LAST_MODIFIED_DATE = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
+      LAST_MODIFIED_BY_USER_LOGIN = #{record.lastModifiedByUserLogin,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.promo.model.ProductPromo">
+    update product_promo
+    <set>
+      <if test="promoName != null">
+        PROMO_NAME = #{promoName,jdbcType=VARCHAR},
+      </if>
+      <if test="promoText != null">
+        PROMO_TEXT = #{promoText,jdbcType=VARCHAR},
+      </if>
+      <if test="userEntered != null">
+        USER_ENTERED = #{userEntered,jdbcType=CHAR},
+      </if>
+      <if test="showToCustomer != null">
+        SHOW_TO_CUSTOMER = #{showToCustomer,jdbcType=CHAR},
+      </if>
+      <if test="requireCode != null">
+        REQUIRE_CODE = #{requireCode,jdbcType=CHAR},
+      </if>
+      <if test="useLimitPerOrder != null">
+        USE_LIMIT_PER_ORDER = #{useLimitPerOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="useLimitPerCustomer != null">
+        USE_LIMIT_PER_CUSTOMER = #{useLimitPerCustomer,jdbcType=DECIMAL},
+      </if>
+      <if test="useLimitPerPromotion != null">
+        USE_LIMIT_PER_PROMOTION = #{useLimitPerPromotion,jdbcType=DECIMAL},
+      </if>
+      <if test="billbackFactor != null">
+        BILLBACK_FACTOR = #{billbackFactor,jdbcType=DECIMAL},
+      </if>
+      <if test="overrideOrgPartyId != null">
+        OVERRIDE_ORG_PARTY_ID = #{overrideOrgPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdByUserLogin != null">
+        CREATED_BY_USER_LOGIN = #{createdByUserLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedDate != null">
+        LAST_MODIFIED_DATE = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedByUserLogin != null">
+        LAST_MODIFIED_BY_USER_LOGIN = #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    </set>
+    where PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.promo.model.ProductPromo">
+    update product_promo
+    set PROMO_NAME = #{promoName,jdbcType=VARCHAR},
+      PROMO_TEXT = #{promoText,jdbcType=VARCHAR},
+      USER_ENTERED = #{userEntered,jdbcType=CHAR},
+      SHOW_TO_CUSTOMER = #{showToCustomer,jdbcType=CHAR},
+      REQUIRE_CODE = #{requireCode,jdbcType=CHAR},
+      USE_LIMIT_PER_ORDER = #{useLimitPerOrder,jdbcType=DECIMAL},
+      USE_LIMIT_PER_CUSTOMER = #{useLimitPerCustomer,jdbcType=DECIMAL},
+      USE_LIMIT_PER_PROMOTION = #{useLimitPerPromotion,jdbcType=DECIMAL},
+      BILLBACK_FACTOR = #{billbackFactor,jdbcType=DECIMAL},
+      OVERRIDE_ORG_PARTY_ID = #{overrideOrgPartyId,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      CREATED_BY_USER_LOGIN = #{createdByUserLogin,jdbcType=VARCHAR},
+      LAST_MODIFIED_DATE = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      LAST_MODIFIED_BY_USER_LOGIN = #{lastModifiedByUserLogin,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+    where PRODUCT_PROMO_ID = #{productPromoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

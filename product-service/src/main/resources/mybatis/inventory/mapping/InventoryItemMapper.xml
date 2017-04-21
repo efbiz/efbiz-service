@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.efbiz.product.inventory.dao.InventoryItemMapper">
+  <resultMap id="BaseResultMap" type="org.efbiz.product.inventory.model.InventoryItem">
+    <id column="INVENTORY_ITEM_ID" jdbcType="VARCHAR" property="inventoryItemId" />
+    <result column="INVENTORY_ITEM_TYPE_ID" jdbcType="VARCHAR" property="inventoryItemTypeId" />
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="PARTY_ID" jdbcType="VARCHAR" property="partyId" />
+    <result column="OWNER_PARTY_ID" jdbcType="VARCHAR" property="ownerPartyId" />
+    <result column="STATUS_ID" jdbcType="VARCHAR" property="statusId" />
+    <result column="DATETIME_RECEIVED" jdbcType="TIMESTAMP" property="datetimeReceived" />
+    <result column="DATETIME_MANUFACTURED" jdbcType="TIMESTAMP" property="datetimeManufactured" />
+    <result column="EXPIRE_DATE" jdbcType="TIMESTAMP" property="expireDate" />
+    <result column="FACILITY_ID" jdbcType="VARCHAR" property="facilityId" />
+    <result column="CONTAINER_ID" jdbcType="VARCHAR" property="containerId" />
+    <result column="LOT_ID" jdbcType="VARCHAR" property="lotId" />
+    <result column="UOM_ID" jdbcType="VARCHAR" property="uomId" />
+    <result column="BIN_NUMBER" jdbcType="VARCHAR" property="binNumber" />
+    <result column="LOCATION_SEQ_ID" jdbcType="VARCHAR" property="locationSeqId" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="comments" />
+    <result column="QUANTITY_ON_HAND_TOTAL" jdbcType="DECIMAL" property="quantityOnHandTotal" />
+    <result column="AVAILABLE_TO_PROMISE_TOTAL" jdbcType="DECIMAL" property="availableToPromiseTotal" />
+    <result column="ACCOUNTING_QUANTITY_TOTAL" jdbcType="DECIMAL" property="accountingQuantityTotal" />
+    <result column="QUANTITY_ON_HAND" jdbcType="DECIMAL" property="quantityOnHand" />
+    <result column="AVAILABLE_TO_PROMISE" jdbcType="DECIMAL" property="availableToPromise" />
+    <result column="SERIAL_NUMBER" jdbcType="VARCHAR" property="serialNumber" />
+    <result column="SOFT_IDENTIFIER" jdbcType="VARCHAR" property="softIdentifier" />
+    <result column="ACTIVATION_NUMBER" jdbcType="VARCHAR" property="activationNumber" />
+    <result column="ACTIVATION_VALID_THRU" jdbcType="TIMESTAMP" property="activationValidThru" />
+    <result column="UNIT_COST" jdbcType="DECIMAL" property="unitCost" />
+    <result column="CURRENCY_UOM_ID" jdbcType="VARCHAR" property="currencyUomId" />
+    <result column="LAST_UPDATED_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedStamp" />
+    <result column="LAST_UPDATED_TX_STAMP" jdbcType="TIMESTAMP" property="lastUpdatedTxStamp" />
+    <result column="CREATED_STAMP" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
+    <result column="FIXED_ASSET_ID" jdbcType="VARCHAR" property="fixedAssetId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    INVENTORY_ITEM_ID, INVENTORY_ITEM_TYPE_ID, PRODUCT_ID, PARTY_ID, OWNER_PARTY_ID, 
+    STATUS_ID, DATETIME_RECEIVED, DATETIME_MANUFACTURED, EXPIRE_DATE, FACILITY_ID, CONTAINER_ID, 
+    LOT_ID, UOM_ID, BIN_NUMBER, LOCATION_SEQ_ID, COMMENTS, QUANTITY_ON_HAND_TOTAL, AVAILABLE_TO_PROMISE_TOTAL, 
+    ACCOUNTING_QUANTITY_TOTAL, QUANTITY_ON_HAND, AVAILABLE_TO_PROMISE, SERIAL_NUMBER, 
+    SOFT_IDENTIFIER, ACTIVATION_NUMBER, ACTIVATION_VALID_THRU, UNIT_COST, CURRENCY_UOM_ID, 
+    LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, CREATED_STAMP, CREATED_TX_STAMP, FIXED_ASSET_ID
+  </sql>
+  <select id="selectByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from inventory_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_item
+    where INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from inventory_item
+    where INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemExample">
+    delete from inventory_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.efbiz.product.inventory.model.InventoryItem">
+    insert into inventory_item (INVENTORY_ITEM_ID, INVENTORY_ITEM_TYPE_ID, 
+      PRODUCT_ID, PARTY_ID, OWNER_PARTY_ID, 
+      STATUS_ID, DATETIME_RECEIVED, DATETIME_MANUFACTURED, 
+      EXPIRE_DATE, FACILITY_ID, CONTAINER_ID, 
+      LOT_ID, UOM_ID, BIN_NUMBER, 
+      LOCATION_SEQ_ID, COMMENTS, QUANTITY_ON_HAND_TOTAL, 
+      AVAILABLE_TO_PROMISE_TOTAL, ACCOUNTING_QUANTITY_TOTAL, 
+      QUANTITY_ON_HAND, AVAILABLE_TO_PROMISE, SERIAL_NUMBER, 
+      SOFT_IDENTIFIER, ACTIVATION_NUMBER, ACTIVATION_VALID_THRU, 
+      UNIT_COST, CURRENCY_UOM_ID, LAST_UPDATED_STAMP, LAST_UPDATED_TX_STAMP, 
+      CREATED_STAMP, CREATED_TX_STAMP, FIXED_ASSET_ID)
+    values (#{inventoryItemId,jdbcType=VARCHAR}, #{inventoryItemTypeId,jdbcType=VARCHAR}, 
+      #{productId,jdbcType=VARCHAR}, #{partyId,jdbcType=VARCHAR}, #{ownerPartyId,jdbcType=VARCHAR}, 
+      #{statusId,jdbcType=VARCHAR}, #{datetimeReceived,jdbcType=TIMESTAMP}, #{datetimeManufactured,jdbcType=TIMESTAMP}, 
+      #{expireDate,jdbcType=TIMESTAMP}, #{facilityId,jdbcType=VARCHAR}, #{containerId,jdbcType=VARCHAR}, 
+      #{lotId,jdbcType=VARCHAR}, #{uomId,jdbcType=VARCHAR}, #{binNumber,jdbcType=VARCHAR}, 
+      #{locationSeqId,jdbcType=VARCHAR}, #{comments,jdbcType=VARCHAR}, #{quantityOnHandTotal,jdbcType=DECIMAL}, 
+      #{availableToPromiseTotal,jdbcType=DECIMAL}, #{accountingQuantityTotal,jdbcType=DECIMAL}, 
+      #{quantityOnHand,jdbcType=DECIMAL}, #{availableToPromise,jdbcType=DECIMAL}, #{serialNumber,jdbcType=VARCHAR}, 
+      #{softIdentifier,jdbcType=VARCHAR}, #{activationNumber,jdbcType=VARCHAR}, #{activationValidThru,jdbcType=TIMESTAMP}, 
+      #{unitCost,jdbcType=DECIMAL}, #{currencyUomId,jdbcType=VARCHAR}, NOW(), NOW(), 
+      NOW(), NOW(), #{fixedAssetId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.efbiz.product.inventory.model.InventoryItem">
+    insert into inventory_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inventoryItemId != null">
+        INVENTORY_ITEM_ID,
+      </if>
+      <if test="inventoryItemTypeId != null">
+        INVENTORY_ITEM_TYPE_ID,
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="partyId != null">
+        PARTY_ID,
+      </if>
+      <if test="ownerPartyId != null">
+        OWNER_PARTY_ID,
+      </if>
+      <if test="statusId != null">
+        STATUS_ID,
+      </if>
+      <if test="datetimeReceived != null">
+        DATETIME_RECEIVED,
+      </if>
+      <if test="datetimeManufactured != null">
+        DATETIME_MANUFACTURED,
+      </if>
+      <if test="expireDate != null">
+        EXPIRE_DATE,
+      </if>
+      <if test="facilityId != null">
+        FACILITY_ID,
+      </if>
+      <if test="containerId != null">
+        CONTAINER_ID,
+      </if>
+      <if test="lotId != null">
+        LOT_ID,
+      </if>
+      <if test="uomId != null">
+        UOM_ID,
+      </if>
+      <if test="binNumber != null">
+        BIN_NUMBER,
+      </if>
+      <if test="locationSeqId != null">
+        LOCATION_SEQ_ID,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+      <if test="quantityOnHandTotal != null">
+        QUANTITY_ON_HAND_TOTAL,
+      </if>
+      <if test="availableToPromiseTotal != null">
+        AVAILABLE_TO_PROMISE_TOTAL,
+      </if>
+      <if test="accountingQuantityTotal != null">
+        ACCOUNTING_QUANTITY_TOTAL,
+      </if>
+      <if test="quantityOnHand != null">
+        QUANTITY_ON_HAND,
+      </if>
+      <if test="availableToPromise != null">
+        AVAILABLE_TO_PROMISE,
+      </if>
+      <if test="serialNumber != null">
+        SERIAL_NUMBER,
+      </if>
+      <if test="softIdentifier != null">
+        SOFT_IDENTIFIER,
+      </if>
+      <if test="activationNumber != null">
+        ACTIVATION_NUMBER,
+      </if>
+      <if test="activationValidThru != null">
+        ACTIVATION_VALID_THRU,
+      </if>
+      <if test="unitCost != null">
+        UNIT_COST,
+      </if>
+      <if test="currencyUomId != null">
+        CURRENCY_UOM_ID,
+      </if>
+      LAST_UPDATED_STAMP,
+      LAST_UPDATED_TX_STAMP,
+      CREATED_STAMP,
+      CREATED_TX_STAMP,
+      <if test="fixedAssetId != null">
+        FIXED_ASSET_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inventoryItemId != null">
+        #{inventoryItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryItemTypeId != null">
+        #{inventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="partyId != null">
+        #{partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPartyId != null">
+        #{ownerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null">
+        #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="datetimeReceived != null">
+        #{datetimeReceived,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datetimeManufactured != null">
+        #{datetimeManufactured,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null">
+        #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="facilityId != null">
+        #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="lotId != null">
+        #{lotId,jdbcType=VARCHAR},
+      </if>
+      <if test="uomId != null">
+        #{uomId,jdbcType=VARCHAR},
+      </if>
+      <if test="binNumber != null">
+        #{binNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="locationSeqId != null">
+        #{locationSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="quantityOnHandTotal != null">
+        #{quantityOnHandTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="availableToPromiseTotal != null">
+        #{availableToPromiseTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="accountingQuantityTotal != null">
+        #{accountingQuantityTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="quantityOnHand != null">
+        #{quantityOnHand,jdbcType=DECIMAL},
+      </if>
+      <if test="availableToPromise != null">
+        #{availableToPromise,jdbcType=DECIMAL},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="softIdentifier != null">
+        #{softIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="activationNumber != null">
+        #{activationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="activationValidThru != null">
+        #{activationValidThru,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unitCost != null">
+        #{unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="currencyUomId != null">
+        #{currencyUomId,jdbcType=VARCHAR},
+      </if>
+      NOW(),
+      NOW(),
+      NOW(),
+      NOW(),
+      <if test="fixedAssetId != null">
+        #{fixedAssetId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.efbiz.product.inventory.model.InventoryItemExample" resultType="java.lang.Long">
+    select count(*) from inventory_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update inventory_item
+    <set>
+      <if test="record.inventoryItemId != null">
+        INVENTORY_ITEM_ID = #{record.inventoryItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryItemTypeId != null">
+        INVENTORY_ITEM_TYPE_ID = #{record.inventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partyId != null">
+        PARTY_ID = #{record.partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerPartyId != null">
+        OWNER_PARTY_ID = #{record.ownerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statusId != null">
+        STATUS_ID = #{record.statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datetimeReceived != null">
+        DATETIME_RECEIVED = #{record.datetimeReceived,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.datetimeManufactured != null">
+        DATETIME_MANUFACTURED = #{record.datetimeManufactured,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireDate != null">
+        EXPIRE_DATE = #{record.expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.facilityId != null">
+        FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containerId != null">
+        CONTAINER_ID = #{record.containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lotId != null">
+        LOT_ID = #{record.lotId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uomId != null">
+        UOM_ID = #{record.uomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.binNumber != null">
+        BIN_NUMBER = #{record.binNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationSeqId != null">
+        LOCATION_SEQ_ID = #{record.locationSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comments != null">
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantityOnHandTotal != null">
+        QUANTITY_ON_HAND_TOTAL = #{record.quantityOnHandTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.availableToPromiseTotal != null">
+        AVAILABLE_TO_PROMISE_TOTAL = #{record.availableToPromiseTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.accountingQuantityTotal != null">
+        ACCOUNTING_QUANTITY_TOTAL = #{record.accountingQuantityTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.quantityOnHand != null">
+        QUANTITY_ON_HAND = #{record.quantityOnHand,jdbcType=DECIMAL},
+      </if>
+      <if test="record.availableToPromise != null">
+        AVAILABLE_TO_PROMISE = #{record.availableToPromise,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serialNumber != null">
+        SERIAL_NUMBER = #{record.serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softIdentifier != null">
+        SOFT_IDENTIFIER = #{record.softIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activationNumber != null">
+        ACTIVATION_NUMBER = #{record.activationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activationValidThru != null">
+        ACTIVATION_VALID_THRU = #{record.activationValidThru,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.unitCost != null">
+        UNIT_COST = #{record.unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currencyUomId != null">
+        CURRENCY_UOM_ID = #{record.currencyUomId,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      <if test="record.fixedAssetId != null">
+        FIXED_ASSET_ID = #{record.fixedAssetId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update inventory_item
+    set INVENTORY_ITEM_ID = #{record.inventoryItemId,jdbcType=VARCHAR},
+      INVENTORY_ITEM_TYPE_ID = #{record.inventoryItemTypeId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PARTY_ID = #{record.partyId,jdbcType=VARCHAR},
+      OWNER_PARTY_ID = #{record.ownerPartyId,jdbcType=VARCHAR},
+      STATUS_ID = #{record.statusId,jdbcType=VARCHAR},
+      DATETIME_RECEIVED = #{record.datetimeReceived,jdbcType=TIMESTAMP},
+      DATETIME_MANUFACTURED = #{record.datetimeManufactured,jdbcType=TIMESTAMP},
+      EXPIRE_DATE = #{record.expireDate,jdbcType=TIMESTAMP},
+      FACILITY_ID = #{record.facilityId,jdbcType=VARCHAR},
+      CONTAINER_ID = #{record.containerId,jdbcType=VARCHAR},
+      LOT_ID = #{record.lotId,jdbcType=VARCHAR},
+      UOM_ID = #{record.uomId,jdbcType=VARCHAR},
+      BIN_NUMBER = #{record.binNumber,jdbcType=VARCHAR},
+      LOCATION_SEQ_ID = #{record.locationSeqId,jdbcType=VARCHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      QUANTITY_ON_HAND_TOTAL = #{record.quantityOnHandTotal,jdbcType=DECIMAL},
+      AVAILABLE_TO_PROMISE_TOTAL = #{record.availableToPromiseTotal,jdbcType=DECIMAL},
+      ACCOUNTING_QUANTITY_TOTAL = #{record.accountingQuantityTotal,jdbcType=DECIMAL},
+      QUANTITY_ON_HAND = #{record.quantityOnHand,jdbcType=DECIMAL},
+      AVAILABLE_TO_PROMISE = #{record.availableToPromise,jdbcType=DECIMAL},
+      SERIAL_NUMBER = #{record.serialNumber,jdbcType=VARCHAR},
+      SOFT_IDENTIFIER = #{record.softIdentifier,jdbcType=VARCHAR},
+      ACTIVATION_NUMBER = #{record.activationNumber,jdbcType=VARCHAR},
+      ACTIVATION_VALID_THRU = #{record.activationValidThru,jdbcType=TIMESTAMP},
+      UNIT_COST = #{record.unitCost,jdbcType=DECIMAL},
+      CURRENCY_UOM_ID = #{record.currencyUomId,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      FIXED_ASSET_ID = #{record.fixedAssetId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.efbiz.product.inventory.model.InventoryItem">
+    update inventory_item
+    <set>
+      <if test="inventoryItemTypeId != null">
+        INVENTORY_ITEM_TYPE_ID = #{inventoryItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="partyId != null">
+        PARTY_ID = #{partyId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPartyId != null">
+        OWNER_PARTY_ID = #{ownerPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null">
+        STATUS_ID = #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="datetimeReceived != null">
+        DATETIME_RECEIVED = #{datetimeReceived,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datetimeManufactured != null">
+        DATETIME_MANUFACTURED = #{datetimeManufactured,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null">
+        EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="facilityId != null">
+        FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        CONTAINER_ID = #{containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="lotId != null">
+        LOT_ID = #{lotId,jdbcType=VARCHAR},
+      </if>
+      <if test="uomId != null">
+        UOM_ID = #{uomId,jdbcType=VARCHAR},
+      </if>
+      <if test="binNumber != null">
+        BIN_NUMBER = #{binNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="locationSeqId != null">
+        LOCATION_SEQ_ID = #{locationSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="quantityOnHandTotal != null">
+        QUANTITY_ON_HAND_TOTAL = #{quantityOnHandTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="availableToPromiseTotal != null">
+        AVAILABLE_TO_PROMISE_TOTAL = #{availableToPromiseTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="accountingQuantityTotal != null">
+        ACCOUNTING_QUANTITY_TOTAL = #{accountingQuantityTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="quantityOnHand != null">
+        QUANTITY_ON_HAND = #{quantityOnHand,jdbcType=DECIMAL},
+      </if>
+      <if test="availableToPromise != null">
+        AVAILABLE_TO_PROMISE = #{availableToPromise,jdbcType=DECIMAL},
+      </if>
+      <if test="serialNumber != null">
+        SERIAL_NUMBER = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="softIdentifier != null">
+        SOFT_IDENTIFIER = #{softIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="activationNumber != null">
+        ACTIVATION_NUMBER = #{activationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="activationValidThru != null">
+        ACTIVATION_VALID_THRU = #{activationValidThru,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unitCost != null">
+        UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="currencyUomId != null">
+        CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR},
+      </if>
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      <if test="fixedAssetId != null">
+        FIXED_ASSET_ID = #{fixedAssetId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.efbiz.product.inventory.model.InventoryItem">
+    update inventory_item
+    set INVENTORY_ITEM_TYPE_ID = #{inventoryItemTypeId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      PARTY_ID = #{partyId,jdbcType=VARCHAR},
+      OWNER_PARTY_ID = #{ownerPartyId,jdbcType=VARCHAR},
+      STATUS_ID = #{statusId,jdbcType=VARCHAR},
+      DATETIME_RECEIVED = #{datetimeReceived,jdbcType=TIMESTAMP},
+      DATETIME_MANUFACTURED = #{datetimeManufactured,jdbcType=TIMESTAMP},
+      EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      CONTAINER_ID = #{containerId,jdbcType=VARCHAR},
+      LOT_ID = #{lotId,jdbcType=VARCHAR},
+      UOM_ID = #{uomId,jdbcType=VARCHAR},
+      BIN_NUMBER = #{binNumber,jdbcType=VARCHAR},
+      LOCATION_SEQ_ID = #{locationSeqId,jdbcType=VARCHAR},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      QUANTITY_ON_HAND_TOTAL = #{quantityOnHandTotal,jdbcType=DECIMAL},
+      AVAILABLE_TO_PROMISE_TOTAL = #{availableToPromiseTotal,jdbcType=DECIMAL},
+      ACCOUNTING_QUANTITY_TOTAL = #{accountingQuantityTotal,jdbcType=DECIMAL},
+      QUANTITY_ON_HAND = #{quantityOnHand,jdbcType=DECIMAL},
+      AVAILABLE_TO_PROMISE = #{availableToPromise,jdbcType=DECIMAL},
+      SERIAL_NUMBER = #{serialNumber,jdbcType=VARCHAR},
+      SOFT_IDENTIFIER = #{softIdentifier,jdbcType=VARCHAR},
+      ACTIVATION_NUMBER = #{activationNumber,jdbcType=VARCHAR},
+      ACTIVATION_VALID_THRU = #{activationValidThru,jdbcType=TIMESTAMP},
+      UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+      CURRENCY_UOM_ID = #{currencyUomId,jdbcType=VARCHAR},
+      LAST_UPDATED_STAMP =  NOW() ,
+      LAST_UPDATED_TX_STAMP =  NOW() ,
+      FIXED_ASSET_ID = #{fixedAssetId,jdbcType=VARCHAR}
+    where INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,1 +1,10 @@
 name: carts
+spring:
+  application:
+    name: carts
+server:
+  port: 10010
+
+endpoints:
+  shutdown:
+    enabled: true

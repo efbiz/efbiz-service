@@ -2,7 +2,6 @@ package org.efbiz.product;
 
 
 import static springfox.documentation.builders.RequestHandlerSelectors.withClassAnnotation;
-import io.swagger.annotations.Api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +9,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
+import com.github.kristofa.brave.Brave;
+import com.github.kristofa.brave.mysql.MySQLStatementInterceptorManagementBean;
+
+import io.swagger.annotations.Api;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -40,7 +43,13 @@ public class ProductServiceApplication {
                         new Contact("Joni", "https://github.com/efbiz", "joni@efbiz.org"), null, null))
                 .forCodeGeneration(true);
     }
-
+    
+    @Bean
+    public MySQLStatementInterceptorManagementBean mysqlStatementInterceptorManagementBean(){
+    	Brave brave = new Brave.Builder("productDao").build();
+    	return new MySQLStatementInterceptorManagementBean(brave.clientTracer());
+    }
+    
     public static void main(String[] args) {
         SpringApplication.run(ProductServiceApplication.class, args);
     }

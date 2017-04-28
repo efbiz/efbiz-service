@@ -10,6 +10,9 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-config')
     compile('org.springframework.cloud:spring-cloud-starter-bus-amqp')
     compile('org.springframework.cloud:spring-cloud-starter-zipkin')
+    compile('io.zipkin.java:zipkin:1.23.0')
+    compile('io.zipkin.brave:brave-core:4.2.0')
+    compile('io.zipkin.reporter:zipkin-sender-okhttp3:0.6.12')
     compile('io.springfox:springfox-swagger2:2.6.1')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -32,4 +32,14 @@ public class ProdCatalogController{
             return null;
         }
     }
+    
+    @RequestMapping(value = "/" + CatalogConstant.CONTEXT + "/test", method = RequestMethod.GET)
+    List<ProdCatalog> test(ProdCatalogExample example){
+        try {
+            return prodCatalogService.findProdCatalogs(example);
+        } catch (Exception e) {
+            logger.error("查询商品分类异常", e);
+            return null;
+        }
+    }
 }

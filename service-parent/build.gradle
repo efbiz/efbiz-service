@@ -1,4 +1,1 @@
-dependencies {
-	compile group: 'io.zipkin.brave', name: 'brave-mysql', version: '4.1.1'
-}
 bootRepackage { enabled = false }

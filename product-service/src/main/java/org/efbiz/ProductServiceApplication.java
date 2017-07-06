@@ -1,4 +1,4 @@
-package org.efbiz.product;
+package org.efbiz;
 
 
 import static springfox.documentation.builders.RequestHandlerSelectors.withClassAnnotation;
@@ -6,9 +6,11 @@ import io.swagger.annotations.Api;
 import org.efbiz.brave.MySQLStatementInterceptorManagementBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.EurekaClientConfigBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.service.ApiInfo;
@@ -33,6 +35,7 @@ import com.github.kristofa.brave.Brave;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2
+@EnableAutoConfiguration
 public class ProductServiceApplication {
 
     @Bean

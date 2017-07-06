@@ -3,6 +3,7 @@ package org.efbiz.product.catalog.controller;
 import io.swagger.annotations.Api;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.efbiz.config.ProductConfig;
 import org.efbiz.product.catalog.constant.CatalogConstant;
 import org.efbiz.product.catalog.model.ProdCatalog;
 import org.efbiz.product.catalog.model.ProdCatalogExample;
@@ -21,11 +22,15 @@ public class ProdCatalogController{
     
     @Autowired
     private ProdCatalogService prodCatalogService;
+    
+    @Autowired
+    private ProductConfig productConfig;
    
     
     @RequestMapping(value = "/" + CatalogConstant.CONTEXT + "/prodcatalogs", method = RequestMethod.GET)
     List<ProdCatalog> findProdcatalogs(ProdCatalogExample example){
         try {
+            System.out.println(productConfig.getVersion());
             return prodCatalogService.findProdCatalogs(example);
         } catch (Exception e) {
             logger.error("查询商品分类异常", e);

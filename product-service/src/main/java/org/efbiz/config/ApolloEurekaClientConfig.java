@@ -31,14 +31,22 @@ public class ApolloEurekaClientConfig extends EurekaClientConfigBean{
     // TimeUnit: second
     
     protected Splitter splitter = Splitter.on(LIST_SEPARATOR).omitEmptyStrings().trimResults();
+    @SuppressWarnings("static-access")
     @PostConstruct
     private void init() {
         log.info("ConfigurationProperties defaultZone : {}", defaultZone);
+        if (Strings.isNullOrEmpty(defaultUrl)) {
+           this.defaultUrl = super.DEFAULT_URL;
+        }
+        if (Strings.isNullOrEmpty(defaultZone)) {
+            this.defaultZone = super.DEFAULT_ZONE;
+        }
     }
     
     /**
      * Assert only one zone: defaultZone, but multiple environments.
      */
+    @Override
     public List<String> getEurekaServerServiceUrls(String myZone) {
         if (Strings.isNullOrEmpty(defaultUrl)) {
             return Collections.emptyList();

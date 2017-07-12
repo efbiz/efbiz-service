@@ -1,9 +1,9 @@
 name: products
 server:
   port: 20000
-zipkin:
-  enable: false	
-  server: http://localhost:9411   
+#zipkin:
+#  enable: false	
+#  server: http://localhost:9411   
 endpoints:
  shutdown:
   enabled: true 

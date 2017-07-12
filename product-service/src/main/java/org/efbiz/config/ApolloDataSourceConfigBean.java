@@ -13,10 +13,10 @@ import com.ctrip.framework.apollo.spring.annotation.ApolloConfigChangeListener;
 /**
  * @author Joni
  */
-@ConfigurationProperties()
+@ConfigurationProperties(prefix = "spring.datasource")
 @Log4j2
 @RefreshScope
-public class DataSourceConfigBean{
+public class ApolloDataSourceConfigBean{
     
     private String  username;
     private String  url;
@@ -29,7 +29,7 @@ public class DataSourceConfigBean{
     
     @PostConstruct
     private void init() {
-        log.info("ConfigurationProperties datasource - userName: {}, password: {}, url: {},type :{}", username, password, url, type);
+        log.info("ConfigurationProperties datasource - username: {}, password: {}, url: {},type :{}", username, password, url, type);
     }
     
     public void setUsername(String userName) {
@@ -81,7 +81,7 @@ public class DataSourceConfigBean{
     }
     
     @ApolloConfigChangeListener({
-            "application", "TEST2.database" })
+            "application", "TEST2.datasource" })
     private void changeHandler(ConfigChangeEvent changeEvent) {
         log.info("[changeHandler]Changes for namespace {}", changeEvent.getNamespace());
         for (String key : changeEvent.changedKeys()) {

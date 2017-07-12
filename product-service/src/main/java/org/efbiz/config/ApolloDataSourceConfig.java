@@ -15,14 +15,14 @@ import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 
 @Configuration
 @EnableTransactionManagement
-@EnableApolloConfig("TEST2.database")
+@EnableApolloConfig("TEST2.datasource")
 @Log4j2
-public class DataSourceConfig{
+public class ApolloDataSourceConfig{
     
     @Bean
     @RefreshScope
-    public DataSourceConfigBean javaConfigBean() {
-        return new DataSourceConfigBean();
+    public ApolloDataSourceConfigBean javaConfigBean() {
+        return new ApolloDataSourceConfigBean();
     }
     
     @SuppressWarnings("unchecked")
@@ -31,7 +31,7 @@ public class DataSourceConfig{
     @Primary
     @RefreshScope
     public DataSource defaultDataSource() {
-        DataSourceConfigBean dataSourceConfigBean = javaConfigBean();
+        ApolloDataSourceConfigBean dataSourceConfigBean = javaConfigBean();
         DataSourceBuilder dsb = DataSourceBuilder.create().driverClassName(javaConfigBean().getDriverClassName());
         dsb.url(dataSourceConfigBean.getUrl());
         dsb.username(dataSourceConfigBean.getUsername());

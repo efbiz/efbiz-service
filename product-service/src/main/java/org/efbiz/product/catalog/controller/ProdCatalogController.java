@@ -30,7 +30,6 @@ public class ProdCatalogController{
     @RequestMapping(value = "/" + CatalogConstant.CONTEXT + "/prodcatalogs", method = RequestMethod.GET)
     List<ProdCatalog> findProdcatalogs(ProdCatalogExample example){
         try {
-            System.out.println(productConfig.getVersion());
             return prodCatalogService.findProdCatalogs(example);
         } catch (Exception e) {
             logger.error("查询商品分类异常", e);

@@ -1,4 +1,4 @@
-package org.efbiz.config;
+package org.efbiz.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

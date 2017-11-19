@@ -2,9 +2,10 @@ package org.efbiz.product.price.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class ProductPriceType extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductPriceType extends ObjectValue implements Serializable {
     private String productPriceTypeId;
 
     private String description;

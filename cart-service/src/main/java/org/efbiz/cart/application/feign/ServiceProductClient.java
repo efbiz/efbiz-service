@@ -1,4 +1,4 @@
-package org.efbiz.feign;
+package org.efbiz.cart.application.feign;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

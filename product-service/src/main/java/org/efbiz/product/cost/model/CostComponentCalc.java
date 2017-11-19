@@ -3,9 +3,10 @@ package org.efbiz.product.cost.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import org.efbiz.model.BaseEntity;
 
-public class CostComponentCalc extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class CostComponentCalc extends ObjectValue implements Serializable {
     private String costComponentCalcId;
 
     private String description;

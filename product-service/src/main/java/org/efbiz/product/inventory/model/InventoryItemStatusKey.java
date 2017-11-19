@@ -3,9 +3,10 @@ package org.efbiz.product.inventory.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class InventoryItemStatusKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class InventoryItemStatusKey extends ObjectValue implements Serializable {
     private String inventoryItemId;
 
     private String statusId;

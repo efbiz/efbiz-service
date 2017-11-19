@@ -2,9 +2,10 @@ package org.efbiz.product.price.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class QuantityBreakType extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class QuantityBreakType extends ObjectValue implements Serializable {
     private String quantityBreakTypeId;
 
     private String description;

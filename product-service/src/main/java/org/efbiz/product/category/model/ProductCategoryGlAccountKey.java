@@ -2,9 +2,10 @@ package org.efbiz.product.category.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class ProductCategoryGlAccountKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductCategoryGlAccountKey extends ObjectValue implements Serializable {
     private String productCategoryId;
 
     private String organizationPartyId;

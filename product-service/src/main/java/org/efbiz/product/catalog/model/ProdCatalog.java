@@ -2,9 +2,10 @@ package org.efbiz.product.catalog.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class ProdCatalog extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProdCatalog extends ObjectValue implements Serializable {
     private String prodCatalogId;
 
     private String catalogName;

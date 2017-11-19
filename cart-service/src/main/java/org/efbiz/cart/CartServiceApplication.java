@@ -1,4 +1,4 @@
-package org.efbiz;
+package org.efbiz.cart;
 
 import static springfox.documentation.builders.RequestHandlerSelectors.withClassAnnotation;
 import io.swagger.annotations.Api;

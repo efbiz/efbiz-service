@@ -3,9 +3,10 @@ package org.efbiz.product.cost.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class ProductCostComponentCalcKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductCostComponentCalcKey extends ObjectValue implements Serializable {
     private String productId;
 
     private String costComponentTypeId;

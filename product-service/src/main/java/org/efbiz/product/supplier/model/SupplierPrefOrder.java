@@ -2,9 +2,10 @@ package org.efbiz.product.supplier.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class SupplierPrefOrder extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class SupplierPrefOrder extends ObjectValue implements Serializable {
     private String supplierPrefOrderId;
 
     private String description;

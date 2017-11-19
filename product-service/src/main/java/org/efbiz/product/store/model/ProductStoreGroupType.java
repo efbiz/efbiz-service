@@ -2,9 +2,10 @@ package org.efbiz.product.store.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class ProductStoreGroupType extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductStoreGroupType extends ObjectValue implements Serializable {
     private String productStoreGroupTypeId;
 
     private String description;

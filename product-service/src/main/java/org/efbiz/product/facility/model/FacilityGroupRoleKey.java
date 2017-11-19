@@ -2,9 +2,10 @@ package org.efbiz.product.facility.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class FacilityGroupRoleKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class FacilityGroupRoleKey extends ObjectValue implements Serializable {
     private String facilityGroupId;
 
     private String partyId;

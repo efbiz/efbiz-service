@@ -3,9 +3,10 @@ package org.efbiz.product.product.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import org.efbiz.model.BaseEntity;
 
-public class ProductCalculatedInfo extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductCalculatedInfo extends ObjectValue implements Serializable {
     private String productId;
 
     private BigDecimal totalQuantityOrdered;

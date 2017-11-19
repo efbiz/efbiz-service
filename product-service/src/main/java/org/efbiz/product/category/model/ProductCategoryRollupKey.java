@@ -3,9 +3,10 @@ package org.efbiz.product.category.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class ProductCategoryRollupKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductCategoryRollupKey extends ObjectValue implements Serializable {
     private String productCategoryId;
 
     private String parentProductCategoryId;

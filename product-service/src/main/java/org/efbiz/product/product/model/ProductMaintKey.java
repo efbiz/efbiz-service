@@ -2,9 +2,10 @@ package org.efbiz.product.product.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class ProductMaintKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductMaintKey extends ObjectValue implements Serializable {
     private String productId;
 
     private String productMaintSeqId;

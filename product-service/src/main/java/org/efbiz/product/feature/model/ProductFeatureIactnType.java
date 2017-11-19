@@ -2,9 +2,10 @@ package org.efbiz.product.feature.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class ProductFeatureIactnType extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductFeatureIactnType extends ObjectValue implements Serializable {
     private String productFeatureIactnTypeId;
 
     private String parentTypeId;

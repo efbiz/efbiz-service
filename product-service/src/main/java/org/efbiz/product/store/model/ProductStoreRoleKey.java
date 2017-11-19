@@ -3,9 +3,10 @@ package org.efbiz.product.store.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class ProductStoreRoleKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductStoreRoleKey extends ObjectValue implements Serializable {
     private String partyId;
 
     private String roleTypeId;

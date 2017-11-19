@@ -2,9 +2,10 @@ package org.efbiz.product.promo.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class ProductPromoProductKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductPromoProductKey extends ObjectValue implements Serializable {
     private String productPromoId;
 
     private String productPromoRuleId;

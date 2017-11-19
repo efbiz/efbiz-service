@@ -2,9 +2,10 @@ package org.efbiz.product.inventory.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class InventoryItemTempResKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class InventoryItemTempResKey extends ObjectValue implements Serializable {
     private String visitId;
 
     private String productId;

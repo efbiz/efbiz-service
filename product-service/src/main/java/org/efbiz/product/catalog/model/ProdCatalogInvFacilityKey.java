@@ -3,9 +3,10 @@ package org.efbiz.product.catalog.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class ProdCatalogInvFacilityKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProdCatalogInvFacilityKey extends ObjectValue implements Serializable {
     private String prodCatalogId;
 
     private String facilityId;

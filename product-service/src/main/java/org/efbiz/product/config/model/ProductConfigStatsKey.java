@@ -2,9 +2,10 @@ package org.efbiz.product.config.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class ProductConfigStatsKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductConfigStatsKey extends ObjectValue implements Serializable {
     private String configId;
 
     private String productId;

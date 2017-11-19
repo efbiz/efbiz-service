@@ -4,9 +4,10 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class ProductStoreSurveyAppl extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductStoreSurveyAppl extends ObjectValue implements Serializable {
     private String productStoreSurveyId;
 
     private String productStoreId;

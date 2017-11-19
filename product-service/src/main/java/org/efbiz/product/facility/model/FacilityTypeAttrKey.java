@@ -2,9 +2,10 @@ package org.efbiz.product.facility.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class FacilityTypeAttrKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class FacilityTypeAttrKey extends ObjectValue implements Serializable {
     private String facilityTypeId;
 
     private String attrName;

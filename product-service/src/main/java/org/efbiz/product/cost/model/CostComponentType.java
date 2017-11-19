@@ -2,9 +2,10 @@ package org.efbiz.product.cost.model;
 
 import com.google.gson.Gson;
 import java.io.Serializable;
-import org.efbiz.model.BaseEntity;
 
-public class CostComponentType extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class CostComponentType extends ObjectValue implements Serializable {
     private String costComponentTypeId;
 
     private String parentTypeId;

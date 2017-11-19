@@ -1,6 +1,6 @@
-package org.efbiz.hystrix;
+package org.efbiz.cart.application.hystrix;
 
-import org.efbiz.feign.ServiceProductClient;
+import org.efbiz.cart.application.feign.ServiceProductClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

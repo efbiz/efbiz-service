@@ -3,9 +3,10 @@ package org.efbiz.product.product.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class ProductContentKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductContentKey extends ObjectValue implements Serializable {
     private String productId;
 
     private String contentId;

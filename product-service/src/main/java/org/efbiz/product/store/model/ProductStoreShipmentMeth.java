@@ -3,9 +3,10 @@ package org.efbiz.product.store.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import org.efbiz.model.BaseEntity;
 
-public class ProductStoreShipmentMeth extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductStoreShipmentMeth extends ObjectValue implements Serializable {
     private String productStoreShipMethId;
 
     private String productStoreId;

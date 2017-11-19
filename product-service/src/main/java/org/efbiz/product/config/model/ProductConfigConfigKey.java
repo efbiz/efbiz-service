@@ -3,9 +3,10 @@ package org.efbiz.product.config.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import org.efbiz.model.BaseEntity;
 
-public class ProductConfigConfigKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductConfigConfigKey extends ObjectValue implements Serializable {
     private String configId;
 
     private String configItemId;

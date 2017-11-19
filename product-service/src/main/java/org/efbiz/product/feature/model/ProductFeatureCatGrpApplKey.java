@@ -3,9 +3,10 @@ package org.efbiz.product.feature.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class ProductFeatureCatGrpApplKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductFeatureCatGrpApplKey extends ObjectValue implements Serializable {
     private String productCategoryId;
 
     private String productFeatureGroupId;

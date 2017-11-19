@@ -3,9 +3,10 @@ package org.efbiz.product.subscription.model;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Date;
-import org.efbiz.model.BaseEntity;
 
-public class ProductSubscriptionResourceKey extends BaseEntity implements Serializable {
+import org.efbiz.common.model.ObjectValue;
+
+public class ProductSubscriptionResourceKey extends ObjectValue implements Serializable {
     private String productId;
 
     private String subscriptionResourceId;
